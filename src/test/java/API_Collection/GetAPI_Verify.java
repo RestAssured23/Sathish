@@ -227,7 +227,6 @@ public void Contact_Info()
                 .then().log().all().spec(respec);
     }
 
-
     @Test
     public void ProductSearch_MF_Form()
     {
@@ -385,8 +384,28 @@ public void Contact_Info()
         res.when().post("/core/investor/dashboard/portfolio/allocations")
                 .then().log().all().spec(respec).extract().response().asString();
     }
-
-
+    @Test
+    public void Announcements()
+    {
+        RequestSpecification res=given().spec(req);
+        res.when().get("/core/user/sign-up/announcements")
+                .then().log().all().spec(respec);
+    }
+@Test(priority = 1)
+    public void Investor_Nominee_Declaration()
+    {
+        RequestSpecification res=given().spec(req)
+                .queryParam("holdingProfileId",Holdingid);
+        res.when().get("/core/investor/nominees/declaration")
+                .then().log().all().spec(respec);
+    }
+    @Test
+    public void lookup() {
+        RequestSpecification res = given().spec(req)
+                .queryParam("types", "State,Location,country,fd_nominee_salutation");
+        res.when().get("/core/lookups")
+                .then().log().all().spec(respec);
+    }
 }
 
 
