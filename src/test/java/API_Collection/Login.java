@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 
 public class Login {
     static RequestSpecification req =new RequestSpecBuilder()
-            .setBaseUri("https://testapi.fundsindia.com")
+            .setBaseUri("https://dev-api.fundsindia.com")
             .addHeader("x-api-version","2.0")
             .addHeader("channel-id","10")
             .setContentType(ContentType.JSON).build();
@@ -38,6 +38,7 @@ public class Login {
         return response.getData().getAccessToken();
 
     }
+
     @Test
     public static String Admin()    {
 
@@ -102,7 +103,7 @@ public class Login {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "fdrevamp@gmail.com");        login.put("password", "asdf1234");
+        login.put("emailId", "fdrevamp@gmail.com");        login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");             login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)

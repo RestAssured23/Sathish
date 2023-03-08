@@ -6,7 +6,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 
 public class HoldingProfile {
-    @Getter @Setter
+    @Getter@Setter
+
     public static class Bank{
         public String investorId;
         public String accountHolderName;
@@ -23,6 +24,7 @@ public class HoldingProfile {
         public boolean activated;
         public ArrayList<String> mandateType;
         public String bankLookUpId;
+        public String rzpNetBankId;
     }
     @Getter @Setter
     public static class Datum{
@@ -72,4 +74,5 @@ public class HoldingProfile {
         public String name;
         public ArrayList<Datum> data;
     }
+
 }

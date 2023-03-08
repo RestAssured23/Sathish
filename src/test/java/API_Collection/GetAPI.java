@@ -1,14 +1,11 @@
 package API_Collection;
 
-import MFPojo.HoldingProfile;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import lombok.Getter;
-import lombok.Setter;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -17,18 +14,12 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class GetAPI {
-    //BaseURI
-    String dev = "https://dev-api.fundsindia.com";          String test = "https://testapi.fundsindia.com";
-    String scrum1 = "https://scrum1-api.fundsindia.com";    String scrum2 = "https://scrum2-api.fundsindia.com";
-    String scrum3 = "https://scrum3-api.fundsindia.com";    String scrum4 = "https://scrum4-api.fundsindia.com";
-    String staging = "https://staging-api.fundsindia.com";   String live = "https://api.fundsindia.com";
-    String hotfix = "https://hotfix-api.fundsindia.com";
 
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(dev)
+            .setBaseUri(BaseURL.dev)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.sathish())
+            .addHeader("x-fi-access-token",Login.sathish())
             .setContentType(ContentType.JSON).build();
 
     ResponseSpecification respec = new ResponseSpecBuilder()
@@ -37,6 +28,7 @@ public class GetAPI {
 
     String holdingid = "179605";
 String Holdingid;
+
 
     @Test
     public void User_Profile() {
@@ -48,24 +40,10 @@ String Holdingid;
 
     @Test
     public void Holding_Profile() {
-        String expectedholdingid = "179605";
+
         RequestSpecification res = given().spec(req);
-        HoldingProfile.Root hold_response = res.when().get("/core/investor/holding-profiles")
-                .then().spec(respec).extract().response().as(HoldingProfile.Root.class);
-
-        int size = hold_response.getData().size();
-      //  Holdingid = hold_response.getData().get(3).getHoldingProfileId();
-      //  System.out.println(Holdingid);
-
-       for(int i=0;i<size;i++)
-        {
-            String holdinglist=hold_response.getData().get(i).getHoldingProfileId();
-           if (expectedholdingid==holdinglist)
-           {
-               Holdingid=hold_response.getData().get(i).getHoldingProfileId();
-               System.out.println(Holdingid);
-           }
-       }
+       res.when().get("/core/investor/holding-profiles")
+                .then().log().all().spec(respec);
     }
     @Test
     public void Systematic_plan()

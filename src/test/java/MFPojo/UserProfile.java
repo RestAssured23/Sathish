@@ -39,6 +39,7 @@ public class UserProfile {
         public boolean activated;
         public ArrayList<String> mandateType;
         public String bankLookUpId;
+        public String rzpNetBankId;
     }
     @Getter @Setter
     public static class Data{

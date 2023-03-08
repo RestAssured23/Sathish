@@ -1,15 +1,14 @@
-package API_Collection;
+package API_Collection.TwoFA_API;
 
+import API_Collection.BaseURL;
+import API_Collection.Login;
 import DBConnection.DBconnection;
-import MFPojo.HoldingProfile;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.TwoFA.AddScheme;
 import MFPojo.TwoFA.GetCart;
-import MFPojo.UserProfile;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.Test;
@@ -21,12 +20,11 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 
-public class test {
+public class TwoFA {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri("https://dev-api.fundsindia.com")
+            .setBaseUri(BaseURL.staging)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.twofa())
@@ -35,9 +33,8 @@ public class test {
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
- String Holdingid;    String InvestorId;
-String CartId; String GroupId; String otprefid;
-String DB_Otp;   String DB_refid;
+    String CartId; String GroupId; String otprefid;
+    String DB_Otp;   String DB_refid;
 
     @Test(priority = 0)
     public void Add_Schecm()
@@ -47,17 +44,17 @@ String DB_Otp;   String DB_refid;
                 .body(payload);
         AddScheme.Root response=res.when().post("/core/investor/cart")
                 .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
-       CartId= response.getData().getCartId();
-       System.out.println(CartId);
+        CartId= response.getData().getCartId();
+        System.out.println(CartId);
     }
     @Test(priority = 1)
     public void Get_Cart() {
         RequestSpecification getres = given().spec(req)
-                .queryParam("cartId", "2875c404-1220-4673-8ff2-f054dd5e07cc");
-       GetCart.Root response=getres.when().get("/core/investor/cart/folio-groups")
+                .queryParam("cartId", CartId);
+        GetCart.Root response=getres.when().get("/core/investor/cart/folio-groups")
                 .then().log().all().spec(respec).extract().response().as(GetCart.Root.class);
-       GroupId=response.getData().getGroups().get(0).getGroupId();
-       System.out.println(GroupId);
+        GroupId=response.getData().getGroups().get(0).getGroupId();
+        System.out.println(GroupId);
     }
     @Test(priority = 2)
     public void Common_Otp() {
@@ -71,8 +68,8 @@ String DB_Otp;   String DB_refid;
                 .body(otppayload);
         CommonOTP.Root response=otpres.when().post("/core/investor/common/otp")
                 .then().log().all().spec(respec).extract().response().as(CommonOTP.Root.class);
-     otprefid= response.getData().getOtpReferenceId();
-     System.out.println(otprefid);
+        otprefid= response.getData().getOtpReferenceId();
+        System.out.println(otprefid);
     }
     @Test(priority = 4)
     public void OTP_Verify() {
@@ -122,6 +119,13 @@ String DB_Otp;   String DB_refid;
             if (con != null) con.close();
         }
 
+    }
+    @Test
+    public void Contact_Info()
+    {
+        RequestSpecification res=given().spec(req);
+        res.when().get("/core/investor/contacts")
+                .then().log().all().spec(respec);
     }
 
 }

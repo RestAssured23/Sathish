@@ -1,7 +1,6 @@
 package API_Collection;
 
 import MFPojo.HoldingProfile;
-import MFPojo.UserProfile;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -15,30 +14,24 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class GetAPI_Verify {
-    //BaseURI
-    String dev = "https://dev-api.fundsindia.com";          String test = "https://testapi.fundsindia.com";
-    String scrum1 = "https://scrum1-api.fundsindia.com";    String scrum2 = "https://scrum2-api.fundsindia.com";
-    String scrum3 = "https://scrum3-api.fundsindia.com";    String scrum4 = "https://scrum4-api.fundsindia.com";
-    String staging = "https://staging-api.fundsindia.com";   String live = "https://api.fundsindia.com";
-    String hotfix = "https://hotfix-api.fundsindia.com";
 
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(dev)
+            .setBaseUri(BaseURL.live)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.sathish())
+            .addHeader("x-fi-access-token", Live_Login.sathish())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
 
 //Local DATA
-String Holdingid;       String Expected_HoldID = "179605";
-int Invetor_id;         int ExpextedInvestorid=282306;
+//String Holdingid;       String Expected_HoldID = "179605";      String InvestorId;
 
-/*// Live Data
-    String Holdingid;       String Expected_HoldID = "1403821";
-    int Invetor_id;         int ExpextedInvestorid=1401246;*/
+//Live Data
+    String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
+ //  String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
+
 @Test(priority = 0)
     public void Feature()	{
 
@@ -50,36 +43,32 @@ int Invetor_id;         int ExpextedInvestorid=282306;
     public void User_Profile() {
     RequestSpecification res = given().spec(req)
             .queryParam("holdingProfileId", Holdingid);
-    UserProfile.Root user_response= res.when().get("/core/user-profile")
-            .then().spec(respec).extract().response().as(UserProfile.Root.class);
-    int size= user_response.getData().getInvestors().size();
-    for(int i=0;i<size;i++)
-    {
-        int InvestorList=user_response.getData().getInvestors().get(i).getInvestorId();
-        if (InvestorList==ExpextedInvestorid)
-        {
-            Invetor_id=user_response.getData().getInvestors().get(i).getInvestorId();
-            System.out.println(Invetor_id);
+             res.when().get("/core/user-profile")
+            .then().log().all().spec(respec);
 
-        }
-    }
     }
 @Test(priority = 0)
     public void Holding_Profile() {
-        RequestSpecification res = given().spec(req);
-        HoldingProfile.Root hold_response = res.when().get("/core/investor/holding-profiles")
-                .then().spec(respec).extract().response().as(HoldingProfile.Root.class);
-
-        int size = hold_response.getData().size();
+    RequestSpecification res = given().spec(req);
+    HoldingProfile.Root hold_response= res.when().get("/core/investor/holding-profiles")
+            .then().log().all().spec(respec).extract().response().as(HoldingProfile.Root.class);
+    int size = hold_response.getData().size();  // Data Size
     for(int i=0;i<size;i++)
+    {
+        int count=hold_response.getData().get(i).getInvestors().size();                 // Investor count
+        String holdinglist= String.valueOf(hold_response.getData().get(i).getHoldingProfileId());
+        for (int j=0;j<count;j++)
         {
-            String holdinglist= String.valueOf(hold_response.getData().get(i).getHoldingProfileId());
             if (holdinglist.equalsIgnoreCase(Expected_HoldID))
             {
+                InvestorId= hold_response.getData().get(i).getInvestors().get(j).getInvestorId();
                 Holdingid=hold_response.getData().get(i).getHoldingProfileId();
                 System.out.println(Holdingid);
+                System.out.println(InvestorId);
+
             }
         }
+    }
     }
 @Test(priority = 1)
     public void Dashboard()	{
@@ -125,7 +114,7 @@ int Invetor_id;         int ExpextedInvestorid=282306;
     public void Investor_Mandates()
     {
         RequestSpecification res=given().spec(req)
-                .queryParam("investorId", Invetor_id);
+                .queryParam("investorId", InvestorId);
         res.when().get("/core/investor/mandates")
                 .then().log().all().spec(respec);
     }
