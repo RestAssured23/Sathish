@@ -1,4 +1,4 @@
-package API_Collection;
+package API_Collection.Login;
 
 import MFPojo.Signin;
 import io.restassured.builder.RequestSpecBuilder;

@@ -1,15 +1,13 @@
 package API_Collection;
 
+import API_Collection.Login.Login;
 import DBConnection.DBconnection;
-import MFPojo.HoldingProfile;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.TwoFA.AddScheme;
 import MFPojo.TwoFA.GetCart;
-import MFPojo.UserProfile;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.Test;

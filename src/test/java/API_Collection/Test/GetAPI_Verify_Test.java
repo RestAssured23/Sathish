@@ -1,7 +1,7 @@
 package API_Collection.Test;
 
-import API_Collection.BaseURL;
-import API_Collection.Live_Login;
+import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Live_Login;
 import MFPojo.HoldingProfile;
 import MFPojo.TwoFA.AddScheme;
 import MFPojo.TwoFA.GetCart;

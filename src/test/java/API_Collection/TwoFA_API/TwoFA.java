@@ -1,7 +1,7 @@
 package API_Collection.TwoFA_API;
 
-import API_Collection.BaseURL;
-import API_Collection.Login;
+import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.TwoFA.AddScheme;
