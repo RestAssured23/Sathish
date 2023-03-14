@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.given;
 public class GetAPI_Verify {
 
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.staging)
+            .setBaseUri(BaseURL.live)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Live_Login.sathish())
@@ -397,6 +397,8 @@ public void Contact_Info()
         res.when().get("/core/lookups")
                 .then().log().all().spec(respec);
     }
+
+
 }
 
 

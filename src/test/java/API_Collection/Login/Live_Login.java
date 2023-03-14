@@ -28,7 +28,7 @@ public class Live_Login {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "dsathish0223@gmail.com");        login.put("password", "KOushik@26");
+        login.put("emailId", "dsathish0223@gmail.com");        login.put("password", "Koushik@26");
         login.put("grantType", "credentials");        login.put("refreshToken", "string");
         RequestSpecification res=given().spec(req)
                 .body(login);
@@ -38,7 +38,7 @@ public class Live_Login {
 
     }
     @Test
-    public static String Saravanan()    {
+    public static String saravanan()    {
 
         HashMap<String, String> login = new HashMap<String, String>();
         login.put("emailId", "saravana0989@gmail.com");        login.put("password", "Sara_1689");

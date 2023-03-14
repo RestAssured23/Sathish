@@ -180,7 +180,6 @@ String Holdingid;
         RequestSpecification res=given().spec(req);
         res.when().get("/core/investor/contacts")
                 .then().log().all().spec(respec);
-
     }
 
     @Test

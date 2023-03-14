@@ -61,19 +61,14 @@ public class Login {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "feednominee@gmail.com");
-        login.put("password", "asdfasdf12");
-        login.put("grantType", "credentials");
-        login.put("refreshToken", "string");
+        login.put("emailId", "feednominee@gmail.com");         login.put("password", "asdfasdf12");
+        login.put("grantType", "credentials");                  login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)
                 .body(login);
-        String rs=res.when().post("/auth/sign-in")
-                .then().spec(respec).extract().response().asString();
-
-        JsonPath js=new JsonPath(rs);  							//parsing JSON
-        String  access_token=js.getString("data.accessToken");
-        return  access_token;
+        Signin.Root response=res.when().post("/core/auth/sign-in")
+                .then().spec(respec).extract().response().as(Signin.Root.class);
+        return response.getData().getAccessToken();
     }
 
 
