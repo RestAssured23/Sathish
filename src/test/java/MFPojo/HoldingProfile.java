@@ -60,6 +60,7 @@ public class HoldingProfile {
         public String holdingProfileId;
         public String investorName;
         public String type;
+        public String  clientId;
         public boolean minor;
         public boolean poa;
         public Guardian guardian;

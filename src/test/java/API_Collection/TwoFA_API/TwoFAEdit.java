@@ -2,7 +2,9 @@ package API_Collection.TwoFA_API;
 
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.Login.Login;
+import MFPojo.Authorization;
 import MFPojo.HoldingProfile;
+import MFPojo.PendingPayment;
 import MFPojo.SystematicPlans;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -32,19 +34,20 @@ public class TwoFAEdit {
     String Holdingid;    String Expected_HoldID = "182350";    String InvestorId;    String refid;
     String siptype;    String schemcode;    String folio;    String type;
 
+    @Test
+    public void Feature()	{
+
+        RequestSpecification res=given().spec(req);
+        res.when().get("/core/features")
+                .then().log().all().spec(respec);
+    }
+
+
     @Test(priority = 0)
     public void Sys_plan() {
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", "182350");
         res.when().get("/core/investor/systematic-plan/sips")
-                .then().log().all().spec(respec);
-    }
-    @Test
-    public void Pending_Authorization()
-    {
-        RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId","182350");
-        res.when().get("/core/investor/transactions/authorization")
                 .then().log().all().spec(respec);
     }
     @Test(priority = 0)
@@ -108,6 +111,81 @@ public class TwoFAEdit {
                 .body(payload);
         res.when().put("/core/investor/systematic-plan/sips")
                 .then().log().all().spec(respec);
+    }
+
+    @Test
+    public void Pending_Payments_NRI()
+    {
+        RequestSpecification res=given().spec(req)
+          .queryParam("holdingProfileId","182766");         //NRI 182766 female_s_c 182350
+     PendingPayment.Root response= res.when().get("/core/investor/pending-payments")
+                .then().spec(respec).extract().response().as(PendingPayment.Root.class);
+        for (int i=0;i<response.getData().getTransactions().size();i++){
+            System.out.println("Payment ID : "+response.getData().getTransactions().get(i).getPaymentId());
+            for(int j=0;j<response.getData().getTransactions().get(i).getSip().getSchemes().size();j++) {
+                System.out.println("Group ID: "+response.getData().getTransactions().get(i).getSip().getSchemes().get(j).getFolioGroupId());
+                System.out.println("Scheme Name : "+response.getData().getTransactions().get(i).getSip().getSchemes().get(j).getSchemeName());
+             }
+        }
+    }
+
+@Test
+    public void Pending_Payments_Investor()
+    {
+        RequestSpecification res=given().spec(req)
+                .queryParam("holdingProfileId","182350");         //NRI 182766 female_s_c 182350
+        PendingPayment.Root response= res.when().get("/core/investor/pending-payments")
+                .then().spec(respec).extract().response().as(PendingPayment.Root.class);
+        for (int i=0;i<response.getData().getTransactions().size();i++){
+            System.out.println("Payment ID : "+response.getData().getTransactions().get(i).getPaymentId());
+
+           }
+
+    }
+
+
+    @Test
+    public void Pending_Authorization_NRI()
+    {
+        RequestSpecification res=given().spec(req)
+                .queryParam("holdingProfileId","182766");       //NRI 182766    female_s_c 182350
+       Authorization.Root response= res.when().get("/core/investor/transactions/authorization")
+                .then().spec(respec).extract().response().as(Authorization.Root.class);
+        for (int i = 0; i < response.getData().getSips().size(); i++) {
+            if (response.getData().getSips().get(i).getFolioGroupId().equalsIgnoreCase("")) {
+                System.out.println("Group ID :"+response.getData().getSips().get(i).getFolioGroupId());
+                System.out.println("Reference ID: "+response.getData().getSips().get(i).getReferenceId());
+                System.out.println("SchemeName : " + response.getData().getSips().get(i).getSchemeName());
+                System.out.println("SIP Type : " + response.getData().getSips().get(i).getSipType());
+            } else {
+                System.out.println("Group ID :"+response.getData().getSips().get(i).getFolioGroupId());
+                System.out.println("Reference ID: "+response.getData().getSips().get(i).getReferenceId());
+                System.out.println("SchemeName: " + response.getData().getSips().get(i).getSchemeName());
+                System.out.println("SIP Type : " + response.getData().getSips().get(i).getSipType());
+            }
+
+       }
+    }
+    @Test
+    public void Pending_Authorization_Invet() {
+        RequestSpecification res = given().spec(req)
+                .queryParam("holdingProfileId", "182350");       //NRI 182766    female_s_c 182350
+        Authorization.Root response = res.when().get("/core/investor/transactions/authorization")
+                .then().spec(respec).extract().response().as(Authorization.Root.class);
+
+        for (int i = 0; i < response.getData().getSips().size(); i++) {
+            if (response.getData().getSips().get(i).getFolioGroupId().equalsIgnoreCase("")) {
+                System.out.println("Group ID :"+response.getData().getSips().get(i).getFolioGroupId());
+                System.out.println("Reference ID: "+response.getData().getSips().get(i).getReferenceId());
+                System.out.println("SchemeName : " + response.getData().getSips().get(i).getSchemeName());
+                System.out.println("SIP Type : " + response.getData().getSips().get(i).getSipType());
+            } else {
+                System.out.println("Group ID :"+response.getData().getSips().get(i).getFolioGroupId());
+                System.out.println("Reference ID: "+response.getData().getSips().get(i).getReferenceId());
+                System.out.println("SchemeName: " + response.getData().getSips().get(i).getSchemeName());
+                System.out.println("SIP Type : " + response.getData().getSips().get(i).getSipType());
+            }
+        }
     }
 
 

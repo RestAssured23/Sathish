@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-@Getter@Setter
-public class AddNominee {
+
+public class NewDeclaration {
     @Getter@Setter
     public static class Address{
         public String addressId;
@@ -23,6 +23,24 @@ public class AddNominee {
         public String landmark;
     }
     @Getter@Setter
+    public static class Data{
+        public ArrayList<Nominee> nominees;
+        public String status;
+        public String declarationType;
+        public String remarks;
+        public String nomineeId;
+        public String nomineeOptedOut;
+    }
+    @Getter@Setter
+    public static class Error{
+        public int productId;
+        public String id;
+        public String field;
+        public int code;
+        public String desc;
+        public String type;
+    }
+    @Getter@Setter
     public static class Guardian{
         public String firstName;
         public String middleName;
@@ -37,6 +55,7 @@ public class AddNominee {
     }
     @Getter@Setter
     public static class Nominee{
+        public String combinedName;
         public String firstName;
         public String middleName;
         public String lastName;
@@ -51,11 +70,14 @@ public class AddNominee {
         public Guardian guardian;
         public int percentage;
     }
-@Getter@Setter
+    @Getter@Setter
     public static class Root{
-        public String holdingProfileId;
-        public boolean optedOut;
-        public ArrayList<Nominee> nominees;
+        public int code;
+        public String desc;
+        public boolean success;
+        public ArrayList<Error> errors;
+        public String type;
+        public Data data;
+        public String name;
     }
-
 }

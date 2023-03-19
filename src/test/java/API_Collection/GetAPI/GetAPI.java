@@ -18,7 +18,7 @@ import static io.restassured.RestAssured.given;
 public class GetAPI {
 
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.scrum1)
+            .setBaseUri(BaseURL.dev)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.sathish())

@@ -2,6 +2,7 @@ package API_Collection.GetAPI;
 
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.Login.Live_Login;
+import API_Collection.Login.Login;
 import MFPojo.HoldingProfile;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -18,20 +19,20 @@ import static io.restassured.RestAssured.given;
 public class GetAPI_Verify {
 
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.live)
+            .setBaseUri(BaseURL.scrum1)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Live_Login.sathish())
+            .addHeader("x-fi-access-token", Login.sathish())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
 
 //Local DATA
-//String Holdingid;       String Expected_HoldID = "179605";      String InvestorId;
+String Holdingid;       String Expected_HoldID = "179605";      String InvestorId;
 
 //Live Data
-    String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
+//    String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
  //  String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
 
 @Test(priority = 0)
@@ -217,164 +218,6 @@ public void Contact_Info()
         res.when().get("/core/product-search/mf/form")
                 .then().log().all().spec(respec);
     }
-
-    @Test
-    public void ProductSearch_MF_Form()
-    {
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "	\"page\": 1,\r\n"
-                        + "	\"size\": 20,\r\n"
-                        + "	\"orderBy\": \"rating\",\r\n"
-                        + "	\"orderType\": \"DESC\",\r\n"
-                        + "	\"amcs\": [],\r\n"
-                        + "	\"categories\": [],\r\n"
-                        + "	\"subCategories\": [],\r\n"
-                        + "	\"risk\": [],\r\n"
-                        + "	\"ratings\": [],\r\n"
-                        + "	\"sip\": true,\r\n"
-                        + "	\"schemeType\": [],\r\n"
-                        + "	\"searchCode\": []\r\n"
-                        + "}");
-        res.when().post("/core/product-search/mf")
-                .then().log().all().statusCode(200);
-    }
-    @Test
-    public void Super_Savings()
-    {
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "	\"page\": 1,\r\n"
-                        + "	\"size\": 20,\r\n"
-                        + "	\"orderBy\": \"rating\",\r\n"
-                        + "	\"orderType\": \"DESC\",\r\n"
-                        + "	\"amcs\": [],\r\n"
-                        + "	\"categories\": [],\r\n"
-                        + "	\"subCategories\": [],\r\n"
-                        + "	\"risk\": [],\r\n"
-                        + "	\"ratings\": [],\r\n"
-                        + "	\"schemeType\": [],\r\n"
-                        + "	\"searchCode\": [{\r\n"
-                        + "		\"name\": \"\",\r\n"
-                        + "		\"value\": \"super_savings\",\r\n"
-                        + "		\"sort\": true\r\n"
-                        + "	}]\r\n"
-                        + "}");
-        res.when().post("/core/product-search/mf")
-                .then().log().all().statusCode(200);
-    }
-
-
-    @Test
-    public void NFO_Search()
-    {
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "	\"page\": 1,\r\n"
-                        + "	\"size\": 20,\r\n"
-                        + "	\"orderBy\": \"rating\",\r\n"
-                        + "	\"orderType\": \"DESC\",\r\n"
-                        + "	\"amcs\": [],\r\n"
-                        + "	\"categories\": [],\r\n"
-                        + "	\"subCategories\": [],\r\n"
-                        + "	\"risk\": [],\r\n"
-                        + "	\"ratings\": [],\r\n"
-                        + "	\"schemeType\": [],\r\n"
-                        + "	\"searchCode\": [{\r\n"
-                        + "		\"name\": \"\",\r\n"
-                        + "		\"value\": \"nfo\",\r\n"
-                        + "		\"sort\": true\r\n"
-                        + "	}]\r\n"
-                        + "}");
-
-        res.when().post("/core/product-search/mf")
-                .then().log().all().statusCode(200);
-    }
-@Test(priority = 1)
-    public void Portfolio_View()
-    {
-        Map<String,Object> payload=new HashMap<String,Object>();
-        payload.put("holdingProfileId", Holdingid);
-        payload.put("showZeroHoldings", true);
-
-        Map<String,Object> sort=new HashMap<String,Object>();
-        sort.put("by", "investment_amount");
-
-        /*investment_amount, current_amount, scheme_name, portfolio_name,
-         * today_change, annualized_return, return_1yr, return_3yr,
-         * return_5yr, since_inception_return
-         */
-
-        sort.put("type", "desc");				//desc , asc
-        payload.put("sort", sort);
-        payload.put("type", "portfolio");		//	portfolio, scheme_info, asset, tax
-
-        RequestSpecification res=given().spec(req)
-                .body(payload);
-        res.when().post("/core/investor/dashboard/portfolio")
-                .then().log().all().spec(respec);
-    }
-
-    @Test
-    public void Dashboard_portfolio_Allocation_Asset()	{
-/*
- * Sathish Test Holding ID
-	   179127 - sathish , 	179341 - saran , 179400 - pradeep , 179529 - Testinvestor ,
-		179605(testing name)  --181288 post login  180805 (283504)- SIP TEST
- */
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "  \"holdingProfileId\": \"\",\r\n"
-                        + "  \"portfolioId\": \"\",\r\n"
-                        + "  \"detailType\": \"asset\"\r\n"
-                        //		+ "  \"duration\": \"one_month\"\r\n"
-                        + "}");
-
-        res.when().post("/core/investor/dashboard/portfolio/allocations")
-                .then().log().all().spec(respec).extract().response().asString();
-    }
-    @Test
-    public void Dashboard_portfolio_Allocation_category()	{
-
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "  \"holdingProfileId\": \"\",\r\n"
-                        + "  \"portfolioId\": \"\",\r\n"
-                        + "  \"detailType\": \"category\"\r\n"
-                        //		+ "  \"duration\": \"one_month\"\r\n"
-                        + "}");
-
-        res.when().post("/core/investor/dashboard/portfolio/allocations")
-                .then().log().all().spec(respec).extract().response().asString();
-    }
-    @Test
-    public void Dashboard_portfolio_Allocation_fi_style()	{
-
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "  \"holdingProfileId\": \"\",\r\n"
-                        + "  \"portfolioId\": \"\",\r\n"
-                        + "  \"detailType\": \"fi_style\"\r\n"
-                        //		+ "  \"duration\": \"one_month\"\r\n"
-                        + "}");
-
-        res.when().post("/core/investor/dashboard/portfolio/allocations")
-                .then().log().all().spec(respec).extract().response().asString();
-    }
-    @Test
-    public void Dashboard_portfolio_Allocation_credit()	{
-
-        RequestSpecification res=given().spec(req)
-                .body("{\r\n"
-                        + "  \"holdingProfileId\": \"\",\r\n"
-                        + "  \"portfolioId\": \"\",\r\n"
-                        + "  \"detailType\": \"credit_quality\"\r\n"
-                        //		+ "  \"duration\": \"one_month\"\r\n"
-                        + "}");
-
-        res.when().post("/core/investor/dashboard/portfolio/allocations")
-                .then().log().all().spec(respec).extract().response().asString();
-    }
     @Test
     public void Announcements()
     {
@@ -396,6 +239,111 @@ public void Contact_Info()
                 .queryParam("types", "State,Location,country,fd_nominee_salutation");
         res.when().get("/core/lookups")
                 .then().log().all().spec(respec);
+    }
+    @Test
+    public void ProductSearch_MF_Form()
+    {
+        RequestSpecification res=given().spec(req)
+                .body(Payload.product_Search());
+        res.when().post("/core/product-search/mf")
+                .then().log().all().statusCode(200);
+    }
+    @Test
+    public void Super_Savings()
+    {
+        RequestSpecification res=given().spec(req)
+                .body(Payload.Super_Savings());
+        res.when().post("/core/product-search/mf")
+                .then().log().all().statusCode(200);
+    }
+    @Test
+    public void NFO_Search()
+    {
+        RequestSpecification res=given().spec(req)
+                .body(Payload.NFO());
+        res.when().post("/core/product-search/mf")
+                .then().log().all().statusCode(200);
+    }
+    @Test(priority = 1)
+    public void Scheme_info() //Scheme_Info
+    {
+        Map<String,Object> payload=new HashMap<String,Object>();
+        payload.put("holdingProfileId", "0");
+        payload.put("showZeroHoldings", true);
+        Map<String,Object> sort=new HashMap<String,Object>();
+        sort.put("by", "investment_amount");
+        /*investment_amount, current_amount, scheme_name, portfolio_name,
+         * today_change, annualized_return, return_1yr, return_3yr,
+         * return_5yr, since_inception_return
+         */
+        sort.put("type", "desc");				//desc , asc
+        payload.put("sort", sort);
+        payload.put("type", "portfolio");		//	portfolio, scheme_info, asset, tax
+
+        RequestSpecification res=given().spec(req)
+                .body(payload);
+        res.when().post("/core/investor/dashboard/portfolio")
+                .then().log().all().spec(respec);
+    }
+
+    //Asset Allocation
+    @Test
+    public void Dashboard_portfolio_Allocation_Asset()	{
+        Map<String,Object> payload=new HashMap<String,Object>();
+        payload.put("holdingProfileId","0");
+        payload.put("portfolioId","0");
+        payload.put("detailType","asset");
+        payload.put("duration","three_month");
+
+        RequestSpecification res=given().spec(req)
+                .body(payload);
+        res.when().post("/core/investor/dashboard/portfolio/allocations")
+                .then().log().all().spec(respec).extract().response().asString();
+    }
+    @Test
+    public void Dashboard_portfolio_Allocation_category()	{
+        Map<String,Object> payload=new HashMap<String,Object>();
+        payload.put("holdingProfileId","0");
+        payload.put("portfolioId","0");
+        payload.put("detailType","category");
+        payload.put("duration","three_month");
+        RequestSpecification res=given().spec(req)
+                .body(payload);
+        res.when().post("/core/investor/dashboard/portfolio/allocations")
+                .then().log().all().spec(respec).extract().response().asString();
+    }
+    @Test
+    public void Dashboard_portfolio_Allocation_fi_style()	{
+        Map<String,Object> payload=new HashMap<String,Object>();
+        payload.put("holdingProfileId","0");
+        payload.put("portfolioId","0");
+        payload.put("detailType","fi_style");
+        payload.put("duration","three_month");
+        RequestSpecification res=given().spec(req)
+                .body(payload);
+        res.when().post("/core/investor/dashboard/portfolio/allocations")
+                .then().log().all().spec(respec).extract().response().asString();
+    }
+    @Test
+    public void Dashboard_portfolio_Allocation_credit()	{
+        Map<String,Object> payload=new HashMap<String,Object>();
+        payload.put("holdingProfileId","0");
+        payload.put("portfolioId","0");
+        payload.put("detailType","credit_quality");
+        payload.put("duration","three_month");
+        RequestSpecification res=given().spec(req)
+                .body(payload);
+
+        res.when().post("/core/investor/dashboard/portfolio/allocations")
+                .then().log().all().spec(respec).extract().response().asString();
+    }
+    @Test
+    public void Select_Funds()
+    {
+        RequestSpecification res=given().spec(req)
+                .body(Payload.Select_Funds());
+        res.when().post("/core/product-search/mf/select-funds")
+                .then().log().all().statusCode(200);
     }
 
 

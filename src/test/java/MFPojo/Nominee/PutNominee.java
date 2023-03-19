@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-@Getter@Setter
-public class AddNominee {
+
+public class PutNominee {
     @Getter@Setter
     public static class Address{
         public String addressId;
@@ -21,6 +21,11 @@ public class AddNominee {
         public String country;
         public String pincode;
         public String landmark;
+    }
+    @Getter@Setter
+    public static class Folio{
+        public String folioNo;
+        public String amc;
     }
     @Getter@Setter
     public static class Guardian{
@@ -51,11 +56,14 @@ public class AddNominee {
         public Guardian guardian;
         public int percentage;
     }
-@Getter@Setter
+    @Getter@Setter
     public static class Root{
+        public String investorId;
         public String holdingProfileId;
-        public boolean optedOut;
+        public ArrayList<Folio> folios;
+        public String declarationType;
+        public String processType;
         public ArrayList<Nominee> nominees;
+        public String otpReferenceId;
     }
-
 }

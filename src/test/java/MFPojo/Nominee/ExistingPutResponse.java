@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-@Getter@Setter
-public class AddNominee {
+
+public class ExistingPutResponse {
     @Getter@Setter
     public static class Address{
         public String addressId;
@@ -23,17 +23,25 @@ public class AddNominee {
         public String landmark;
     }
     @Getter@Setter
-    public static class Guardian{
-        public String firstName;
-        public String middleName;
-        public String lastName;
-        public String dateOfBirth;
-        public String relationship;
-        public String gender;
-        public String email;
-        public String mobile;
-        public String salutation;
-        public Address address;
+    public static class Data{
+        public ArrayList<Nominee> nominees;
+        public ArrayList<Investor> investors;
+    }
+    @Getter@Setter
+    public static class Error{
+        public int productId;
+        public String id;
+        public String field;
+        public int code;
+        public String desc;
+        public String type;
+    }
+    @Getter@Setter
+    public static class Investor{
+        public String investorId;
+        public String investorName;
+        public String message;
+        public String otpReferenceId;
     }
     @Getter@Setter
     public static class Nominee{
@@ -47,15 +55,19 @@ public class AddNominee {
         public String mobile;
         public String salutation;
         public Address address;
+        public String investorId;
         public String nomineeId;
-        public Guardian guardian;
-        public int percentage;
+        public boolean result;
+        public String remark;
     }
-@Getter@Setter
+    @Getter@Setter
     public static class Root{
-        public String holdingProfileId;
-        public boolean optedOut;
-        public ArrayList<Nominee> nominees;
+        public int code;
+        public String desc;
+        public boolean success;
+        public ArrayList<Error> errors;
+        public String type;
+        public Data data;
+        public String name;
     }
-
 }

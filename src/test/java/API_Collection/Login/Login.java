@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class Login {
     static RequestSpecification req =new RequestSpecBuilder()
-            .setBaseUri(BaseURL.dev)
+            .setBaseUri(BaseURL.scrum1)
             .addHeader("x-api-version","2.0")
             .addHeader("channel-id","10")
             .setContentType(ContentType.JSON).build();
@@ -30,7 +30,9 @@ public class Login {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "sat@gmail.com");        login.put("password", "asdfasdf12");
+        login.put("emailId", "saravanan.e@fundsindia.com");
+     //   login.put("emailId", "sat@gmail.com");
+        login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");        login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)
@@ -61,7 +63,7 @@ public class Login {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "feednominee@gmail.com");         login.put("password", "asdfasdf12");
+        login.put("emailId", "nomine@gmail.com");         login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");                  login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)
@@ -94,7 +96,9 @@ public class Login {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "fdrevamp@gmail.com");        login.put("password", "asdfasdf12");
+       login.put("emailId","mfrevamp@gmail.com");
+      //  login.put("emailId", "fdrevamp@gmail.com");
+        login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");             login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)
@@ -124,6 +128,20 @@ public static String Admin()    {
         HashMap<String, String> login = new HashMap<String, String>();
         login.put("emailId", "testadmin@gmail.com");        login.put("password", "asdfasdf");
         login.put("grantType", "credentials");              login.put("refreshToken", "string");
+
+        RequestSpecification res=given().spec(req)
+                .body(login);
+        Signin.Root response=res.when().post("/core/auth/sign-in")
+                .then().spec(respec).extract().response().as(Signin.Root.class);
+        return response.getData().getAccessToken();
+    }
+
+    public static String equity()
+    {
+
+        HashMap<String, String> login = new HashMap<String, String>();
+        login.put("emailId", "mailtossv@gmail.com");         login.put("password", "asdfasdf");
+        login.put("grantType", "credentials");                  login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)
                 .body(login);
