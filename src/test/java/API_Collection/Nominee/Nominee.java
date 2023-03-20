@@ -27,7 +27,7 @@ public class Nominee {
             .setBaseUri(BaseURL.test)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Nominee())
+            .addHeader("x-fi-access-token", Login.twofa())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
@@ -38,20 +38,32 @@ public class Nominee {
     @Test
     public void Nominee_Declaration() {
         RequestSpecification res = given().spec(req)
-                .queryParam("holdingProfileId", "181554");
+                .queryParam("holdingProfileId", "182348");
         NewDeclaration.Root response = res.when().get("/core/investor/nominees/declaration")
                 .then().log().all().spec(respec).extract().response().as(NewDeclaration.Root.class);
         System.out.println(response.getData().getStatus());
     }
-
     @Test
     public void Opt_Out() {
         Map<String, Object> optout = new HashMap<String, Object>();
-        optout.put("holdingProfileId", "181557");
+        optout.put("holdingProfileId", "182348");
         optout.put("optedOut", true);
 
         RequestSpecification res = given().spec(req)
                 .body(optout);
+        PostResponse.Root response = res.when().post("/core/investor/nominees")
+                .then().log().all().spec(respec).extract().response().as(PostResponse.Root.class);
+        for (int i = 0; i < response.getData().getInvestors().size(); i++) {
+            otp_refid = response.getData().getInvestors().get(i).getOtpReferenceId();
+            System.out.println("OTP RefID : " + otp_refid);
+        }
+    }
+
+    @Test
+    public void Nominee_Add() {
+
+        RequestSpecification res = given().spec(req)
+                .body(payload.single());
         PostResponse.Root response = res.when().post("/core/investor/nominees")
                 .then().log().all().spec(respec).extract().response().as(PostResponse.Root.class);
         for (int i = 0; i < response.getData().getInvestors().size(); i++) {
@@ -155,7 +167,7 @@ public class Nominee {
     public void Existing()	{
         //Investor ID for Equity and Holding id for MF
         RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId","181554")
+                .queryParam("holdingProfileId","182348")
                 .queryParam("product","MF");;
         res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec);
@@ -164,7 +176,8 @@ public class Nominee {
     @Test
     public void Put_Nominee()	{
         RequestSpecification res=given().spec(req)
-                .body(PutPayload.OptOut());
+                .queryParam("product","MF")
+                .body(ExistingPayload.OptOut());
         res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec);
     }

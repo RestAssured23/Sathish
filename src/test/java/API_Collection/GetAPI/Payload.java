@@ -87,5 +87,18 @@ public class Payload {
                 "  ]\n" +
                 "}";
     }
-
+    public static String questionnaire() {
+        {
+            return "{\n" +
+                    "  \"type\": \"pre-redemption\",\n" +
+                    "  \"answers\": [\n" +
+                    "    {\n" +
+                    "      \"questionId\": \"4\",\n" +
+                    "      \"answerId\": \"0\",\n" +
+                    "      \"answer\": \"\"\n" +
+                    "    }\n" +
+                    "  ]\n" +
+                    "}";
+        }
+    }
 }

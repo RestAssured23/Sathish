@@ -6,7 +6,8 @@ import java.util.Map;
 public class eqt_payload {
 
     public static String Optout="{\n" +
-            "  \"investorId\": \"7\",\n" +
+            "  \"holdingProfileId\": \" \",\n" +
+            "  \"investorId\": \"177973\",\n" +
             "  \"declarationType\": \"opt-out\",\n" +
             "  \"processType\": \"online\"\n" +
             "}";
@@ -82,7 +83,7 @@ public class eqt_payload {
     public static String test()
     {
         return "{\n" +
-                "  \"investorId\": \"12\",\n" +
+                "  \"investorId\": \"177973\",\n" +
                 //    "  \"holdingProfileId\": \"string\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
@@ -145,7 +146,38 @@ public class eqt_payload {
                            "  \"otpReferenceId\": \"NA\"\n" +
                 "}";
     }
+    public static String NoGuardian()
+    {
+        return "{\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Sath\",\n" +
+                "      \"dateOfBirth\": \"12-05-2022\",\n" +
+                "      \"relationship\": \"self\",\n" +
 
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"Erode\",\n" +
+                "        \"cityId\": \"string\",\n" +
+                "        \"stateId\": \"string\",\n" +
+                "        \"countryId\": \"string\",\n" +
+                "        \"state\": \"TN\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"6000012 \",\n" +
+               "        \"landmark\": \"Park\"\n" +
+                "      },\n" +
+                "      \"percentage\": 100\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"NA\"\n" +
+                "}";
+    }
 
     public static String two()
     {

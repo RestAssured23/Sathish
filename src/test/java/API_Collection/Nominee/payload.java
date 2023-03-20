@@ -18,7 +18,7 @@ public class payload {
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Test\",\n" +
-                "      \"lastName\": \"t\",\n" +
+            //    "      \"lastName\": \"t\",\n" +
                 "      \"dateOfBirth\": \"05/03/1980\",\n" +
                 "      \"percentage\": 100,\n" +
                 "      \"relationship\": \"Brother\"\n" +

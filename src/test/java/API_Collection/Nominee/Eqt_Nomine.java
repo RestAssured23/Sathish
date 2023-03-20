@@ -54,7 +54,7 @@ System.out.println(response.getData().getStatus());
 public void Existing_GetNominee()	{
         //Investor ID for Equity and Holding id for MF
     RequestSpecification res=given().spec(req)
-            .queryParam("investorId","12")
+            .queryParam("investorId","177973")
       //      .queryParam("investorId",Investorid)
             .queryParam("product","EQUITY");
     res.when().get("/core/investor/nominees/existing-declaration")
@@ -63,15 +63,9 @@ public void Existing_GetNominee()	{
     @Test
     public void Put_Nominee()	{
 
-        Map<String,Object> payload=new LinkedHashMap<String,Object>();
-
-        ExistingDeclaration.Root ex=new ExistingDeclaration.Root();
-        ex.getData();
-
-
-        RequestSpecification res=given().spec(req)
+    RequestSpecification res=given().spec(req)
                 .queryParam("product","EQUITY")
-                        .body(eqt_payload.test());
+                        .body(eqt_payload.NoGuardian());
         res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec);
     }
