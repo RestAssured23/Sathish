@@ -24,8 +24,7 @@ public class Live_Login {
             .expectContentType(ContentType.JSON).build();
 
     @Test
-    public static String sathish()
-    {
+    public static String sathish()    {
 
         HashMap<String, String> login = new HashMap<String, String>();
         login.put("emailId", "dsathish0223@gmail.com");        login.put("password", "Koushik@26");
