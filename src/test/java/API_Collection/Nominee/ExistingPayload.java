@@ -3,11 +3,11 @@ package API_Collection.Nominee;
 public class ExistingPayload {
     public static String OptOut(){
         return "{ \n" +
-                "  \"holdingProfileId\": \"182348\",\n" +
+                "  \"holdingProfileId\": \"181596\",\n" +
                 "  \"folios\": [\n" +
                 "    {\n" +
-                "      \"folioNo\": \"12345/11\",\n" +
-                "      \"amc\": \"P\"\n" +
+                "      \"folioNo\": \"0123456780\",\n" +
+                "      \"amc\": \"400004\"\n" +
                 "    }\n" +
                 "  ],\n" +
                 "  \"declarationType\": \"opt-out\",\n" +
@@ -18,11 +18,11 @@ public class ExistingPayload {
     public static String single(){
         return "{\n" +
                 "  \"investorId\": \"\",\n" +
-                "  \"holdingProfileId\": \"181554\",\n" +
+                "  \"holdingProfileId\": \"181559\",\n" +
                 "  \"folios\": [\n" +
                 "    {\n" +
-                "      \"folioNo\": \"5001\",\n" +
-                "      \"amc\": \"B\"\n" +
+                "      \"folioNo\": \"34649/46464\",\n" +
+                "      \"amc\": \"400015\"\n" +
                 "    }\n" +
                 "  ],\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
@@ -30,30 +30,8 @@ public class ExistingPayload {
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"aaa1\",\n" +
-                "      \"middleName\": \"bbb1\",\n" +
-                "      \"lastName\": \"ccc1\",\n" +
                 "      \"dateOfBirth\": \"10/10/2000\",\n" +
                 "      \"relationship\": \"brother\",\n" +
-                "      \"gender\": \"male\",\n" +
-                "      \"email\": \"abc@gmail.com\",\n" +
-                "      \"mobile\": \"9999999999\",\n" +
-                "      \"salutation\": \"Mr.\",\n" +
-                "      \"address\": {\n" +
-                "        \"addressId\": \"1\",\n" +
-                "        \"addressType\": \"communication\",\n" +
-                "        \"addressLine1\": \"al1\",\n" +
-                "        \"addressLine2\": \"al2\",\n" +
-                "        \"city\": \"c\",\n" +
-                "        \"cityOthers\": \"co\",\n" +
-                "        \"cityId\": \"cid\",\n" +
-                "        \"stateId\": \"sid\",\n" +
-                "        \"countryId\": \"cid\",\n" +
-                "        \"state\": \"s\",\n" +
-                "        \"country\": \"c\",\n" +
-                "        \"pincode\": \"000000\",\n" +
-                "        \"landmark\": \"ckbcskcbk\"\n" +
-                "      },\n" +
-                "      \"nomineeId\": \"string\",\n" +
                 "      \"percentage\": 100\n" +
                 "    }    \n" +
                 "  ],\n" +
@@ -61,7 +39,62 @@ public class ExistingPayload {
                 "}";
 
     }
-    public static String sample(){
+    public static String sameinvestorname(){
+        return "{\n" +
+                "  \"investorId\": \"\",\n" +
+                "  \"holdingProfileId\": \"181596\",\n" +
+                "  \"folios\": [\n" +
+                "    {\n" +
+                "      \"folioNo\": \"0123456780\",\n" +
+                "      \"amc\": \"400004\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Joint One\",\n" +
+                "      \"dateOfBirth\": \"12/12/2000\",\n" +
+                "      \"relationship\": \"brother\",\n" +
+                "      \"percentage\": 100\n" +
+                "    }    \n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"\"\n" +
+                "}";
+
+    }
+    public static String Guardian(){
+        return "{\n" +
+                "  \"investorId\": \"\",\n" +
+                "  \"holdingProfileId\": \"181596\",\n" +
+                "  \"folios\": [\n" +
+                "    {\n" +
+                "      \"folioNo\": \"0123456780\",\n" +
+                "      \"amc\": \"400004\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"aaa1\",\n" +
+                "      \"dateOfBirth\": \"10/10/2022\",\n" +
+                "      \"relationship\": \"brother\",\n" +
+                "      \"percentage\": 100\n" +
+                "    },\n" +
+               "      \"guardian\": {\n" +
+                "        \"firstName\": \"abc\",\n" +
+                "        \"dateOfBirth\": \"10/10/2000\",\n" +
+                "        \"relationship\": \"brother\",\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"\"\n" +
+                "}";
+
+    }
+
+
+    public static String two(){
         return "{\n" +
                 "  \n" +
                 "  \"holdingProfileId\": \"string\",\n" +

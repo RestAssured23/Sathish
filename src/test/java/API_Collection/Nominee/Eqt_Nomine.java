@@ -1,5 +1,6 @@
 package API_Collection.Nominee;
 import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
 import MFPojo.Nominee.ExistingDeclaration;
 import MFPojo.Nominee.NewDeclaration;
@@ -9,6 +10,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -51,21 +53,19 @@ System.out.println(response.getData().getStatus());
     }
 //Existing Nominee
 @Test
-public void Existing_GetNominee()	{
+public void Existing_GetNominee()	{           //Get API
         //Investor ID for Equity and Holding id for MF
     RequestSpecification res=given().spec(req)
-            .queryParam("investorId","177973")
-      //      .queryParam("investorId",Investorid)
+            .queryParam("investorId","177973")      // 934332(saravanan)  , 177973(local)
             .queryParam("product","EQUITY");
     res.when().get("/core/investor/nominees/existing-declaration")
             .then().log().all().spec(respec);
     }
     @Test
     public void Put_Nominee()	{
-
     RequestSpecification res=given().spec(req)
                 .queryParam("product","EQUITY")
-                        .body(eqt_payload.NoGuardian());
+                        .body(eqt_payload.Optout);
         res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec);
     }

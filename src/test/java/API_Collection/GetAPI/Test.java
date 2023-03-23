@@ -95,7 +95,7 @@ String token="";
     public void Pending_Payments()
     {
         RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId","1511045");
+                .queryParam("holdingProfileId","1505963");
         res.when().get("/core/investor/pending-payments")
                 .then().log().all().spec(respec);
     }

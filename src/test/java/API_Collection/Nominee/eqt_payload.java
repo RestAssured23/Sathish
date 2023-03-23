@@ -6,171 +6,34 @@ import java.util.Map;
 public class eqt_payload {
 
     public static String Optout="{\n" +
-            "  \"holdingProfileId\": \" \",\n" +
             "  \"investorId\": \"177973\",\n" +
             "  \"declarationType\": \"opt-out\",\n" +
             "  \"processType\": \"online\"\n" +
             "}";
+
     public static String single()
-    {
-
-
-       return "{\n" +
-               "  \"investorId\": \"169541\",\n" +
-          //    "  \"holdingProfileId\": \"string\",\n" +
-               "  \"declarationType\": \"opt-in\",\n" +
-               "  \"processType\": \"online\",\n" +
-               "  \"nominees\": [\n" +
-               "    {\n" +
-               "      \"firstName\": \"Sathish\",\n" +
-          //     "      \"middleName\": \"R\",\n" +
-          //     "      \"lastName\": \"R\",\n" +
-               "      \"dateOfBirth\": \"12-05-1982\",\n" +
-               "      \"relationship\": \"self\",\n" +
-        //       "      \"gender\": \"male\",\n" +
-         //      "      \"email\": \"abc@gmail.com\",\n" +
-         //      "      \"mobile\": \"999999999\",\n" +
-        //       "      \"salutation\": \"Mr\",\n" +
-               "      \"address\": {\n" +
-         //      "        \"addressId\": \"string\",\n" +
-         //      "        \"addressType\": \"communication\",\n" +
-               "        \"addressLine1\": \"address1\",\n" +
-          //     "        \"addressLine2\": \"address2\",\n" +
-               "        \"city\": \"Chennai\",\n" +
-         //      "        \"cityOthers\": \"Erode\",\n" +
-        //       "        \"cityId\": \"string\",\n" +
-         //      "        \"stateId\": \"string\",\n" +
-         //     "        \"countryId\": \"string\",\n" +
-               "        \"state\": \"TN\",\n" +
-               "        \"country\": \"India\",\n" +
-               "        \"pincode\": \"600001\",\n" +
-         //      "        \"landmark\": \"Park\"\n" +
-               "      },\n" +
-       //        "      \"nomineeId\": \"string\",\n" +
-               "      \"guardian\": {\n" +
-               "        \"firstName\": \"abc\",\n" +
-        //       "        \"middleName\": \"string\",\n" +
-         //      "        \"lastName\": \"cde\",\n" +
-               "        \"dateOfBirth\": \"12-02-1800\",\n" +
-               "        \"relationship\": \"self\",\n" +
-       //        "        \"gender\": \"male\",\n" +
-        //       "        \"email\": \"gdc@gmail.com\",\n" +
-        //       "        \"mobile\": \"1234567899\",\n" +
-        //       "        \"salutation\": \"Mr\",\n" +
-               "        \"address\": {\n" +
-       //        "          \"addressId\": \"string\",\n" +
-       //        "          \"addressType\": \"permanent\",\n" +
-               "          \"addressLine1\": \"rtyui\",\n" +
-        //       "          \"addressLine2\": \"adfghjj\",\n" +
-               "          \"city\": \"Chennai\",\n" +
-       //        "          \"cityOthers\": \"Salem\",\n" +
-       //        "          \"cityId\": \"string\",\n" +
-        //       "          \"stateId\": \"string\",\n" +
-        //       "          \"countryId\": \"string\",\n" +
-               "          \"state\": \"Tamilnadu\",\n" +
-               "          \"country\": \"India\",\n" +
-               "          \"pincode\": \"600002\",\n" +
-        //       "          \"landmark\": \"bustand\"\n" +
-               "        }\n" +
-               "      },\n" +
-               "      \"percentage\": 50\n" +
-               "    }\n" +
-               "  ],\n" +
-    //           "  \"otpReferenceId\": \"NA\"\n" +
-               "}";
-    }
-
-    public static String test()
     {
         return "{\n" +
                 "  \"investorId\": \"177973\",\n" +
-                //    "  \"holdingProfileId\": \"string\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Sathish\",\n" +
-                    "      \"middleName\": \"R\",\n" +
-                    "      \"lastName\": \"R\",\n" +
-                "      \"dateOfBirth\": \"12-05-1982\",\n" +
-                "      \"relationship\": \"self\",\n" +
-                       "      \"gender\": \"male\",\n" +
-                     "      \"email\": \"abc@gmail.com\",\n" +
-                     "      \"mobile\": \"999999999\",\n" +
-                      "      \"salutation\": \"Mr\",\n" +
-                "      \"address\": {\n" +
-                     "        \"addressId\": \"string\",\n" +
-                      "        \"addressType\": \"communication\",\n" +
-                "        \"addressLine1\": \"address1\",\n" +
-                     "        \"addressLine2\": \"address2\",\n" +
-                "        \"city\": \"Chennai\",\n" +
-                     "        \"cityOthers\": \"Erode\",\n" +
-                       "        \"cityId\": \"string\",\n" +
-                      "        \"stateId\": \"string\",\n" +
-                     "        \"countryId\": \"string\",\n" +
-                "        \"state\": \"TN\",\n" +
-                "        \"country\": \"India\",\n" +
-                "        \"pincode\": \"600001\",\n" +
-                      "        \"landmark\": \"Park\"\n" +
-                "      },\n" +
-                //        "      \"nomineeId\": \"string\",\n" +
-                "      \"guardian\": {\n" +
-                "        \"firstName\": \"abc\",\n" +
-                      "        \"middleName\": \"string\",\n" +
-                      "        \"lastName\": \"cde\",\n" +
-                "        \"dateOfBirth\": \"12-02-1800\",\n" +
-                "        \"relationship\": \"self\",\n" +
-                       "        \"gender\": \"male\",\n" +
-                       "        \"email\": \"gdc@gmail.com\",\n" +
-                       "        \"mobile\": \"1234567899\",\n" +
-                       "        \"salutation\": \"Mr\",\n" +
-                "        \"address\": {\n" +
-                      "          \"addressId\": \"string\",\n" +
-                        "          \"addressType\": \"permanent\",\n" +
-                "          \"addressLine1\": \"rtyui\",\n" +
-                       "          \"addressLine2\": \"adfghjj\",\n" +
-                "          \"city\": \"Chennai\",\n" +
-                        "          \"cityOthers\": \"Salem\",\n" +
-                        "          \"cityId\": \"string\",\n" +
-                       "          \"stateId\": \"string\",\n" +
-                       "          \"countryId\": \"string\",\n" +
-                "          \"state\": \"Tamilnadu\",\n" +
-                "          \"country\": \"India\",\n" +
-                "          \"pincode\": \"600002\",\n" +
-                       "          \"landmark\": \"bustand\"\n" +
-                "        }\n" +
-                "      },\n" +
-                "      \"percentage\": 100\n" +
-                "    }\n" +
-                "  ],\n" +
-                           "  \"otpReferenceId\": \"NA\"\n" +
-                "}";
-    }
-    public static String NoGuardian()
-    {
-        return "{\n" +
-                "  \"investorId\": \"177973\",\n" +
-                "  \"declarationType\": \"opt-in\",\n" +
-                "  \"processType\": \"online\",\n" +
-                "  \"nominees\": [\n" +
-                "    {\n" +
-                "      \"firstName\": \"Sath\",\n" +
-                "      \"dateOfBirth\": \"12-05-2022\",\n" +
-                "      \"relationship\": \"self\",\n" +
-
+                "      \"dateOfBirth\": \"05/12/1989\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
                 "        \"addressLine1\": \"address1\",\n" +
-
                 "        \"city\": \"Chennai\",\n" +
-                "        \"cityOthers\": \"Erode\",\n" +
-                "        \"cityId\": \"string\",\n" +
-                "        \"stateId\": \"string\",\n" +
-                "        \"countryId\": \"string\",\n" +
-                "        \"state\": \"TN\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+               "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
                 "        \"country\": \"India\",\n" +
-                "        \"pincode\": \"6000012 \",\n" +
-               "        \"landmark\": \"Park\"\n" +
+                "        \"pincode\": \"1AB67890\",\n" +
+               "        \"landmark\": \" \"\n" +
                 "      },\n" +
                 "      \"percentage\": 100\n" +
                 "    }\n" +
@@ -179,29 +42,20 @@ public class eqt_payload {
                 "}";
     }
 
-    public static String two()
+    public static String Guardian()
     {
         return "{\n" +
-                "  \"investorId\": \"6\",\n" +
-                //    "  \"holdingProfileId\": \"string\",\n" +
+                "  \"investorId\": \"177973\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Sathish\",\n" +
-                "      \"middleName\": \"R\",\n" +
-                "      \"lastName\": \"R\",\n" +
-                "      \"dateOfBirth\": \"12-05-1982\",\n" +
+                "      \"dateOfBirth\": \"13/05/2022\",\n" +
                 "      \"relationship\": \"self\",\n" +
-                "      \"gender\": \"male\",\n" +
-                "      \"email\": \"abc@gmail.com\",\n" +
-                "      \"mobile\": \"999999999\",\n" +
-                "      \"salutation\": \"Mr\",\n" +
                 "      \"address\": {\n" +
-                "        \"addressId\": \"string\",\n" +
                 "        \"addressType\": \"communication\",\n" +
                 "        \"addressLine1\": \"address1\",\n" +
-                "        \"addressLine2\": \"address2\",\n" +
                 "        \"city\": \"Chennai\",\n" +
                 "        \"cityOthers\": \"Erode\",\n" +
                 "        \"cityId\": \"string\",\n" +
@@ -210,24 +64,15 @@ public class eqt_payload {
                 "        \"state\": \"TN\",\n" +
                 "        \"country\": \"India\",\n" +
                 "        \"pincode\": \"600001\",\n" +
-                "        \"landmark\": \"Park\"\n" +
+                "        \"landmark\": \" \"\n" +
                 "      },\n" +
-                //        "      \"nomineeId\": \"string\",\n" +
                 "      \"guardian\": {\n" +
                 "        \"firstName\": \"abc\",\n" +
-                "        \"middleName\": \"string\",\n" +
-                "        \"lastName\": \"cde\",\n" +
-                "        \"dateOfBirth\": \"12-02-1800\",\n" +
+                "        \"dateOfBirth\": \"13/05/2000\",\n" +
                 "        \"relationship\": \"self\",\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"email\": \"gdc@gmail.com\",\n" +
-                "        \"mobile\": \"1234567899\",\n" +
-                "        \"salutation\": \"Mr\",\n" +
                 "        \"address\": {\n" +
-                "          \"addressId\": \"string\",\n" +
                 "          \"addressType\": \"permanent\",\n" +
                 "          \"addressLine1\": \"rtyui\",\n" +
-                "          \"addressLine2\": \"adfghjj\",\n" +
                 "          \"city\": \"Chennai\",\n" +
                 "          \"cityOthers\": \"Salem\",\n" +
                 "          \"cityId\": \"string\",\n" +
@@ -236,68 +81,62 @@ public class eqt_payload {
                 "          \"state\": \"Tamilnadu\",\n" +
                 "          \"country\": \"India\",\n" +
                 "          \"pincode\": \"600002\",\n" +
-                "          \"landmark\": \"bustand\"\n" +
+                "          \"landmark\": \" \"\n" +
                 "        }\n" +
+                "      },\n" +
+                "      \"percentage\": 100\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"NA\"\n" +
+                "}";
+    }
+
+
+    public static String two()
+    {
+        return "{\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Sathish\",\n" +
+                "      \"dateOfBirth\": \"12/05/2000\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"6000012 \",\n" +
+                "        \"landmark\": \" \"\n" +
                 "      },\n" +
                 "      \"percentage\": 50\n" +
                 "    },\n" +
-
-                "    {\n" +
+                "{\n" +
                 "      \"firstName\": \"Sathish\",\n" +
-                "      \"middleName\": \"R\",\n" +
-                "      \"lastName\": \"R\",\n" +
-                "      \"dateOfBirth\": \"12-05-1982\",\n" +
-                "      \"relationship\": \"self\",\n" +
-                "      \"gender\": \"male\",\n" +
-                "      \"email\": \"abc@gmail.com\",\n" +
-                "      \"mobile\": \"999999999\",\n" +
-                "      \"salutation\": \"Mr\",\n" +
+                "      \"dateOfBirth\": \"13/05/2000\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
-                "        \"addressId\": \"string\",\n" +
                 "        \"addressType\": \"communication\",\n" +
                 "        \"addressLine1\": \"address1\",\n" +
-                "        \"addressLine2\": \"address2\",\n" +
                 "        \"city\": \"Chennai\",\n" +
-                "        \"cityOthers\": \"Erode\",\n" +
-                "        \"cityId\": \"string\",\n" +
-                "        \"stateId\": \"string\",\n" +
-                "        \"countryId\": \"string\",\n" +
-                "        \"state\": \"TN\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
                 "        \"country\": \"India\",\n" +
-                "        \"pincode\": \"600001\",\n" +
-                "        \"landmark\": \"Park\"\n" +
-                "      },\n" +
-                //        "      \"nomineeId\": \"string\",\n" +
-                "      \"guardian\": {\n" +
-                "        \"firstName\": \"abc\",\n" +
-                "        \"middleName\": \"string\",\n" +
-                "        \"lastName\": \"cde\",\n" +
-                "        \"dateOfBirth\": \"12-02-1800\",\n" +
-                "        \"relationship\": \"self\",\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"email\": \"gdc@gmail.com\",\n" +
-                "        \"mobile\": \"1234567899\",\n" +
-                "        \"salutation\": \"Mr\",\n" +
-                "        \"address\": {\n" +
-                "          \"addressId\": \"string\",\n" +
-                "          \"addressType\": \"permanent\",\n" +
-                "          \"addressLine1\": \"rtyui\",\n" +
-                "          \"addressLine2\": \"adfghjj\",\n" +
-                "          \"city\": \"Chennai\",\n" +
-                "          \"cityOthers\": \"Salem\",\n" +
-                "          \"cityId\": \"string\",\n" +
-                "          \"stateId\": \"string\",\n" +
-                "          \"countryId\": \"string\",\n" +
-                "          \"state\": \"Tamilnadu\",\n" +
-                "          \"country\": \"India\",\n" +
-                "          \"pincode\": \"600002\",\n" +
-                "          \"landmark\": \"bustand\"\n" +
-                "        }\n" +
+                "        \"pincode\": \"6000012 \",\n" +
+                "        \"landmark\": \" \"\n" +
                 "      },\n" +
                 "      \"percentage\": 50\n" +
                 "    }\n" +
-
-
                 "  ],\n" +
                 "  \"otpReferenceId\": \"NA\"\n" +
                 "}";
@@ -306,33 +145,153 @@ public class eqt_payload {
     public static String three()
     {
         return "{\n" +
-                "  \"holdingProfileId\": \"181557\",\n" +
-                "  \"optedOut\": false,\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"First\",\n" +
-                "      \"middleName\": \"\",\n" +
-                "      \"lastName\": \"F\",\n" +
-                "      \"dateOfBirth\": \"03/03/1997\",\n" +
+                "      \"firstName\": \"Sathish D\",\n" +
+                "      \"dateOfBirth\": \"12/05/2000\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
-                "      \"percentage\": 40\n" +
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"6000012 \",\n" +
+                "        \"landmark\": \" \"\n" +
+                "      },\n" +
+                "      \"percentage\":30\n" +
                 "    },\n" +
-                "    {\n" +
-                "      \"firstName\": \"Second\",\n" +
-                "      \"middleName\": \"\",\n" +
-                "      \"lastName\": \"S\",\n" +
-                "      \"dateOfBirth\": \"01/03/1999\",\n" +
+
+                "{\n" +                                                           //second Nominee
+                "      \"firstName\": \"Sathish Dhamodharan\",\n" +
+                "      \"dateOfBirth\": \"12/05/2000\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
-                "      \"percentage\": 30\n" +
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"6000012 \",\n" +
+                "        \"landmark\": \" \"\n" +
+                "      },\n" +
+                "      \"percentage\": 20\n" +
                 "    },\n" +
-                "    {\n" +
-                "      \"firstName\": \"Third\",\n" +
-                "      \"lastName\": \"t\",\n" +
-                "      \"dateOfBirth\": \"03/03/1986\",\n" +
-                "      \"percentage\": 30,\n" +
-                "      \"relationship\": \"Brother\"\n" +
+
+                "{\n" +                                                            // Third Nominee
+                "      \"firstName\": \"Sathish\",\n" +
+                "      \"dateOfBirth\": \"12/05/2000\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"6000012 \",\n" +
+                "        \"landmark\": \" \"\n" +
+                "      },\n" +
+                "      \"percentage\": 50\n" +
                 "    }\n" +
-                "  ]\n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"NA\"\n" +
                 "}";
     }
+
+    public static String sameinvestorname()
+    {
+        return "{\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Saravanan Elumalai\",\n" +
+                "      \"dateOfBirth\": \"05/12/1979\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"600we22w\",\n" +
+                "        \"landmark\": \" \"\n" +
+                "      },\n" +
+                "      \"percentage\": 100\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"NA\"\n" +
+                "}";
+    }
+
+    public static String Guardianwithsameinvestorname()
+    {
+        return "{\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Sathish\",\n" +
+                "      \"dateOfBirth\": \"05/12/2022\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
+                "      \"address\": {\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"address1\",\n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"Erode\",\n" +
+                "        \"cityId\": \"string\",\n" +
+                "        \"stateId\": \"string\",\n" +
+                "        \"countryId\": \"string\",\n" +
+                "        \"state\": \"TN\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"600001\",\n" +
+                "        \"landmark\": \" \"\n" +
+                "      },\n" +
+                "      \"guardian\": {\n" +
+                "        \"firstName\": \"Saravanan Elumalai\",\n" +
+                "        \"dateOfBirth\": \"05/12/1979\",\n" +
+                "        \"relationship\": \"Brother\",\n" +
+                "        \"address\": {\n" +
+                "          \"addressType\": \"permanent\",\n" +
+                "          \"addressLine1\": \"rtyui\",\n" +
+                "          \"city\": \"Chennai\",\n" +
+                "          \"cityOthers\": \"Salem\",\n" +
+                "          \"cityId\": \"string\",\n" +
+                "          \"stateId\": \"string\",\n" +
+                "          \"countryId\": \"string\",\n" +
+                "          \"state\": \"Tamilnadu\",\n" +
+                "          \"country\": \"India\",\n" +
+                "          \"pincode\": \"600002\",\n" +
+                "          \"landmark\": \" \"\n" +
+                "        }\n" +
+                "      },\n" +
+                "      \"percentage\": 100\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"otpReferenceId\": \"NA\"\n" +
+                "}";
+    }
+
+
 }
