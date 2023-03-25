@@ -37,19 +37,16 @@ public class GetAPI_Verify {
 
     @Test(priority = 0)
     public void Feature() {
-
         RequestSpecification res = given().spec(req);
         res.when().get("/core/features")
                 .then().log().all().spec(respec).extract().response().asString();
     }
-
     @Test(priority = 0)
     public void User_Profile() {
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", Holdingid);
         res.when().get("/core/user-profile")
                 .then().log().all().spec(respec);
-
     }
 
     @Test(priority = 0)
@@ -243,7 +240,7 @@ public class GetAPI_Verify {
     @Test
     public void lookup() {
         RequestSpecification res = given().spec(req)
-                .queryParam("types", "State,Location,country,fd_nominee_salutation");
+                .queryParam("types", "Location");  //State,Location,country,fd_nominee_salutation
         res.when().get("/core/lookups")
                 .then().log().all().spec(respec);
     }

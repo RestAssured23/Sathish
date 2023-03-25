@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class Login {
     static RequestSpecification req =new RequestSpecBuilder()
-            .setBaseUri(BaseURL.scrum1)
+            .setBaseUri(BaseURL.test)
             .addHeader("x-api-version","2.0")
             .addHeader("channel-id","10")
             .setContentType(ContentType.JSON).build();

@@ -1,4 +1,4 @@
-package FD_Revamp;
+package API_Collection.FixedDeposite;
 
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.Login.Live_Login;
@@ -16,15 +16,13 @@ import static io.restassured.RestAssured.given;
 
 public class FD_Revamp {
 
-String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3JpdGUiLCJuYW1lIjoiU2FpYmFiYSBWIERhdHRhbmkiLCJlbWFpbCI6InNhaWRhdHRhbmlAdW5pdmVyc2FscmVsb2NhdGlvbnMuY29tIiwibW9iaWxlIjoiNzMwNTYwNDMzMyIsIm1hbmFnZW1lbnQtdXNlci1pZCI6MTg5MDc0MywibWFuYWdlbWVudC11c2VyLXJvbGVzIjoiYWRtaW4iLCJpc3MiOiJmdW5kc2luZGlhLmNvbSIsImp0aSI6IjI2MWE0ZDNmLTg1Y2ItNGZkZC1hN2I1LWY3OGFkMTEwNmIxNiIsImlhdCI6MTY3OTMxNzY3NSwiZXhwIjoxNjc5MzIxMzM1fQ.X2mMVPGQlTpz8WY7oyHUVJHcyCgzPmNjoLZle0Tje3BoH13mfwusZ89lVr-jqiB-QYrolMk_aXzI5PbLqVP4ow";
-
-
+String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI3Njc5Iiwic2NvcGVzIjoicmVhZCx3cml0ZSIsIm5hbWUiOiJTeWVkIEdob3VzZSIsImVtYWlsIjoiU3llZC5HaG91c2UwMDZAR21haWwuQ29tIiwibW9iaWxlIjoiOTg0OTcyNjAwNiIsIm1hbmFnZW1lbnQtdXNlci1pZCI6MTg5MDc0MywibWFuYWdlbWVudC11c2VyLXJvbGVzIjoiYWRtaW4iLCJpc3MiOiJmdW5kc2luZGlhLmNvbSIsImp0aSI6ImE4MWExY2FlLTNlMGEtNDVkMy05MTVmLTkyNmRkYWZkMWZlNCIsImlhdCI6MTY3OTU3MTAyMCwiZXhwIjoxNjc5NTc0NjgwfQ.wBtELBoMwV6i4hWcFQGfe3BHZbpChc8MQrv73u2ejlPKKzg6GLohwDv2cIR0StY4bJwsPosZNWc-JhIUAIAORA";
 
 	RequestSpecification req = new RequestSpecBuilder()
-			.setBaseUri(BaseURL.scrum1)
+			.setBaseUri(BaseURL.live)
 			.addHeader("x-api-version", "2.0")
 			.addHeader("channel-id", "10")
-			.addHeader("x-fi-access-token", Login.sathish())
+			.addHeader("x-fi-access-token", token)
 			.setContentType(ContentType.JSON).build();
 
 	ResponseSpecification respec = new ResponseSpecBuilder()
@@ -48,7 +46,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void Holding_Profile_FD() {
 		RequestSpecification res = given().spec(req)
 				.queryParam("product", "FD");
-		res.when().get("/investor/holding-profiles")
+		res.when().get("/core/investor/holding-profiles")
 				.then().log().all().spec(respec);
 
 	}
@@ -56,9 +54,9 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	@Test
 	public void personal_information() {
 		RequestSpecification res = given().spec(req)
-				.queryParam("fdId", "FD16558")
+				.queryParam("fdId", "FD41634")
 				.body("{	}");
-		res.when().post("/internal/fixed-deposit/shri-ram/personal-information")
+		res.when().post("/core/internal/fixed-deposit/shri-ram/personal-information")
 				.then().log().all().spec(respec);
 	}
 
@@ -66,7 +64,6 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void Feature() {
 
 		RequestSpecification res = given().spec(req);
-			//	.queryParam("holdingProfileId", "0");
 		res.when().get("/core/features")
 				.then().log().all().spec(respec);
 	}
@@ -75,7 +72,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void User_Profile() {
 		RequestSpecification res = given().spec(req)
 				.queryParam("holdingProfileId", "0");
-		res.when().get("/user-profile")
+		res.when().get("/core/user-profile")
 				.then().log().all().spec(respec);
 	}
 
@@ -86,7 +83,6 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 		res.when().get("/investor/nominees/declaration")
 				.then().log().all().spec(respec);
 	}
-
 
 	@Test
 	public void select_funds() {
@@ -116,7 +112,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 
 		RequestSpecification res = given().spec(req)
 				.body(payload);
-		res.when().post("/product-search/fixed-deposit/select-funds")
+		res.when().post("/core/product-search/fixed-deposit/select-funds")
 				.then().log().all().spec(respec);
 	}
 
@@ -158,7 +154,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void lookup() {
 		RequestSpecification res = given().spec(req)
 				.queryParam("types", "State,Location,country,fd_nominee_salutation");
-		res.when().get("/lookups")
+		res.when().get("/core/lookups")
 				.then().log().all().spec(respec);
 	}
 
@@ -166,7 +162,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void Get_Internal_Investment() {
 		RequestSpecification res = given().spec(req)
 				.queryParam("fdId", "FD45353");
-		res.when().get("/internal/investor/fixed-deposit/investment")
+		res.when().get("/core/internal/investor/fixed-deposit/investment")
 				.then().log().all().spec(respec);
 	}
 
@@ -179,7 +175,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 						"  \"message\": \"string\",\n" +
 						"  \"gatewayPaymentId\": \"string\"\n" +
 						"}");
-		res.when().post("/internal/investor/fixed-deposit/investment")
+		res.when().post("/core/internal/investor/fixed-deposit/investment")
 				.then().log().all().spec(respec);
 	}
 
@@ -188,7 +184,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 
 		RequestSpecification res = given().spec(req)
 				.queryParam("fdId", "FD45403");
-		res.when().delete("/investor/fixed-deposit/investment")
+		res.when().delete("/core/investor/fixed-deposit/investment")
 				.then().log().all().spec(respec);
 	}
 
@@ -196,14 +192,14 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void Get_Investor_Investment() {
 		RequestSpecification res = given().spec(req)
 				.queryParam("fdId", "FD45404");
-		res.when().get("/investor/fixed-deposit/investment")
+		res.when().get("/core/investor/fixed-deposit/investment")
 				.then().log().all().spec(respec);
 	}
 
 	@Test
 	public void Retry() {
 		RequestSpecification res = given().spec(req)
-				.queryParam("fdId", "FD16594");
+				.queryParam("fdId", "FD43143");
 		res.when().get("/core/investor/fixed-deposit/investment/retry")
 				.then().log().all().spec(respec);
 	}
@@ -213,7 +209,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void Company() {
 		RequestSpecification res = given().spec(req)
 				.body("{companyId:[19]}");
-		res.when().post("/product-search/fixed-deposit/companies")
+		res.when().post("/core/product-search/fixed-deposit/companies")
 				.then().log().all().spec(respec);
 	}
 
@@ -221,7 +217,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 	public void Investor_holding() {
 		RequestSpecification res = given().spec(req)
 				.queryParam("holdingProfileId", "1403821");
-		res.when().get("/investor/holding-profiles")
+		res.when().get("/core/investor/holding-profiles")
 				.then().log().all().spec(respec);
 	}
 
@@ -297,7 +293,7 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 						"    ]\n" +
 						"}");
 
-		res.when().post("/investor/fixed-deposit/investment")
+		res.when().post("/core/investor/fixed-deposit/investment")
 				.then().log().all().spec(respec);
 	}
 
@@ -387,12 +383,9 @@ String token="eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzMTU2NSIsInNjb3BlcyI6InJlYWQsd3Jpd
 
 		RequestSpecification res = given().spec(req)
 				.body(payload);
-		res.when().post("/investor/fixed-deposit/investment")
+		res.when().post("/core/investor/fixed-deposit/investment")
 				.then().log().all().spec(respec);
 	}
-
-
-
 }
 	
 	

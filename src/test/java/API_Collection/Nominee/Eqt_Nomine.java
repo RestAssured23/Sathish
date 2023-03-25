@@ -1,8 +1,6 @@
 package API_Collection.Nominee;
 import API_Collection.BaseURL.BaseURL;
-import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
-import MFPojo.Nominee.ExistingDeclaration;
 import MFPojo.Nominee.NewDeclaration;
 import MFPojo.Nominee.PostResponse;
 import io.restassured.builder.RequestSpecBuilder;
@@ -12,10 +10,6 @@ import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
 import org.testng.annotations.Test;
-
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 

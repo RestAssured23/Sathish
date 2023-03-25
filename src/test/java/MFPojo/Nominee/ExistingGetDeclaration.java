@@ -4,87 +4,70 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
+import java.util.Date;
 
-public class ExistingDeclaration {
+public class ExistingGetDeclaration {
+
     @Getter@Setter
     public static class Address{
-        public String addressId;
-        public String addressType;
         public String addressLine1;
         public String addressLine2;
         public String city;
-        public String cityOthers;
-        public String cityId;
-        public String stateId;
-        public String countryId;
         public String state;
-        public String country;
         public String pincode;
-        public String landmark;
+    }
+    @Getter@Setter
+    public static class Contact{
+        public String type;
+        public String mobile;
+        public String email;
     }
     @Getter@Setter
     public static class Datum{
         public ArrayList<Nominee> nominees;
         public String status;
-        public String declarationType;
         public String remarks;
         public Mf mf;
-        public String mobile;
-        public String email;
+        public ArrayList<Contact> contacts;
+        public String declarationType;
     }
-@Getter@Setter
-    public static class Error{
-        public int productId;
-        public String id;
-        public String field;
-        public int code;
-        public String desc;
-        public String type;
-    }
-@Getter@Setter
+    @Getter@Setter
     public static class Guardian{
         public String firstName;
         public String middleName;
         public String lastName;
-        public String dateOfBirth;
+        public Date dateOfBirth;
         public String relationship;
-        public String gender;
-        public String email;
-        public String mobile;
-        public String salutation;
-        public Address address;
     }
-@Getter@Setter
+    @Getter@Setter
     public static class Mf{
         public String folio;
         public String amc;
         public String amcCode;
     }
-@Getter@Setter
+    @Getter@Setter
     public static class Nominee{
         public String firstName;
         public String middleName;
         public String lastName;
-        public String dateOfBirth;
+        public Date dateOfBirth;
         public String relationship;
-        public String gender;
         public String email;
-        public String mobile;
-        public String salutation;
         public Address address;
-        public String nomineeId;
         public Guardian guardian;
         public int percentage;
+        public String nomineeId;
     }
     @Getter@Setter
     public static class Root{
         public int code;
         public String desc;
+        public ArrayList<Object> errors;
         public boolean success;
-        public ArrayList<Error> errors;
         public String type;
-        public ArrayList<Datum> data;
         public String name;
+        public ArrayList<Datum> data;
     }
+
 
 }

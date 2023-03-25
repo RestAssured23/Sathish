@@ -3,6 +3,8 @@ package API_Collection.Nominee;
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
+import MFPojo.HoldingProfile;
+import MFPojo.Nominee.ExistingGetDeclaration;
 import MFPojo.Nominee.ExistingPutResponse;
 import MFPojo.Nominee.NewDeclaration;
 import MFPojo.Nominee.PostResponse;
@@ -49,7 +51,6 @@ public class Nominee {
         Map<String, Object> optout = new HashMap<String, Object>();
         optout.put("holdingProfileId", "182348");
         optout.put("optedOut", true);
-
         RequestSpecification res = given().spec(req)
                 .body(optout);
         PostResponse.Root response = res.when().post("/core/investor/nominees")
@@ -164,11 +165,13 @@ public class Nominee {
                 .then().log().all().spec(respec);
     }
 
+
+        // Test B (181558) , //181596(3Joint)  181559(2 joint)
     @Test
     public void Existing()	{
         //Investor ID for Equity and Holding id for MF
         RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId","181559")        //181596(3Joint)  181559(2 joint)
+                .queryParam("holdingProfileId","181557")
                 .queryParam("product","MF");;
         res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec);
@@ -178,7 +181,7 @@ public class Nominee {
     public void Put_Nominee()	{
         RequestSpecification res=given().spec(req)
                 .queryParam("product","MF")
-                .body(ExistingPayload.single());
+                .body(ExistingPayload.Guardian());
         res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec);
     }
@@ -187,7 +190,7 @@ public class Nominee {
     public void Put_Nominee_Test()	{
         RequestSpecification res=given().spec(req)
                 .queryParam("product","MF")
-                .body(ExistingPayload.single());
+                .body(ExistingPayload.One_Nomoinee());
         ExistingPutResponse.Root response= res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec).extract().response().as(ExistingPutResponse.Root.class);
         for (int i = 0; i < response.getData().getInvestors().size(); i++) {
@@ -205,7 +208,7 @@ public class Nominee {
         try {
             RequestSpecification res=given().spec(req)
                     .queryParam("product","MF")
-                    .body(ExistingPayload.single());
+                    .body(ExistingPayload.One_Nomoinee());
         ExistingPutResponse.Root response= res.when().put("/core/investor/nominees")
                     .then().log().all().spec(respec).extract().response().as(ExistingPutResponse.Root.class);
             for (int i = 0; i < response.getData().getInvestors().size(); i++) {
@@ -244,5 +247,29 @@ public class Nominee {
         }
 
     }
+
+    @Test
+    public void Test_Existing()	{
+        //Investor ID for Equity and Holding id for MF
+        RequestSpecification res=given().spec(req)
+                .queryParam("holdingProfileId","181557")
+                .queryParam("product","MF");;
+       ExistingGetDeclaration.Root response= res.when().get("/core/investor/nominees/existing-declaration")
+                .then().spec(respec).extract().response().as(ExistingGetDeclaration.Root.class);
+      int size= response.getData().size();
+      for(int i=0;i<size;i++)
+      {
+         if(response.getData().get(i).getStatus().equalsIgnoreCase("incomplete")){
+                System.out.println(response.getData().get(i).getMf().getAmc());
+                System.out.println(response.getData().get(i).getMf().getFolio());
+               System.out.println(response.getData().get(i).getMf().getAmcCode());
+
+         }
+      }
+
+    }
+
+
+
 
 }

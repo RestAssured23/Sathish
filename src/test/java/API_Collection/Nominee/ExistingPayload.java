@@ -1,168 +1,139 @@
 package API_Collection.Nominee;
 
 public class ExistingPayload {
+
     public static String OptOut(){
-        return "{ \n" +
-                "  \"holdingProfileId\": \"181596\",\n" +
+        return "{\n" +
+                "  \"holdingProfileId\": \"181557\",\n" +
+                "  \"optedOut\": true,\n" +
                 "  \"folios\": [\n" +
                 "    {\n" +
-                "      \"folioNo\": \"0123456780\",\n" +
-                "      \"amc\": \"400004\"\n" +
+          //      "      \"amc\": \"400004\",\n" +
+                "      \"amcCode\": \"400004\",\n" +
+                "      \"folioNo\": \"0123456794\"\n" +
                 "    }\n" +
                 "  ],\n" +
                 "  \"declarationType\": \"opt-out\",\n" +
-                "  \"processType\": \"online\",\n" +
-                "  \"otpReferenceId\": \"\"\n" +
+                "  \"processType\": \"online\"\n" +
                 "}";
     }
-    public static String single(){
+    public static String One_Nomoinee(){
         return "{\n" +
-                "  \"investorId\": \"\",\n" +
                 "  \"holdingProfileId\": \"181559\",\n" +
-                "  \"folios\": [\n" +
-                "    {\n" +
-                "      \"folioNo\": \"34649/46464\",\n" +
-                "      \"amc\": \"400015\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"declarationType\": \"opt-in\",\n" +
-                "  \"processType\": \"online\",\n" +
+                "  \"optedOut\": false,\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"aaa1\",\n" +
-                "      \"dateOfBirth\": \"10/10/2000\",\n" +
-                "      \"relationship\": \"brother\",\n" +
+                "      \"firstName\": \"sathish\",\n" +
+                "      \"dateOfBirth\": \"02/02/1981\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
                 "      \"percentage\": 100\n" +
-                "    }    \n" +
-                "  ],\n" +
-                "  \"otpReferenceId\": \"\"\n" +
-                "}";
-
-    }
-    public static String sameinvestorname(){
-        return "{\n" +
-                "  \"investorId\": \"\",\n" +
-                "  \"holdingProfileId\": \"181596\",\n" +
-                "  \"folios\": [\n" +
-                "    {\n" +
-                "      \"folioNo\": \"0123456780\",\n" +
-                "      \"amc\": \"400004\"\n" +
                 "    }\n" +
                 "  ],\n" +
-                "  \"declarationType\": \"opt-in\",\n" +
-                "  \"processType\": \"online\",\n" +
-                "  \"nominees\": [\n" +
+                "  \"folios\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"Joint One\",\n" +
-                "      \"dateOfBirth\": \"12/12/2000\",\n" +
-                "      \"relationship\": \"brother\",\n" +
-                "      \"percentage\": 100\n" +
-                "    }    \n" +
+                "      \"amc\": \"400015\",\n" +
+                "      \"amcCode\": \"400015\",\n" +
+                "      \"folioNo\": \"34649/46464\"\n" +
+                "    }\n" +
                 "  ],\n" +
-                "  \"otpReferenceId\": \"\"\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"declarationType\": \"opt-in\"\n" +
                 "}";
 
     }
     public static String Guardian(){
         return "{\n" +
-                "  \"investorId\": \"\",\n" +
-                "  \"holdingProfileId\": \"181596\",\n" +
-                "  \"folios\": [\n" +
-                "    {\n" +
-                "      \"folioNo\": \"0123456780\",\n" +
-                "      \"amc\": \"400004\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"declarationType\": \"opt-in\",\n" +
-                "  \"processType\": \"online\",\n" +
+                "  \"holdingProfileId\": \"181557\",\n" +
+                "  \"optedOut\": false,\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"aaa1\",\n" +
+                "      \"firstName\": \"Sathish Test Tesgvsajsa\",\n" +
                 "      \"dateOfBirth\": \"10/10/2022\",\n" +
-                "      \"relationship\": \"brother\",\n" +
-                "      \"percentage\": 100\n" +
-                "    },\n" +
-               "      \"guardian\": {\n" +
-                "        \"firstName\": \"abc\",\n" +
+                "      \"relationship\": \"Grand Daughter\",\n" +
+                "      \"percentage\": 100,\n" +
+                "      \"guardian\": {\n" +
+                "        \"firstName\": \"Guardian Details\",\n" +
                 "        \"dateOfBirth\": \"10/10/2000\",\n" +
-                "        \"relationship\": \"brother\",\n" +
+                "        \"relationship\": \"Brother\"\n" +
+                "      }\n" +
                 "    }\n" +
                 "  ],\n" +
-                "  \"otpReferenceId\": \"\"\n" +
-                "}";
-
-    }
-
-
-    public static String two(){
-        return "{\n" +
-                "  \n" +
-                "  \"holdingProfileId\": \"string\",\n" +
                 "  \"folios\": [\n" +
                 "    {\n" +
-                "      \"folioNo\": \"0123456789\",\n" +
-                "      \"amc\": \"400015\"\n" +
+                "      \"amc\": \"400013\",\n" +
+           //     "      \"amcCode\": \"400013\",\n" +
+                "      \"folioNo\": \"1234/461\"\n" +
                 "    }\n" +
                 "  ],\n" +
-                "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
+                "  \"declarationType\": \"opt-in\"\n" +
+                "}";
+
+    }
+    public static String Two_Nominee() {
+        return "{\n" +
+                "  \"holdingProfileId\": \"181558\",\n" +
+                "  \"optedOut\": false,\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"string\",\n" +
-                "      \"middleName\": \"string\",\n" +
-                "      \"lastName\": \"string\",\n" +
-                "      \"dateOfBirth\": \"string\",\n" +
-                "      \"relationship\": \"string\",\n" +
-                "      \"gender\": \"male\",\n" +
-                "      \"email\": \"string\",\n" +
-                "      \"mobile\": \"string\",\n" +
-                "      \"salutation\": \"string\",\n" +
-                "      \"address\": {\n" +
-                "        \"addressId\": \"string\",\n" +
-                "        \"addressType\": \"communication\",\n" +
-                "        \"addressLine1\": \"string\",\n" +
-                "        \"addressLine2\": \"string\",\n" +
-                "        \"city\": \"string\",\n" +
-                "        \"cityOthers\": \"string\",\n" +
-                "        \"cityId\": \"string\",\n" +
-                "        \"stateId\": \"string\",\n" +
-                "        \"countryId\": \"string\",\n" +
-                "        \"state\": \"string\",\n" +
-                "        \"country\": \"string\",\n" +
-                "        \"pincode\": \"string\",\n" +
-                "        \"landmark\": \"string\"\n" +
-                "      },\n" +
-                "      \"nomineeId\": \"string\",\n" +
-                "      \"guardian\": {\n" +
-                "        \"firstName\": \"string\",\n" +
-                "        \"middleName\": \"string\",\n" +
-                "        \"lastName\": \"string\",\n" +
-                "        \"dateOfBirth\": \"string\",\n" +
-                "        \"relationship\": \"string\",\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"email\": \"string\",\n" +
-                "        \"mobile\": \"string\",\n" +
-                "        \"salutation\": \"string\",\n" +
-                "        \"address\": {\n" +
-                "          \"addressId\": \"string\",\n" +
-                "          \"addressType\": \"communication\",\n" +
-                "          \"addressLine1\": \"string\",\n" +
-                "          \"addressLine2\": \"string\",\n" +
-                "          \"city\": \"string\",\n" +
-                "          \"cityOthers\": \"string\",\n" +
-                "          \"cityId\": \"string\",\n" +
-                "          \"stateId\": \"string\",\n" +
-                "          \"countryId\": \"string\",\n" +
-                "          \"state\": \"string\",\n" +
-                "          \"country\": \"string\",\n" +
-                "          \"pincode\": \"string\",\n" +
-                "          \"landmark\": \"string\"\n" +
-                "        }\n" +
-                "      },\n" +
-                "      \"percentage\": 0\n" +
+                "      \"firstName\": \"sathish\",\n" +
+                "      \"dateOfBirth\": \"02/02/1981\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
+                "      \"percentage\": 50\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"firstName\": \"Second Nominee\",\n" +
+                "      \"dateOfBirth\": \"01/01/1964\",\n" +
+                "      \"relationship\": \"Mother\",\n" +
+                "      \"percentage\": 50\n" +
                 "    }\n" +
                 "  ],\n" +
-                "  \"otpReferenceId\": \"string\"\n" +
+                "  \"folios\": [\n" +
+                "    {\n" +
+                "      \"amc\": \"400004\",\n" +
+                "      \"amcCode\": \"400004\",\n" +
+                "      \"folioNo\": \"0123456794\"\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"declarationType\": \"opt-in\"\n" +
                 "}";
     }
+
+    public static String Three_Nominee() {
+    return "{\n" +
+            "  \"holdingProfileId\": \"181558\",\n" +
+            "  \"optedOut\": false,\n" +
+            "  \"nominees\": [\n" +
+            "    {\n" +
+            "      \"firstName\": \"Second Nominee\",\n" +
+            "      \"dateOfBirth\": \"01/01/1964\",\n" +
+            "      \"relationship\": \"Mother\",\n" +
+            "      \"percentage\": 50\n" +
+            "    },\n" +
+            "    {\n" +
+            "      \"firstName\": \"sathish\",\n" +
+            "      \"dateOfBirth\": \"02/02/1981\",\n" +
+            "      \"relationship\": \"Brother\",\n" +
+            "      \"percentage\": 30\n" +
+            "    },\n" +
+            "    {\n" +
+            "      \"firstName\": \"Third Nominee\",\n" +
+            "      \"dateOfBirth\": \"08/01/1985\",\n" +
+            "      \"relationship\": \"Mother\",\n" +
+            "      \"percentage\": 20\n" +
+            "    }\n" +
+            "  ],\n" +
+            "  \"folios\": [\n" +
+            "    {\n" +
+            "      \"amc\": \"400004\",\n" +
+            "      \"amcCode\": \"400004\",\n" +
+            "      \"folioNo\": \"0123456794\"\n" +
+            "    }\n" +
+            "  ],\n" +
+            "  \"processType\": \"online\",\n" +
+            "  \"declarationType\": \"opt-in\"\n" +
+            "}";
+    }
+
 }
