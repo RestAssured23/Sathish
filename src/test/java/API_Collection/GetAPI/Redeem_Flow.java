@@ -24,7 +24,7 @@ import static io.restassured.RestAssured.given;
 
 public class Redeem_Flow {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.dev)
+            .setBaseUri(BaseURL.dev)    
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.sathish())
@@ -38,9 +38,11 @@ public class Redeem_Flow {
     String Expected_Folio="00005789"; String Expected_GoalName="API Automation";
 
     //Live Data
-    //  String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
-    //  String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
+     /* String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
+      String Expected_Folio="00005789"; String Expected_GoalName="";*/
 
+   /*   String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
+    String Expected_Folio=" "; String Expected_GoalName="";*/
 
     @Test
     public void Redeemption_Flow() throws SQLException {
@@ -145,8 +147,8 @@ System.out.println("=========================Verify OTP API=====================
                 RedeemPayload.put("units",response.getData().get(i).getUnits());
                 RedeemPayload.put("unitsFormatted", response.getData().get(i).getUnitsFormatted());
                 RedeemPayload.put("redemptionMode", "full");
-                RedeemPayload.put("dividendOption", "Payout");
-                RedeemPayload.put("option", "Dividend");
+                RedeemPayload.put("dividendOption", response.getData().get(i).getDividendOption());
+                RedeemPayload.put("option", response.getData().get(i).getOption());
                 RedeemPayload.put("bankId", response.getData().get(i).getBankId());
                 RedeemPayload.put("redemptionType", "regular");
                 RedeemPayload.put("otpReferenceId", DB_refid);
@@ -169,7 +171,7 @@ System.out.println("=========================Redeem API=========================
                 .queryParam("page", "1")
                 .queryParam("size", "10");
         RecentTransaction.Root response = res.when().get("/core/investor/recent-transactions")
-                .then().log().all().spec(respec).extract().response().as(RecentTransaction.Root.class);
+                .then().spec(respec).extract().response().as(RecentTransaction.Root.class);
         int count = response.getData().size();
         for (int i = 0; i < count; i++) {
             for (int j = 0; j < response.getData().get(i).getMf().size(); j++) {
@@ -189,4 +191,6 @@ System.out.println("=========================Redeem API=========================
             }  }
         }
     }
+
+
     }
