@@ -17,12 +17,11 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 
 public class GetAPI_Verify {
-
     RequestSpecification req = new RequestSpecBuilder()
             .setBaseUri(BaseURL.live)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token",Live_Login.saravanan())
+            .addHeader("x-fi-access-token",Live_Login.sathish())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
@@ -32,8 +31,8 @@ public class GetAPI_Verify {
 //String Holdingid;       String Expected_HoldID = "179605";      String InvestorId;
 
     //Live Data
-   // String Holdingid;    String Expected_HoldID = "1403821";    String InvestorId;     //sathish
-      String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
+    String Holdingid;    String Expected_HoldID = "1403821";    String InvestorId;     //sathish
+ //     String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
 
     @Test(priority = 0)
     public void Feature() {
@@ -48,7 +47,6 @@ public class GetAPI_Verify {
         res.when().get("/core/user-profile")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 0)
     public void Holding_Profile() {
         RequestSpecification res = given().spec(req);
@@ -64,15 +62,12 @@ public class GetAPI_Verify {
                     Holdingid = hold_response.getData().get(i).getHoldingProfileId();
                     System.out.println("Holding ID :"+Holdingid);
                     System.out.println("Investor ID"+InvestorId);
-
                 }
             }
         }
     }
-
     @Test(priority = 1)
     public void Dashboard() {
-
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", Holdingid);
         res.when().get("/core/investor/dashboard")
@@ -81,14 +76,12 @@ public class GetAPI_Verify {
 
     @Test(priority = 1)
     public void Dashboard_Portfolio() {
-
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", Holdingid);
         res.when().get("/core/investor/dashboard/portfolio")
                 .then().log().all().spec(respec);
 
     }
-
     @Test(priority = 1)
     public void Systematic_plan() {
         RequestSpecification res = given().spec(req)
@@ -129,10 +122,8 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/current-sips")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void STP() {
-
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", Holdingid)
                 .queryParam("page", "1")
@@ -140,21 +131,18 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/current-stps")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Power_STPs() {
         RequestSpecification res = given().spec(req);
         res.when().get("/core/investor/power-stps")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Triggers() {
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", Holdingid);
         res.when().get("/core/investor/current-triggers")
                 .then().log().all().spec(respec);
-
     }
 
     @Test(priority = 1)
@@ -228,15 +216,6 @@ public class GetAPI_Verify {
         res.when().get("/core/user/sign-up/announcements")
                 .then().log().all().spec(respec);
     }
-
-    @Test(priority = 1)
-    public void Investor_Nominee_Declaration() {
-        RequestSpecification res = given().spec(req)
-                .queryParam("holdingProfileId", Holdingid);
-        res.when().get("/core/investor/nominees/declaration")
-                .then().log().all().spec(respec);
-    }
-
     @Test
     public void lookup() {
         RequestSpecification res = given().spec(req)
@@ -424,6 +403,23 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec);
     }
+ @Test(priority = 1)
+    public void New_Nominee_Declaration() {
+        RequestSpecification res = given().spec(req)
+                .queryParam("holdingProfileId", Holdingid);
+        res.when().get("/core/investor/nominees/declaration")
+                .then().log().all().spec(respec);
+    }
+@Test(priority = 1)
+    public void Existing_Nominee()	{
+        //Investor ID for Equity and Holding id for MF
+        RequestSpecification res=given().spec(req)
+                .queryParam("holdingProfileId",Holdingid)
+                .queryParam("product","MF");;
+        res.when().get("/core/investor/nominees/existing-declaration")
+                .then().log().all().spec(respec);
+    }
+
 
 }
 

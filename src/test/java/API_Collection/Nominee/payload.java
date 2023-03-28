@@ -6,20 +6,18 @@ import java.util.Map;
 public class payload {
 
     public static String Optout="{\"" +
-            "holdingProfileId\":\"181557\"," +
+            "holdingProfileId\":\"181556\"," +
             "\"optedOut\":true" +
             "}";
     public static String single()
     {
-
         return "{\n" +
-                "  \"holdingProfileId\": \"181557\",\n" +
+                "  \"holdingProfileId\": \"181558\",\n" +
                 "  \"optedOut\": false,\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"Test\",\n" +
-            //    "      \"lastName\": \"t\",\n" +
-                "      \"dateOfBirth\": \"05/03/1980\",\n" +
+                "      \"firstName\": \"New Nominee test\",\n" +
+                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
                 "      \"percentage\": 100,\n" +
                 "      \"relationship\": \"Brother\"\n" +
                 "    }\n" +
@@ -36,7 +34,7 @@ public class payload {
                 "      \"firstName\": \"FirstName\",\n" +
                 "      \"middleName\": \"\",\n" +
                 "      \"lastName\": \"FS\",\n" +
-                "      \"dateOfBirth\": \"01/09/2020\",\n" +
+                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"percentage\": 100,\n" +
                 "      \"guardian\": {\n" +
@@ -58,14 +56,14 @@ public class payload {
                 "    {\n" +
                 "      \"firstName\": \"First\",\n" +
                 "      \"lastName\": \"F\",\n" +
-                "      \"dateOfBirth\": \"03/03/1997\",\n" +
+                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
                 "      \"percentage\": 50,\n" +
                 "      \"relationship\": \"Brother\"\n" +
                 "    },\n" +
                 "    {\n" +
                 "      \"firstName\": \"Second\",\n" +
                 "      \"lastName\": \"S\",\n" +
-                "      \"dateOfBirth\": \"01/03/1999\",\n" +
+                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
                 "      \"percentage\": 50,\n" +
                 "      \"relationship\": \"Brother\"\n" +
                 "    }\n" +
@@ -82,7 +80,7 @@ public class payload {
                 "      \"firstName\": \"First\",\n" +
                 "      \"middleName\": \"\",\n" +
                 "      \"lastName\": \"F\",\n" +
-                "      \"dateOfBirth\": \"03/03/1997\",\n" +
+                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"percentage\": 40\n" +
                 "    },\n" +
@@ -90,7 +88,7 @@ public class payload {
                 "      \"firstName\": \"Second\",\n" +
                 "      \"middleName\": \"\",\n" +
                 "      \"lastName\": \"S\",\n" +
-                "      \"dateOfBirth\": \"01/03/1999\",\n" +
+                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"percentage\": 30\n" +
                 "    },\n" +
@@ -104,4 +102,5 @@ public class payload {
                 "  ]\n" +
                 "}";
     }
+
 }

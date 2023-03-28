@@ -17,12 +17,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class Redeem_Flow {
+public class Switch_Flow {
     RequestSpecification req = new RequestSpecBuilder()
             .setBaseUri(BaseURL.dev)    
             .addHeader("x-api-version", "2.0")
@@ -35,7 +37,7 @@ public class Redeem_Flow {
 
     //Local DATA
     String Holdingid;    String Expected_HoldID = "179605";    String InvestorId;
-    String Expected_Folio="00005789"; String Expected_GoalName="API Automation";
+    String Expected_Folio="000001203"; String Expected_GoalName="API Automation";
 
     //Live Data
      /* String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
@@ -45,7 +47,7 @@ public class Redeem_Flow {
     String Expected_Folio=" "; String Expected_GoalName="";*/
 
     @Test
-    public void Redeemption_Flow() throws SQLException {
+    public void Switch_Flow() throws SQLException {
         Statement s1 = null;
         Connection con = null;
         ResultSet rs = null;
@@ -78,16 +80,53 @@ System.out.println("=========================Invested Scheme API================
         for (int i = 0; i < count; i++) {
             if (response.getData().get(i).getGoalName().equalsIgnoreCase(Expected_GoalName)
                     && (response.getData().get(i).getFolio().equalsIgnoreCase(Expected_Folio))) {
-System.out.println(response.getData().get(i).getSchemeName());
-System.out.println("=========================Questinoari API==========================================================");
+                System.out.println(response.getData().get(i).getSchemeName());
+                String Schemecode = response.getData().get(i).getSchemeCode();
+                System.out.println(Schemecode);
 
-// Questinoari API
-                RequestSpecification qid = given().spec(req)
-                        .body(Payload.questionnaire());
-                QuestionnaireResponse.Root quesresponse = qid.when().post("/core/questionnaire")
-                        .then().spec(respec).extract().response().as(QuestionnaireResponse.Root.class);
-                String qref_id = quesresponse.getData().getReferenceId();
-                System.out.println(qref_id);
+
+
+
+
+
+            }}
+
+/*
+//ProductSearch_MF_Form
+                RequestSpecification product=given().spec(req)
+                        .body("{\n" +
+                                "  \"page\": 1,\n" +
+                                "  \"size\": 10,\n" +
+                                "  \"orderBy\": \"rating\",\n" +
+                                "  \"orderType\": \"DESC\",\n" +
+                                "  \"categories\": [],\n" +
+                                "  \"subCategories\": [],\n" +
+                                "  \"query\": \"\",\n" +
+                                "  \"risk\": [],\n" +
+                                "  \"ratings\": [],\n" +
+                                "  \"amcs\": [\n" +
+                                "    {\n" +
+                                "      \"name\": \"HDFC\",\n" +
+                                "      \"value\": \"400013\"\n" +
+                                "    }\n" +
+                                "  ],\n" +
+                                "  \"searchCode\": [\n" +
+                                "    {\n" +
+                                "      \"value\": \"\",\n" +
+                                "      \"sort\": true\n" +
+                                "    }\n" +
+                                "  ]\n" +
+                                "}");
+                product.when().post("/core/product-search/mf")
+                        .then().log().all().statusCode(200);
+
+
+
+
+
+
+
+
 
 System.out.println("=========================Common OTP API==========================================================");
 //Common OTP:
@@ -137,28 +176,28 @@ System.out.println("=========================Verify OTP API=====================
                 res1.when().post("/core/investor/common/otp/verify")
                         .then().log().all().spec(respec);
 //Redeem Payload
-                Map<String, Object> RedeemPayload = new HashMap<String, Object>();
-                RedeemPayload.put("holdingProfileId", Holdingid);
-                RedeemPayload.put("folio", response.getData().get(i).getFolio());
-                RedeemPayload.put("goalId", response.getData().get(i).getGoalId());
-                RedeemPayload.put("goalName", response.getData().get(i).getGoalName());
-                RedeemPayload.put("schemeCode", response.getData().get(i).getSchemeCode());
-                RedeemPayload.put("schemeName", response.getData().get(i).getSchemeName());
-                RedeemPayload.put("units",response.getData().get(i).getUnits());
-                RedeemPayload.put("unitsFormatted", response.getData().get(i).getUnitsFormatted());
-                RedeemPayload.put("redemptionMode", "full");
-                RedeemPayload.put("dividendOption", response.getData().get(i).getDividendOption());
-                RedeemPayload.put("option", response.getData().get(i).getOption());
-                RedeemPayload.put("bankId", response.getData().get(i).getBankId());
-                RedeemPayload.put("redemptionType", "regular");
-                RedeemPayload.put("otpReferenceId", DB_refid);
-                RedeemPayload.put("questionnaireReferenceId", qref_id);
+                Map<String, Object> SwitchPayload = new HashMap<String, Object>();
+                SwitchPayload.put("holdingProfileId", Holdingid);
+                SwitchPayload.put("folio", response.getData().get(i).getFolio());
+                SwitchPayload.put("goalId", response.getData().get(i).getGoalId());
+                SwitchPayload.put("goalName", response.getData().get(i).getGoalName());
+                SwitchPayload.put("schemeCode", response.getData().get(i).getSchemeCode());
+                SwitchPayload.put("schemeName", response.getData().get(i).getSchemeName());
+                SwitchPayload.put("units",response.getData().get(i).getUnits());
+                SwitchPayload.put("unitsFormatted", response.getData().get(i).getUnitsFormatted());
+                SwitchPayload.put("redemptionMode", "full");
+                SwitchPayload.put("dividendOption", response.getData().get(i).getDividendOption());
+                SwitchPayload.put("option", response.getData().get(i).getOption());
+                SwitchPayload.put("bankId", response.getData().get(i).getBankId());
+                SwitchPayload.put("redemptionType", "regular");
+                SwitchPayload.put("otpReferenceId", DB_refid);
+
 
 System.out.println("=========================Redeem API==========================================================");
 //RedeemAPI
                 RequestSpecification redeem = given().spec(req)
-                        .body(RedeemPayload);
-                redeem.when().post("/core/investor/redeem")
+                        .body(SwitchPayload);
+                redeem.when().post("/core/investor/switch")
                         .then().log().all().spec(respec);
             }
         }
@@ -189,8 +228,24 @@ System.out.println("=========================Redeem API=========================
                             .then().log().all().spec(respec);
                 }
             }  }
-        }
+        }*/
     }
+
+ @Test
+    public void product_search_mf_form()
+    {
+        RequestSpecification res=given().spec(req)
+                        .queryParam("page",1)
+                        .queryParam("size",100)
+                        .queryParam("schemeCodes","454");
+       MFscheme.Root response= res.when().get("/core/product-search/mf/schemes")
+                .then().spec(respec).extract().response().as(MFscheme.Root.class);
+      for(int i=0;i<response.getData().getContent().size();i++){
+          System.out.println(response.getData().getContent().get(i).getAmc());
+          System.out.println(response.getData().getContent().get(i).getAmcCode());
+      }
+    }
+
 
 
     }

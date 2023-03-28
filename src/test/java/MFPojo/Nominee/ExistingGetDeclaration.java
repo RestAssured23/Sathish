@@ -30,6 +30,7 @@ public class ExistingGetDeclaration {
         public Mf mf;
         public ArrayList<Contact> contacts;
         public String declarationType;
+        public boolean hasActiveNomination;
     }
     @Getter@Setter
     public static class Guardian{

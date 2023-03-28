@@ -14,25 +14,25 @@ public class eqt_payload {
     public static String single()
     {
         return "{\n" +
-                "  \"investorId\": \"177973\",\n" +
+                "  \"investorId\": \"169541\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"Sathish\",\n" +
-                "      \"dateOfBirth\": \"05/12/1989\",\n" +
-                "      \"relationship\": \"Brother\",\n" +
+                "      \"firstName\": \"Shreya Udayakumar shett\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
+                "      \"relationship\": \"Daughter\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
-                "        \"addressLine1\": \"address1\",\n" +
-                "        \"city\": \"Chennai\",\n" +
+                "        \"addressLine1\": \"401, Laxmi Height, Prabhakar Dattu Mhatre Marg, Bhayander East\",\n" +
+                "        \"city\": \"Thane\",\n" +
                 "        \"cityOthers\": \"\",\n" +
                 "        \"cityId\": \"\",\n" +
                 "        \"stateId\": \"\",\n" +
                "        \"countryId\": \"\",\n" +
-                "        \"state\": \"TamilNadu\",\n" +
+                "        \"state\": \"Maharashtra\",\n" +
                 "        \"country\": \"India\",\n" +
-                "        \"pincode\": \"1AB67890\",\n" +
+                "        \"pincode\": \"400105\",\n" +
                "        \"landmark\": \" \"\n" +
                 "      },\n" +
                 "      \"percentage\": 100\n" +
@@ -50,25 +50,25 @@ public class eqt_payload {
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"Sathish\",\n" +
-                "      \"dateOfBirth\": \"13/05/2022\",\n" +
-                "      \"relationship\": \"self\",\n" +
+                "      \"firstName\": \"Shreya Udayakumar shett\",\n" +
+                "      \"dateOfBirth\": \"2022-04-01T00:00:00.000+0530\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
-                "        \"addressLine1\": \"address1\",\n" +
+                "        \"addressLine1\": \"401, Laxmi Height, Prabhakar Dattu Mhatre Marg, Bhayander East\",\n" +
                 "        \"city\": \"Chennai\",\n" +
-                "        \"cityOthers\": \"Erode\",\n" +
-                "        \"cityId\": \"string\",\n" +
-                "        \"stateId\": \"string\",\n" +
-                "        \"countryId\": \"string\",\n" +
-                "        \"state\": \"TN\",\n" +
+                "        \"cityOthers\": \"Thane\",\n" +
+                "        \"cityId\": \" \",\n" +
+                "        \"stateId\": \" \",\n" +
+                "        \"countryId\": \" \",\n" +
+                "        \"state\": \"Maharashtra\",\n" +
                 "        \"country\": \"India\",\n" +
-                "        \"pincode\": \"600001\",\n" +
+                "        \"pincode\": \"400105\",\n" +
                 "        \"landmark\": \" \"\n" +
                 "      },\n" +
                 "      \"guardian\": {\n" +
                 "        \"firstName\": \"abc\",\n" +
-                "        \"dateOfBirth\": \"13/05/2000\",\n" +
+                "        \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "        \"relationship\": \"self\",\n" +
                 "        \"address\": {\n" +
                 "          \"addressType\": \"permanent\",\n" +
@@ -95,13 +95,13 @@ public class eqt_payload {
     public static String two()
     {
         return "{\n" +
-                "  \"investorId\": \"177973\",\n" +
+                "  \"investorId\": \"169541\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"Sathish\",\n" +
-                "      \"dateOfBirth\": \"12/05/2000\",\n" +
+                "      \"firstName\": \"Sathish D\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -120,7 +120,7 @@ public class eqt_payload {
                 "    },\n" +
                 "{\n" +
                 "      \"firstName\": \"Sathish\",\n" +
-                "      \"dateOfBirth\": \"13/05/2000\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -145,13 +145,13 @@ public class eqt_payload {
     public static String three()
     {
         return "{\n" +
-                "  \"investorId\": \"177973\",\n" +
+                "  \"investorId\": \"169541\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Sathish D\",\n" +
-                "      \"dateOfBirth\": \"12/05/2000\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -171,7 +171,7 @@ public class eqt_payload {
 
                 "{\n" +                                                           //second Nominee
                 "      \"firstName\": \"Sathish Dhamodharan\",\n" +
-                "      \"dateOfBirth\": \"12/05/2000\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -190,8 +190,8 @@ public class eqt_payload {
                 "    },\n" +
 
                 "{\n" +                                                            // Third Nominee
-                "      \"firstName\": \"Sathish\",\n" +
-                "      \"dateOfBirth\": \"12/05/2000\",\n" +
+                "      \"firstName\": \"Sathish S\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -216,13 +216,13 @@ public class eqt_payload {
     public static String sameinvestorname()
     {
         return "{\n" +
-                "  \"investorId\": \"177973\",\n" +
+                "  \"investorId\": \"169541\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Saravanan Elumalai\",\n" +
-                "      \"dateOfBirth\": \"05/12/1979\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -253,7 +253,7 @@ public class eqt_payload {
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Sathish\",\n" +
-                "      \"dateOfBirth\": \"05/12/2022\",\n" +
+                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -270,7 +270,7 @@ public class eqt_payload {
                 "      },\n" +
                 "      \"guardian\": {\n" +
                 "        \"firstName\": \"Saravanan Elumalai\",\n" +
-                "        \"dateOfBirth\": \"05/12/1979\",\n" +
+                "        \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
                 "        \"relationship\": \"Brother\",\n" +
                 "        \"address\": {\n" +
                 "          \"addressType\": \"permanent\",\n" +
@@ -292,6 +292,70 @@ public class eqt_payload {
                 "  \"otpReferenceId\": \"NA\"\n" +
                 "}";
     }
-
+public static String test(){
+    return "{\n" +
+            "  \"investorId\": \"169541\",\n" +
+            "  \"holdingProfileId\": \"\",\n" +
+            "  \"declarationType\": \"opt-in\",\n" +
+            "  \"processType\": \"online\",\n" +
+            "  \"otpReferenceId\": \"NA\",\n" +
+            "  \"nominees\": [\n" +
+            "    {\n" +
+            "      \"firstName\": \"Shreya Udayakumar shett\",\n" +
+            "      \"middleName\": \"\",\n" +
+            "      \"lastName\": \"\",\n" +
+            "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
+            "      \"relationship\": \"03\",\n" +
+            "      \"email\": \"\",\n" +
+            "      \"mobile\": \"\",\n" +
+            "      \"salutation\": \"\",\n" +
+            "      \"nomineeId\": \"\",\n" +
+            "      \"address\": {\n" +
+            "        \"addressId\": \"\",\n" +
+            "        \"addressType\": \"communication\",\n" +
+            "        \"addressLine1\": \"401, Laxmi Height, Prabhakar Dattu Mhatre Marg, Bhayander East \",\n" +
+            "        \"addressLine2\": \"\",\n" +
+            "        \"city\": \"Thane\",\n" +
+            "        \"cityOthers\": \"\",\n" +
+            "        \"cityId\": \"\",\n" +
+            "        \"stateId\": \"\",\n" +
+            "        \"countryId\": \"\",\n" +
+            "        \"state\": \"Maharashtra\",\n" +
+            "        \"country\": \"India\",\n" +
+            "        \"pincode\": \"400105\",\n" +
+            "        \"landmark\": \"\"\n" +
+            "      },\n" +
+            "      \"guardian\": {\n" +
+            "        \"firstName\": \"\",\n" +
+            "        \"middleName\": \"\",\n" +
+            "        \"lastName\": \"\",\n" +
+            "        \"dateOfBirth\": \"\",\n" +
+            "        \"relationship\": \"\",\n" +
+            "        \"relationCode\": \"\",\n" +
+            "        \"gender\": \"\",\n" +
+            "        \"email\": \"\",\n" +
+            "        \"mobile\": \"\",\n" +
+            "        \"salutation\": \"\",\n" +
+            "        \"address\": {\n" +
+            "          \"addressId\": \"\",\n" +
+            "          \"addressType\": \"communication\",\n" +
+            "          \"addressLine1\": \"\",\n" +
+            "          \"addressLine2\": \"\",\n" +
+            "          \"city\": \"\",\n" +
+            "          \"cityOthers\": \"\",\n" +
+            "          \"cityId\": \"\",\n" +
+            "          \"stateId\": \"\",\n" +
+            "          \"countryId\": \"\",\n" +
+            "          \"state\": \"\",\n" +
+            "          \"country\": \"\",\n" +
+            "          \"pincode\": \"\",\n" +
+            "          \"landmark\": \"\"\n" +
+            "        }\n" +
+            "      },\n" +
+            "      \"percentage\": 100\n" +
+            "    }\n" +
+            "  ]\n" +
+            "}";
+}
 
 }

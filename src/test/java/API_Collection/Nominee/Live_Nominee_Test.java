@@ -1,6 +1,7 @@
 package API_Collection.Nominee;
 
 import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.HoldingProfile;
@@ -24,30 +25,53 @@ import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
-public class Nominee {
+public class Live_Nominee_Test {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
+            .setBaseUri(BaseURL.hotfix)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Nominee())
+            .addHeader("x-fi-access-token", Live_Login.sathish())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
 
     String otp_refid, dbotp, DB_refid;
+    @Test(priority = 0)
+    public void Holding_Profile() {
+        RequestSpecification res = given().spec(req);
+        HoldingProfile.Root hold_response = res.when().get("/core/investor/holding-profiles")
+                .then().spec(respec).extract().response().as(HoldingProfile.Root.class);
+        int size = hold_response.getData().size();  // Data Size
+        for (int i = 0; i < size; i++) {
+            int count = hold_response.getData().get(i).getInvestors().size();                 // Investor count
+            String holdinglist = String.valueOf(hold_response.getData().get(i).getHoldingProfileId());
+            for (int j = 0; j < count; j++) {
+                   String InvestorId = hold_response.getData().get(i).getInvestors().get(j).getInvestorId();
+                    String Holdingid = hold_response.getData().get(i).getHoldingProfileId();
+                    System.out.println("Holding ID :"+Holdingid);
+                 //   System.out.println("Investor ID"+InvestorId);
+            }
+        }
+    }
+
+@Test
+    public void Feature() {
+        RequestSpecification res = given().spec(req);
+        res.when().get("/core/features")
+                .then().log().all().spec(respec).extract().response().asString();
+    }
 
     @Test
     public void Nominee_Declaration() {
         RequestSpecification res = given().spec(req)
-                .queryParam("holdingProfileId", "181558");
+                .queryParam("holdingProfileId", "1008908");
         NewDeclaration.Root response = res.when().get("/core/investor/nominees/declaration")
                 .then().log().all().spec(respec).extract().response().as(NewDeclaration.Root.class);
         System.out.println(response.getData().getStatus());
     }
     @Test
     public void Nominee_Add() {         // Post API
-
         RequestSpecification res = given().spec(req)
                 .body(payload.single());
         PostResponse.Root response = res.when().post("/core/investor/nominees")
@@ -63,7 +87,7 @@ public class Nominee {
     public void Existing()	{
         //Investor ID for Equity and Holding id for MF
         RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId","181557")
+                .queryParam("holdingProfileId","1403821")
                 .queryParam("product","MF");;
         res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec);
@@ -76,13 +100,13 @@ public class Nominee {
         res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec);
     }
-
     @Test
     public void JointAccount() {
 //Get API
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", "181559")
                 .queryParam("product", "MF");
+
         ExistingGetDeclaration.Root response = res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec).extract().response().as(ExistingGetDeclaration.Root.class);
         String amccode = null;
