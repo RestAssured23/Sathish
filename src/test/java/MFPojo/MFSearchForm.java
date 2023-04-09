@@ -5,7 +5,7 @@ import lombok.Setter;
 
 import java.util.ArrayList;
 
-public class Mfproductsearch {
+public class MFSearchForm {
     @Getter@Setter
     public static class Amounts{
         public double amount;

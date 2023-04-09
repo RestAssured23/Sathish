@@ -1,6 +1,7 @@
 package API_Collection.Nominee;
 
 import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.Nominee.ExistingPutResponse;
@@ -25,10 +26,10 @@ import static io.restassured.RestAssured.given;
 
 public class OflineDownload {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
+            .setBaseUri(BaseURL.live)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Nominee())
+            .addHeader("x-fi-access-token", Live_Login.saravanan())
             .setContentType(ContentType.ANY)
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()

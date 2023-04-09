@@ -63,7 +63,7 @@ public class Nominee {
     public void Existing()	{
         //Investor ID for Equity and Holding id for MF
         RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId","181557")
+                .queryParam("holdingProfileId","183213")
                 .queryParam("product","MF");;
         res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec);

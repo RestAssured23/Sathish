@@ -1,6 +1,7 @@
 package API_Collection.GetAPI;
 
 import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.*;
@@ -27,19 +28,19 @@ public class Redeem_Flow {
             .setBaseUri(BaseURL.dev)    
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.sathish())
+            .addHeader("x-fi-access-token", Live_Login.sathish())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
 
-    //Local DATA
+  /*  //Local DATA
     String Holdingid;    String Expected_HoldID = "179605";    String InvestorId;
-    String Expected_Folio="00005789"; String Expected_GoalName="API Automation";
+    String Expected_Folio="00005789"; String Expected_GoalName="API Automation";*/
 
     //Live Data
-     /* String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
-      String Expected_Folio=""; String Expected_GoalName="";*/
+      String Holdingid;       String Expected_HoldID = "1403821";  String InvestorId;     //sathish
+      String Expected_Folio=""; String Expected_GoalName="";
 
    /*   String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
     String Expected_Folio=" "; String Expected_GoalName="";*/
@@ -190,6 +191,18 @@ System.out.println("=========================Redeem API=========================
                 }
             }  }
         }
+    }
+
+@Test
+    public void Delete_API() {
+
+   Map<String, String> del = new HashMap<String, String>();
+    del.put("action", "cancel");
+    del.put("referenceNo", "39002685");
+
+        RequestSpecification can=given().spec(req).body(del);
+        can.when().post("/core/investor/recent-transactions")
+                .then().log().all().spec(respec);
     }
 
 

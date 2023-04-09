@@ -97,7 +97,7 @@ String Holdingid;
     public void Recent_Transactions()	{
 
         RequestSpecification res=given().spec(req)
-                .queryParam("holdingProfileId",holdingid);
+                .queryParam("holdingProfileId","182347");
         res.when().get("/core/investor/recent-transactions")
                 .then().log().all().spec(respec);
     }

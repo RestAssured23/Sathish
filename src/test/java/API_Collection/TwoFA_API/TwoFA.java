@@ -36,7 +36,7 @@ public class TwoFA {
     String CartId; String GroupId; String otprefid;
     String DB_Otp;   String DB_refid;
 
-    @Test(priority = 0)
+/*    @Test(priority = 0)
     public void Add_Schecm()
     {
         String payload="{\"product\":\"MF\",\"id\":\"\",\"appInfo\":{\"os\":\"Web-FI\",\"fcmId\":\"\"},\"investorName\":\"First Investor\",\"investorId\":\"285020\",\"holdingProfileId\":\"182347\",\"holdingProfileName\":\"First Investor\",\"holdingProfilePan\":\"OEXPX1162B\",\"mf\":{\"sip\":{\"totalAmount\":1000,\"investmentType\":\"sip\",\"paymentId\":\"\",\"schemes\":[{\"sipType\":\"regular\",\"sipDate\":4,\"folio\":\"12345/01\",\"bankId\":\"1\",\"id\":\"p3XYgtb9M9CSiI-FzsgZO\",\"payment\":false,\"option\":\"Growth\",\"goalId\":\"457078\",\"schemeCode\":\"453\",\"schemeName\":\"Aditya Birla SL Corp Bond Fund(G)\",\"amount\":1000,\"regular\":{\"amount\":1000,\"frequency\":\"monthly\",\"tenure\":999,\"consumerCode\":\"10000000111362\"}}]}}}";
@@ -46,7 +46,7 @@ public class TwoFA {
                 .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
         CartId= response.getData().getCartId();
         System.out.println(CartId);
-    }
+    }*/
     @Test(priority = 1)
     public void Get_Cart() {
         RequestSpecification getres = given().spec(req)
@@ -120,12 +120,6 @@ public class TwoFA {
         }
 
     }
-    @Test
-    public void Contact_Info()
-    {
-        RequestSpecification res=given().spec(req);
-        res.when().get("/core/investor/contacts")
-                .then().log().all().spec(respec);
-    }
+
 
 }

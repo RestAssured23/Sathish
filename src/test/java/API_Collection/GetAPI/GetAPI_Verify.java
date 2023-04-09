@@ -32,7 +32,7 @@ public class GetAPI_Verify {
 
     //Live Data
     String Holdingid;    String Expected_HoldID = "1403821";    String InvestorId;     //sathish
- //     String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
+ //    String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan
 
     @Test(priority = 0)
     public void Feature() {
@@ -61,7 +61,7 @@ public class GetAPI_Verify {
                     InvestorId = hold_response.getData().get(i).getInvestors().get(j).getInvestorId();
                     Holdingid = hold_response.getData().get(i).getHoldingProfileId();
                     System.out.println("Holding ID :"+Holdingid);
-                    System.out.println("Investor ID"+InvestorId);
+                    System.out.println("Investor ID : "+InvestorId);
                 }
             }
         }
@@ -97,16 +97,13 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/invested-schemes")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Recent_Transactions() {
-
         RequestSpecification res = given().spec(req)
                 .queryParam("holdingProfileId", Holdingid);
         res.when().get("/core/investor/recent-transactions")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Investor_Mandates() {
         RequestSpecification res = given().spec(req)
@@ -114,7 +111,6 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/mandates")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Current_SIPS() {
         RequestSpecification res = given().spec(req)
@@ -155,7 +151,6 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/current-swps")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Folio_Banklist() {
         RequestSpecification res = given().spec(req)
@@ -163,14 +158,12 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/folio-bank-list")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Contact_Info() {
         RequestSpecification res = given().spec(req);
         res.when().get("/core/investor/contacts")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Transactions_Authorization() {
         RequestSpecification res = given().spec(req)
@@ -178,7 +171,6 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/transactions/authorization")
                 .then().log().all().spec(respec);
     }
-
     @Test(priority = 1)
     public void Pending_Payments() {
         RequestSpecification res = given().spec(req)
@@ -186,14 +178,12 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/pending-payments")
                 .then().log().all().spec(respec);
     }
-
     @Test
     public void Investor_Goals() {
         RequestSpecification res = given().spec(req);
         res.when().get("/core/goals")
                 .then().log().all().spec(respec);
     }
-
     @Test
     public void Investor_Goal() {
         RequestSpecification res = given().spec(req)
@@ -201,7 +191,6 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/goals")
                 .then().log().all().spec(respec);
     }
-
     @Test
     public void product_search_mf_form() {
         RequestSpecification res = given().spec(req)
@@ -209,7 +198,6 @@ public class GetAPI_Verify {
         res.when().get("/core/product-search/mf/form")
                 .then().log().all().spec(respec);
     }
-
     @Test
     public void Announcements() {
         RequestSpecification res = given().spec(req);
@@ -223,7 +211,6 @@ public class GetAPI_Verify {
         res.when().get("/core/lookups")
                 .then().log().all().spec(respec);
     }
-
     @Test
     public void ProductSearch_MF_Form() {
         RequestSpecification res = given().spec(req)
@@ -231,7 +218,6 @@ public class GetAPI_Verify {
         res.when().post("/core/product-search/mf")
                 .then().log().all().statusCode(200);
     }
-
     @Test
     public void Super_Savings() {
         RequestSpecification res = given().spec(req)
@@ -239,7 +225,6 @@ public class GetAPI_Verify {
         res.when().post("/core/product-search/mf")
                 .then().log().all().statusCode(200);
     }
-
     @Test
     public void NFO_Search() {
         RequestSpecification res = given().spec(req)
@@ -247,7 +232,6 @@ public class GetAPI_Verify {
         res.when().post("/core/product-search/mf")
                 .then().log().all().statusCode(200);
     }
-
     @Test(priority = 1)
     public void Scheme_info() //Scheme_Info
     {
@@ -269,7 +253,6 @@ public class GetAPI_Verify {
         res.when().post("/core/investor/dashboard/portfolio")
                 .then().log().all().spec(respec);
     }
-
     //Asset Allocation
     @Test
     public void Dashboard_portfolio_Allocation_Asset_All() {
@@ -284,7 +267,6 @@ public class GetAPI_Verify {
         res.when().post("/core/investor/dashboard/portfolio/allocations")
                 .then().log().all().spec(respec).extract().response().asString();
     }
-
     /*@Test
     public void Dashboard_portfolio_Allocation_Asset_single() {
         RequestSpecification res = given().spec(req);
@@ -358,7 +340,6 @@ public class GetAPI_Verify {
         res.when().post("/core/investor/dashboard/portfolio/allocations")
                 .then().log().all().spec(respec).extract().response().asString();
     }
-
     @Test
     public void Dashboard_portfolio_Allocation_fi_style() {
         Map<String, Object> payload = new HashMap<String, Object>();
@@ -371,7 +352,6 @@ public class GetAPI_Verify {
         res.when().post("/core/investor/dashboard/portfolio/allocations")
                 .then().log().all().spec(respec).extract().response().asString();
     }
-
     @Test
     public void Dashboard_portfolio_Allocation_credit() {
         Map<String, Object> payload = new HashMap<String, Object>();
@@ -385,23 +365,12 @@ public class GetAPI_Verify {
         res.when().post("/core/investor/dashboard/portfolio/allocations")
                 .then().log().all().spec(respec).extract().response().asString();
     }
-
     @Test
     public void Select_Funds() {
         RequestSpecification res = given().spec(req)
                 .body(Payload.Select_Funds());
         res.when().post("/core/product-search/mf/select-funds")
                 .then().log().all().statusCode(200);
-    }
-
-    @Test(priority = 1)
-    public void Existing_GetNominee()	{
-        //Investor ID for Equity and Holding id for MF
-        RequestSpecification res=given().spec(req)
-                .queryParam("investorId",InvestorId)      // 934332(saravanan)  , 177973(local)
-                .queryParam("product","EQUITY");
-        res.when().get("/core/investor/nominees/existing-declaration")
-                .then().log().all().spec(respec);
     }
  @Test(priority = 1)
     public void New_Nominee_Declaration() {
@@ -411,7 +380,7 @@ public class GetAPI_Verify {
                 .then().log().all().spec(respec);
     }
 @Test(priority = 1)
-    public void Existing_Nominee()	{
+    public void Get_Existing_Nominee_MF()	{
         //Investor ID for Equity and Holding id for MF
         RequestSpecification res=given().spec(req)
                 .queryParam("holdingProfileId",Holdingid)
@@ -419,7 +388,15 @@ public class GetAPI_Verify {
         res.when().get("/core/investor/nominees/existing-declaration")
                 .then().log().all().spec(respec);
     }
-
+    @Test(priority = 1)
+    public void Get_Equity_GetNominee()	{           //Get API
+        //Investor ID for Equity and Holding id for MF
+        RequestSpecification res=given().spec(req)
+                .queryParam("investorId",InvestorId)      // 934332(saravanan)  , 177973(local)
+                .queryParam("product","EQUITY");
+        res.when().get("/core/investor/nominees/existing-declaration")
+                .then().log().all().spec(respec);
+    }
 
 }
 

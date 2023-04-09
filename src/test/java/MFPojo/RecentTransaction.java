@@ -32,6 +32,7 @@ public class RecentTransaction {
         public String unitsFormatted;
         public String dividendType;
         public ArrayList<String> actions;
+        public String subTransType;
     }
     @Getter@Setter
     public static class Root{

@@ -49,7 +49,6 @@ public class Live_Login {
                 .then().spec(respec).extract().response().as(Signin.Root.class);
         return response.getData().getAccessToken();
     }
-
     @Test
     public static String Admin() {
         HashMap<String, String> login = new HashMap<String, String>();

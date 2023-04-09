@@ -16,7 +16,7 @@ import static io.restassured.RestAssured.given;
 
 public class Login {
     static RequestSpecification req =new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
+            .setBaseUri(BaseURL.scrum2)
             .addHeader("x-api-version","2.0")
             .addHeader("channel-id","10")
             .setContentType(ContentType.JSON).build();
@@ -24,6 +24,24 @@ public class Login {
     static ResponseSpecification respec =new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
+
+
+    @Test
+    public static String Regression()
+    {
+
+        HashMap<String, String> login = new HashMap<String, String>();
+        login.put("emailId", "Regression@gmail.com");
+        login.put("password", "asdfasdf12");
+        login.put("grantType", "credentials");        login.put("refreshToken", "string");
+
+        RequestSpecification res=given().spec(req)
+                .body(login);
+        Signin.Root response =res.when().post("/core/auth/sign-in")
+                .then().spec(respec).extract().response().as(Signin.Root.class);
+        return response.getData().getAccessToken();
+
+    }
 
     @Test
     public static String sathish()

@@ -216,13 +216,13 @@ public class eqt_payload {
     public static String sameinvestorname()
     {
         return "{\n" +
-                "  \"investorId\": \"169541\",\n" +
+                "  \"investorId\": \"177973\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
                 "      \"firstName\": \"Saravanan Elumalai\",\n" +
-                "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
+                "      \"dateOfBirth\": \"1979-12-05T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"address\": {\n" +
                 "        \"addressType\": \"communication\",\n" +
@@ -247,7 +247,7 @@ public class eqt_payload {
     public static String Guardianwithsameinvestorname()
     {
         return "{\n" +
-                "  \"investorId\": \"177973\",\n" +
+                "  \"investorId\": \"169541\",\n" +
                 "  \"declarationType\": \"opt-in\",\n" +
                 "  \"processType\": \"online\",\n" +
                 "  \"nominees\": [\n" +
@@ -294,63 +294,27 @@ public class eqt_payload {
     }
 public static String test(){
     return "{\n" +
-            "  \"investorId\": \"169541\",\n" +
-            "  \"holdingProfileId\": \"\",\n" +
+            "  \"investorId\": \"177973\",\n" +
             "  \"declarationType\": \"opt-in\",\n" +
             "  \"processType\": \"online\",\n" +
             "  \"otpReferenceId\": \"NA\",\n" +
             "  \"nominees\": [\n" +
             "    {\n" +
-            "      \"firstName\": \"Shreya Udayakumar shett\",\n" +
-            "      \"middleName\": \"\",\n" +
-            "      \"lastName\": \"\",\n" +
-            "      \"dateOfBirth\": \"2004-04-01T00:00:00.000+0530\",\n" +
-            "      \"relationship\": \"03\",\n" +
-            "      \"email\": \"\",\n" +
-            "      \"mobile\": \"\",\n" +
-            "      \"salutation\": \"\",\n" +
-            "      \"nomineeId\": \"\",\n" +
-            "      \"address\": {\n" +
-            "        \"addressId\": \"\",\n" +
+            "      \"firstName\": \"Saravanan Elumalai\",    \n" +
+            "      \"dateOfBirth\": \"1979-12-05T00:00:00.000+0530\",\n" +
+            "      \"relationship\": \"Brother\",\n" +
+            "      \"address\": {      \n" +
             "        \"addressType\": \"communication\",\n" +
-            "        \"addressLine1\": \"401, Laxmi Height, Prabhakar Dattu Mhatre Marg, Bhayander East \",\n" +
-            "        \"addressLine2\": \"\",\n" +
-            "        \"city\": \"Thane\",\n" +
+            "        \"addressLine1\": \"hvasdjf\",     \n" +
+            "        \"city\": \"Chennai\",\n" +
             "        \"cityOthers\": \"\",\n" +
             "        \"cityId\": \"\",\n" +
             "        \"stateId\": \"\",\n" +
             "        \"countryId\": \"\",\n" +
-            "        \"state\": \"Maharashtra\",\n" +
+            "        \"state\": \"TamilNadu\",\n" +
             "        \"country\": \"India\",\n" +
-            "        \"pincode\": \"400105\",\n" +
+            "        \"pincode\": \"5464654\",\n" +
             "        \"landmark\": \"\"\n" +
-            "      },\n" +
-            "      \"guardian\": {\n" +
-            "        \"firstName\": \"\",\n" +
-            "        \"middleName\": \"\",\n" +
-            "        \"lastName\": \"\",\n" +
-            "        \"dateOfBirth\": \"\",\n" +
-            "        \"relationship\": \"\",\n" +
-            "        \"relationCode\": \"\",\n" +
-            "        \"gender\": \"\",\n" +
-            "        \"email\": \"\",\n" +
-            "        \"mobile\": \"\",\n" +
-            "        \"salutation\": \"\",\n" +
-            "        \"address\": {\n" +
-            "          \"addressId\": \"\",\n" +
-            "          \"addressType\": \"communication\",\n" +
-            "          \"addressLine1\": \"\",\n" +
-            "          \"addressLine2\": \"\",\n" +
-            "          \"city\": \"\",\n" +
-            "          \"cityOthers\": \"\",\n" +
-            "          \"cityId\": \"\",\n" +
-            "          \"stateId\": \"\",\n" +
-            "          \"countryId\": \"\",\n" +
-            "          \"state\": \"\",\n" +
-            "          \"country\": \"\",\n" +
-            "          \"pincode\": \"\",\n" +
-            "          \"landmark\": \"\"\n" +
-            "        }\n" +
             "      },\n" +
             "      \"percentage\": 100\n" +
             "    }\n" +

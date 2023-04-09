@@ -27,7 +27,7 @@ import static io.restassured.RestAssured.given;
 
 public class Live_Nominee_Test {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.hotfix)
+            .setBaseUri(BaseURL.staging)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Live_Login.sathish())
@@ -54,7 +54,6 @@ public class Live_Nominee_Test {
             }
         }
     }
-
 @Test
     public void Feature() {
         RequestSpecification res = given().spec(req);
@@ -65,7 +64,7 @@ public class Live_Nominee_Test {
     @Test
     public void Nominee_Declaration() {
         RequestSpecification res = given().spec(req)
-                .queryParam("holdingProfileId", "1008908");
+                .queryParam("holdingProfileId", "1403821");
         NewDeclaration.Root response = res.when().get("/core/investor/nominees/declaration")
                 .then().log().all().spec(respec).extract().response().as(NewDeclaration.Root.class);
         System.out.println(response.getData().getStatus());

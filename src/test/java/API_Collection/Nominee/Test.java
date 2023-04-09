@@ -24,7 +24,7 @@ import static io.restassured.RestAssured.given;
 
 public class Test {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
+            .setBaseUri(BaseURL.scrum1)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.Nominee())
@@ -34,7 +34,13 @@ public class Test {
             .expectContentType(ContentType.JSON).build();
 
     String otp_refid, dbotp, DB_refid;
-
+    @org.testng.annotations.Test(priority = 1)
+    public void Power_STPs() {
+        RequestSpecification res = given().spec(req)
+        .body("{\"holdingProfileId\":\"181557\",\"newInvestment\":true,\"schemeCode\":\"8250\"}");
+        res.when().post("/core/investor/power-stps/source-schemes")
+                .then().log().all().spec(respec);
+    }
 
     @org.testng.annotations.Test
     public void JointAccount() {
