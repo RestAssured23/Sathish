@@ -4,8 +4,8 @@ import API_Collection.BaseURL.BaseURL;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.HoldingProfile;
-import MFPojo.InvestedScheme;
 import MFPojo.MFSearchForm;
+import MFPojo.MandateAPI;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.PortfolioDashboard;
 import MFPojo.TwoFA.AddScheme;
@@ -25,7 +25,7 @@ import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
-public class InvestMore {
+public class SIP {
     RequestSpecification req = new RequestSpecBuilder()
             .setBaseUri(BaseURL.test)
             .addHeader("x-api-version", "2.0")
@@ -36,9 +36,10 @@ public class InvestMore {
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
     String CartId,GroupId,otprefid,DB_Otp,DB_refid;    String Holdingid, InvestorId, Goal_ID;
-    String Scheme_Name,Scheme_code,Folio,Bankid,Option;
+    String Excpeted_AMC="icici", Expected_Scheme="ICICI Pru Balanced Advantage Fund(G)";
     String Expected_HoldID = "183318";    String Goal_Name = "Test Portfolio"; //sathish
-    String Expected_Folio="124702100", Expected_Scheme="Aditya Birla SL Corp Bond Fund(G)";
+    String ConsumerCode,Bank_Id; double Avaiable_Amount;   String Scheme_Name,Scheme_Code,Option;
+    double Min_Amount;int Min_Tenure;
 
     //   String Holdingid;       String Expected_HoldID = "1540585";  String InvestorId;     //sathish live
     @Test
@@ -61,59 +62,123 @@ public class InvestMore {
         }
     }
     @Test(priority = 1)
-    public void InvestedSchem_API() {
-        RequestSpecification InvestedScheme = given().spec(req)
-                .queryParam("holdingProfileId", Holdingid);
-        MFPojo.InvestedScheme.Root response = InvestedScheme.when().get("/core/investor/invested-schemes")
-                .then().log().all().spec(respec).extract().response().as(InvestedScheme.Root.class);
-        int count = response.getData().size();
-        for (int i = 0; i < count; i++) {
-            if (response.getData().get(i).getGoalName().equalsIgnoreCase(Goal_Name)
-                    && (response.getData().get(i).getFolio().equalsIgnoreCase(Expected_Folio))) {
-                Scheme_Name=response.getData().get(i).getSchemeName();
-                Scheme_code=response.getData().get(i).getSchemeCode();
-                Folio=response.getData().get(i).getFolio();
-                Bankid=response.getData().get(i).getBankId();
-                Goal_ID=response.getData().get(i).getGoalId();
-                Option=response.getData().get(i).getOption();
+    public void Dashboard_portfolio() {
+        Map<String, Object> payload = new HashMap<String, Object>();
+        payload.put("holdingProfileId", Holdingid);
+        payload.put("showZeroHoldings", true);
+        Map<String, Object> sort = new HashMap<String, Object>();
+            sort.put("by", "investment_amount");
+            sort.put("type", "desc");
+        payload.put("sort", sort);
+        payload.put("type", "portfolio");
+        RequestSpecification res = given().spec(req)
+                .body(payload);
+        PortfolioDashboard.Root response = res.when().post("/core/investor/dashboard/portfolio")
+                .then().spec(respec).extract().response().as(PortfolioDashboard.Root.class);
+        for (int i = 0; i < response.getData().size(); i++) {
+            if (response.getData().get(i).getName().equalsIgnoreCase(Goal_Name)) {
+                Goal_ID = response.getData().get(i).getId();
+                System.out.println("Goal ID :" + Goal_ID);
             }
         }
     }
+    @Test
+    public void product_search_mf_form() {
+        RequestSpecification res = given().spec(req)
+                .body("{\n" +
+                        "  \"page\": 1,\n" +
+                        "  \"size\": 10,\n" +
+                        "  \"orderBy\": \"rating\",\n" +
+                        "  \"orderType\": \"DESC\",\n" +
+                        "  \"categories\": [],\n" +
+                        "  \"subCategories\": [],\n" +
+                        "  \"query\": \""+Excpeted_AMC+"\",\n" +
+                        "  \"risk\": [],\n" +
+                        "  \"ratings\": [],\n" +
+                        "  \"amcs\": [],\n" +
+                        "  \"searchCode\": [\n" +
+                        "    {\n" +
+                        "      \"value\": \"\",\n" +
+                        "      \"sort\": true\n" +
+                        "    }\n" +
+                        "  ],\n" +
+                        "  \"oti\": true\n" +
+                        "}");
+       MFSearchForm.Root response= res.when().post("/core/product-search/mf")
+                .then().log().all().spec(respec).extract().response().as(MFSearchForm.Root.class);
+       for(int i=0;i<response.getData().getContent().size();i++){
+           if(response.getData().getContent().get(i).getName().equalsIgnoreCase(Expected_Scheme)){
+
+
+               Scheme_Name=response.getData().getContent().get(i).getName();
+               Scheme_Code=response.getData().getContent().get(i).getSchemeCode();
+               Min_Amount=response.getData().getContent().get(i).getSipMinimumInvestment();
+               Option=response.getData().getContent().get(i).getOption();
+               Min_Tenure=response.getData().getContent().get(i).getMinimumSipTenure();
+               System.out.println(Scheme_Name);
+               System.out.println(Scheme_Code);
+               System.out.println(Min_Amount);
+               System.out.println(Option);
+               System.out.println(Min_Tenure);
+           }
+       }
+    }
+    @Test
+    public void Mandate_API(){
+        RequestSpecification res=given().spec(req)
+                .queryParam("holdingProfileId","183318")
+                .queryParam("ecsDate",1)
+                .queryParam("sipType","regular");
+       MandateAPI.Root response= res.when().get("/core/investor/mandates")
+                .then().log().all().spec(respec).extract().response().as(MandateAPI.Root.class);
+       for(int i=0;i<response.getData().size();i++){
+          if(response.getData().get(i).getStatus().equalsIgnoreCase("Approved")){
+             ConsumerCode= response.getData().get(i).getConsumerCode();
+             Avaiable_Amount=response.getData().get(i).getAvailableAmount();
+             Bank_Id=response.getData().get(i).getBank().getBankId();
+          }
+       }
+    }
     @Test(priority = 2)
     public void Investor_Cart() {
-        Map<String,Object> Payload_Growth=new LinkedHashMap<String,Object>();
-            Payload_Growth.put("product","MF");
-            Payload_Growth.put("id","");
+        Map<String,Object> Payload=new LinkedHashMap<String,Object>();
+        Payload.put("product","MF");
+        Payload.put("id","");
         Map<String,Object> info=new HashMap<String,Object>();
             info.put("os","Web-FI");
             info.put("fcmId","");
-        Payload_Growth.put("appInfo",info);
-        Payload_Growth.put("holdingProfileId",Holdingid);
-        Map<String,Object> oti=new LinkedHashMap<String,Object>();
-            oti.put("totalAmount",1000);
-            oti.put("investmentType","oti");
-            oti.put("paymentId","");
-        List<Map<String, Object>> Scheme_List = new LinkedList<Map<String, Object>>();
+        Payload.put("appInfo",info);
+        Payload.put("holdingProfileId",Holdingid);
+        Map<String,Object> SIP=new LinkedHashMap<String,Object>();
+            SIP.put("totalAmount",1000);
+            SIP.put("investmentType","sip");
+            SIP.put("paymentId","");
+        List<Map<String, Object>> Schemelist = new LinkedList<Map<String, Object>>();
         Map<String, Object> data = new HashMap<String, Object>();
-            data.put("dividendOption","Payout");
-            data.put("folio",Folio);
-            data.put("bankId",Bankid);
-            data.put("payment",true);
+            data.put("folio","-");
+            data.put("bankId",Bank_Id);
+            data.put("payment",false);
             data.put("option",Option);
             data.put("goalId",Goal_ID);
-            data.put("schemeCode",Scheme_code);
+            data.put("schemeCode",Scheme_Code);
             data.put("schemeName",Scheme_Name);
             data.put("amount",1000);
-            data.put("sipType","");
-            data.put("sipDate",0);
-        Scheme_List.add(data);
-            oti.put("schemes",Scheme_List);
+            data.put("sipType","regular");
+            data.put("sipDate",1);
+        Map<String, Object> Reg_Type = new HashMap<String, Object>();
+            Reg_Type.put("amount",Min_Amount);
+            Reg_Type.put("frequency","monthly");
+            Reg_Type.put("tenure",Min_Tenure);
+            Reg_Type.put("consumerCode",ConsumerCode);
+        data.put("regular",Reg_Type);
+        Schemelist.add(data);
+            SIP.put("schemes",Schemelist);
         Map<String,Object> investment=new LinkedHashMap<String,Object>();
-            investment.put("oti",oti);
-         Payload_Growth.put("mf",investment);
+            investment.put("oti",SIP);
+        Payload.put("mf",investment);
 
-    RequestSpecification res = given().spec(req)
-      .body(Payload_Growth);
+        RequestSpecification res = given().spec(req)
+                .body(Payload);
         AddScheme.Root response=res.when().post("/core/investor/cart")
                 .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
         CartId= response.getData().getCartId();
@@ -178,6 +243,7 @@ public class InvestMore {
         payload2.put("email_or_sms", DB_Otp);
         payload1.put("otp", payload2);
         payload1.put("otpReferenceId", DB_refid);
+
         RequestSpecification res = given().spec(req)
                 .body(payload1);
         res.when().post("/core/investor/common/otp/verify")

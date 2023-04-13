@@ -27,11 +27,11 @@ public class Login {
 
 
     @Test
-    public static String Regression()
+    public static String Nominee()
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "Regression@gmail.com");
+        login.put("emailId", "nomine@gmail.com");
         login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");        login.put("refreshToken", "string");
 
@@ -77,11 +77,11 @@ public class Login {
     }
 
 //Nominee credential
-    public static String Nominee()
+    public static String Regression()
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "nomine@gmail.com");         login.put("password", "asdfasdf12");
+        login.put("emailId", "Regression@gmail.com");         login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");                  login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)

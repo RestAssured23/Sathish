@@ -6,18 +6,18 @@ import java.util.Map;
 public class payload {
 
     public static String Optout="{\"" +
-            "holdingProfileId\":\"181556\"," +
+            "holdingProfileId\":\"181558\"," +
             "\"optedOut\":true" +
             "}";
     public static String single()
     {
         return "{\n" +
-                "  \"holdingProfileId\": \"1540585\",\n" +
+                "  \"holdingProfileId\": \"181557\",\n" +
                 "  \"optedOut\": false,\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"New Nominee test\",\n" +
-                "      \"dateOfBirth\": \"2000-12-12T00:00:00.000+0530\",\n" +
+                "      \"firstName\": \"Test A\",\n" +
+                "      \"dateOfBirth\": \"2000-10-10T00:00:00.000+0530\",\n" +
                 "      \"percentage\": 100,\n" +
                 "      \"relationship\": \"Brother\"\n" +
                 "    }\n" +

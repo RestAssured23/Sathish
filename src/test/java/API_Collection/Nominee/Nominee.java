@@ -11,6 +11,7 @@ import MFPojo.Nominee.PostResponse;
 import MFPojo.OTP.VerifyOtpRequest;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
+import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
@@ -26,7 +27,7 @@ import static io.restassured.RestAssured.given;
 
 public class Nominee {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
+            .setBaseUri(BaseURL.scrum1)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.Nominee())
@@ -49,9 +50,12 @@ public class Nominee {
     public void Nominee_Add() {         // Post API
 
         RequestSpecification res = given().spec(req)
-                .body(payload.single());
-        PostResponse.Root response = res.when().post("/core/investor/nominees")
-                .then().log().all().spec(respec).extract().response().as(PostResponse.Root.class);
+                .body(payload.single())
+                .cookie("Test","Test");
+        PostResponse.Root response = res.when().log().body().log().method().post("/core/investor/nominees")
+                .then()
+                .log().ifValidationFails(LogDetail.STATUS)
+                .log().body().spec(respec).extract().response().as(PostResponse.Root.class);
         for (int i = 0; i < response.getData().getInvestors().size(); i++) {
             otp_refid = response.getData().getInvestors().get(i).getOtpReferenceId();
             System.out.println("OTP RefID : " + otp_refid);
@@ -72,7 +76,7 @@ public class Nominee {
     public void Put_Nominee()	{       //PUT API
         RequestSpecification res=given().spec(req)
                 .queryParam("product","MF")
-                .body(ExistingPayload.twonomineewithsameguardian());
+                .body(ExistingPayload.One_Nomoinee());
         res.when().put("/core/investor/nominees")
                 .then().log().all().spec(respec);
     }

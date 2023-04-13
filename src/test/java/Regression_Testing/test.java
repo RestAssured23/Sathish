@@ -21,9 +21,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.*;
 
 import static io.restassured.RestAssured.given;
 
@@ -86,52 +84,37 @@ public class test {
         Map<String,Object> Payload=new LinkedHashMap<String,Object>();
         Payload.put("product","MF");
         Payload.put("id","");
-        Map<String,Object> info=new HashMap<String,Object>();
-        info.put("os","Web-FI");
-        info.put("fcmId","");
+             Map<String,Object> info=new HashMap<String,Object>();
+             info.put("os","Web-FI");
+             info.put("fcmId","");
         Payload.put("appInfo",info);
-
         Payload.put("holdingProfileId",Holdingid);
-
-        Map<String,Object> oti=new LinkedHashMap<String,Object>();
-        oti.put("totalAmount",1000);
-        oti.put("investmentType","oti");
-        oti.put("paymentId","");
-
+              Map<String,Object> oti=new LinkedHashMap<String,Object>();
+              oti.put("totalAmount",1000);
+              oti.put("investmentType","oti");
+              oti.put("paymentId","");
+        List<Map<String, Object>> list = new LinkedList<Map<String, Object>>();
+             Map<String, Object> data = new HashMap<String, Object>();
+             data.put("dividendOption","Payout");
+             data.put("folio",Folio);
+             data.put("bankId",Bankid);
+             data.put("payment",true);
+             data.put("option",Option);
+             data.put("goalId",Goal_ID);
+             data.put("schemeCode",Scheme_code);
+             data.put("schemeName",Scheme_Name);
+             data.put("amount",1000);
+             data.put("sipType","");
+             data.put("sipDate",0);
+        list.add(data);
+        oti.put("schemes",list);
+             Map<String,Object> investment=new LinkedHashMap<String,Object>();
+             investment.put("oti",oti);
+        Payload.put("mf",investment);
 
 
         RequestSpecification res = given().spec(req)
-                .body("{\n" +
-                        "  \"product\": \"MF\",\n" +
-                        "  \"id\": \"\",\n" +
-                        "  \"appInfo\": {\n" +
-                        "    \"os\": \"Web-FI\",\n" +
-                        "    \"fcmId\": \"\"\n" +
-                        "  },\n" +
-                        "  \"holdingProfileId\": \"" + Holdingid + "\",\n" +
-                        "  \"mf\": {\n" +
-                        "    \"oti\": {\n" +
-                        "      \"totalAmount\": 1000,\n" +
-                        "      \"investmentType\": \"oti\",\n" +
-                        "      \"paymentId\": \"\",\n" +
-                        "      \"schemes\": [\n" +
-                        "        {\n" +
-                        "          \"dividendOption\": \"Payout\",\n" +
-                        "          \"folio\": \""+Folio+"\",\n" +
-                        "          \"bankId\": \""+Bankid+"\",\n" +
-                        "          \"payment\": true,\n" +
-                        "          \"option\": \""+Option+"\",\n" +
-                        "          \"goalId\": \"" + Goal_ID + "\",\n" +
-                        "          \"schemeCode\": \""+Scheme_code+"\",\n" +
-                        "          \"schemeName\": \""+Scheme_Name+"\",\n" +
-                        "          \"amount\": 1000,\n" +
-                        //        "          \"sipType\": \"\",\n" +
-                        "          \"sipDate\": 0\n" +
-                        "        }\n" +
-                        "      ]\n" +
-                        "    }\n" +
-                        "  }\n" +
-                        "}");
+                .body(Payload);
         AddScheme.Root response=res.when().post("/core/investor/cart")
                 .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
         CartId= response.getData().getCartId();

@@ -19,10 +19,10 @@ public class ExistingPayload {
     }
     public static String One_Nomoinee(){
         return "{\n" +
-                "  \"holdingProfileId\": \"181559\",\n" +
+                "  \"holdingProfileId\": \"181557\",\n" +
                 "  \"nominees\": [\n" +
                 "    {\n" +
-                "      \"firstName\": \"sathish\",\n" +
+                "      \"firstName\": \"TestA\",\n" +
                 "      \"dateOfBirth\": \"2000-10-10T00:00:00.000+0530\",\n" +
                 "      \"relationship\": \"Brother\",\n" +
                 "      \"percentage\": 100\n" +
@@ -30,8 +30,8 @@ public class ExistingPayload {
                 "  ],\n" +
                 "  \"folios\": [\n" +
                 "    {\n" +
-                "      \"amc\": \"400015\",\n" +
-                "      \"folioNo\": \"34649/46464\"\n" +
+                "      \"amc\": \"400013\",\n" +
+                "      \"folioNo\": \"1234/458\"\n" +
                 "    }\n" +
                 "  ],\n" +
                 "  \"processType\": \"online\",\n" +
