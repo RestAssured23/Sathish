@@ -1,7 +1,6 @@
 package Regression_Testing;
 
 import API_Collection.BaseURL.BaseURL;
-import API_Collection.GetAPI.Payload;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.*;
@@ -12,11 +11,6 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import org.apache.commons.collections4.functors.TruePredicate;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDate;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
@@ -26,11 +20,10 @@ import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 
-public class SWP {
+public class SWP_SWPEdit {
     RequestSpecification req = new RequestSpecBuilder()
             .setBaseUri(BaseURL.test)
             .addHeader("x-api-version", "2.0")
