@@ -113,9 +113,9 @@ public class InvestMore {
          Payload_Growth.put("mf",investment);
 
     RequestSpecification res = given().spec(req)
-      .body(Payload_Growth);
+      .body(Payload_Growth).log().body();
         AddScheme.Root response=res.when().post("/core/investor/cart")
-                .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
+                .then().log().body().spec(respec).extract().response().as(AddScheme.Root.class);
         CartId= response.getData().getCartId();
         System.out.println(CartId);
     }

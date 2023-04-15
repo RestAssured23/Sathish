@@ -24,7 +24,7 @@ public class GetAPI {
             .setBaseUri(BaseURL.test)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Nominee())
+            .addHeader("x-fi-access-token", Login.Regression())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
