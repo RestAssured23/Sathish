@@ -42,6 +42,7 @@ public class PostResponse {
         public String investorName;
         public String message;
         public String otpReferenceId;
+        public String dateOfBirth;
     }
     @Getter@Setter
     public static class Nominee{

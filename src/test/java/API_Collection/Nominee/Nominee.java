@@ -1,6 +1,7 @@
 package API_Collection.Nominee;
 
 import API_Collection.BaseURL.BaseURL;
+import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.HoldingProfile;
@@ -27,10 +28,10 @@ import static io.restassured.RestAssured.given;
 
 public class Nominee {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.scrum1)
+            .setBaseUri(BaseURL.live)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Nominee())
+            .addHeader("x-fi-access-token", Live_Login.sathish())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
@@ -50,7 +51,7 @@ public class Nominee {
     public void Nominee_Add() {         // Post API
 
         RequestSpecification res = given().spec(req)
-                .body(payload.single())
+                .body(payload.live_single_guardian())
                 .cookie("Test","Test");
         PostResponse.Root response = res.when().log().body().log().method().post("/core/investor/nominees")
                 .then()

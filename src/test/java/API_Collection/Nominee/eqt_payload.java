@@ -292,6 +292,8 @@ public class eqt_payload {
                 "  \"otpReferenceId\": \"NA\"\n" +
                 "}";
     }
+
+ //Rejected Cases
 public static String test(){
     return "{\n" +
             "  \"investorId\": \"177973\",\n" +
@@ -321,5 +323,169 @@ public static String test(){
             "  ]\n" +
             "}";
 }
+    public static String test1(){
+        return "{\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"otpReferenceId\": \"NA\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Test\",     \n" +
+                "      \"dateOfBirth\": \"1979-12-05T00:00:00.000+0530\",\n" +
+                "      \"relationship\": \"Brother\",      \n" +
+                "      \"address\": {       \n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"hvasdjf\",        \n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"5464654\",\n" +
+                "        \"landmark\": \"\"\n" +
+                "      },\n" +
+                "      \"guardian\":{\n" +
+                "     \"firstName\": \"Saravanan Elumalai\",     \n" +
+                "      \"dateOfBirth\": \"1979-12-05T00:00:00.000+0530\",\n" +
+                "      \"relationship\": \"Brother\",\n" +
+                "       \"address\": {       \n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"hvasdjf\",        \n" +
+                "        \"city\": \"Chennai\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"TamilNadu\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"5464654\",\n" +
+                "        \"landmark\": \"\"\n" +
+                "       }\n" +
+                "      },\n" +
+                "      \"percentage\": 100\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+    }
+
+    public static String AcceptedCases(){   // With two Same Guardian
+        return "{\n" +
+                "  \"investorId\": \"177973\",\n" +
+                "  \"holdingProfileId\": \"\",\n" +
+                "  \"declarationType\": \"opt-in\",\n" +
+                "  \"processType\": \"online\",\n" +
+                "  \"otpReferenceId\": \"NA\",\n" +
+                "  \"nominees\": [\n" +
+                "    {\n" +
+                "      \"firstName\": \"Ritu Sikarwar\",\n" +
+                "      \"middleName\": \"\",\n" +
+                "      \"lastName\": \"\",\n" +
+                "      \"dateOfBirth\": \"2005-09-15T00:00:00.000+0530\",\n" +
+                "      \"relationship\": \"03\",\n" +
+                "      \"email\": \"\",\n" +
+                "      \"mobile\": \"\",\n" +
+                "      \"salutation\": \"\",\n" +
+                "      \"nomineeId\": \"\",\n" +
+                "      \"address\": {\n" +
+                "        \"addressId\": \"\",\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"RZ-33A, Hans Park, West Sagar Pur\",\n" +
+                "        \"addressLine2\": \"\",\n" +
+                "        \"city\": \"New Delhi\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"New Delhi\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"110046\",\n" +
+                "        \"landmark\": \"\"\n" +
+                "      },\n" +
+                "      \"guardian\": {\n" +
+                "        \"firstName\": \"Seema Singh\",\n" +
+                "        \"middleName\": \"\",\n" +
+                "        \"lastName\": \"\",\n" +
+                "        \"dateOfBirth\": \"1983-07-14T00:00:00.000+0530\",\n" +
+                "        \"relationship\": \"05\",\n" +
+                "        \"email\": \"\",\n" +
+                "        \"mobile\": \"\",\n" +
+                "        \"salutation\": \"\",\n" +
+                "        \"address\": {\n" +
+                "          \"addressId\": \"\",\n" +
+                "          \"addressType\": \"communication\",\n" +
+                "          \"addressLine1\": \"RZ-33A, Hans Park, West Sagar Pur\",\n" +
+                "          \"addressLine2\": \"\",\n" +
+                "          \"city\": \"New Delhi\",\n" +
+                "          \"cityOthers\": \"\",\n" +
+                "          \"cityId\": \"\",\n" +
+                "          \"stateId\": \"\",\n" +
+                "          \"countryId\": \"\",\n" +
+                "          \"state\": \"New Delhi\",\n" +
+                "          \"country\": \"India\",\n" +
+                "          \"pincode\": \"110046\",\n" +
+                "          \"landmark\": \"\"\n" +
+                "        }\n" +
+                "      },\n" +
+                "      \"percentage\": 50\n" +
+                "    },\n" +
+                "    {\n" +
+                "      \"firstName\": \"Riya Sikarwar\",\n" +
+                "      \"middleName\": \"\",\n" +
+                "      \"lastName\": \"\",\n" +
+                "      \"dateOfBirth\": \"2007-11-27T00:00:00.000+0530\",\n" +
+                "      \"relationship\": \"03\",\n" +
+                "      \"email\": \"\",\n" +
+                "      \"mobile\": \"\",\n" +
+                "      \"salutation\": \"\",\n" +
+                "      \"nomineeId\": \"\",\n" +
+                "      \"address\": {\n" +
+                "        \"addressId\": \"\",\n" +
+                "        \"addressType\": \"communication\",\n" +
+                "        \"addressLine1\": \"RZ-33A, Hans Park, West Sagar Pur\",\n" +
+                "        \"addressLine2\": \"\",\n" +
+                "        \"city\": \"New Delhi\",\n" +
+                "        \"cityOthers\": \"\",\n" +
+                "        \"cityId\": \"\",\n" +
+                "        \"stateId\": \"\",\n" +
+                "        \"countryId\": \"\",\n" +
+                "        \"state\": \"New Delhi\",\n" +
+                "        \"country\": \"India\",\n" +
+                "        \"pincode\": \"110046\",\n" +
+                "        \"landmark\": \"\"\n" +
+                "      },\n" +
+                "      \"guardian\": {\n" +
+                "        \"firstName\": \"Seema Singh\",\n" +
+                "        \"middleName\": \"\",\n" +
+                "        \"lastName\": \"\",\n" +
+                "        \"dateOfBirth\": \"1983-07-14T00:00:00.000+0530\",\n" +
+                "        \"relationship\": \"05\",\n" +
+                "        \"email\": \"\",\n" +
+                "        \"mobile\": \"\",\n" +
+                "        \"salutation\": \"\",\n" +
+                "        \"address\": {\n" +
+                "          \"addressId\": \"\",\n" +
+                "          \"addressType\": \"communication\",\n" +
+                "          \"addressLine1\": \"RZ-33A, Hans Park, West Sagar Pur\",\n" +
+                "          \"addressLine2\": \"\",\n" +
+                "          \"city\": \"New Delhi\",\n" +
+                "          \"cityOthers\": \"\",\n" +
+                "          \"cityId\": \"\",\n" +
+                "          \"stateId\": \"\",\n" +
+                "          \"countryId\": \"\",\n" +
+                "          \"state\": \"New Delhi\",\n" +
+                "          \"country\": \"India\",\n" +
+                "          \"pincode\": \"110046\",\n" +
+                "          \"landmark\": \"\"\n" +
+                "        }\n" +
+                "      },\n" +
+                "      \"percentage\": 50\n" +
+                "    }\n" +
+                "  ]\n" +
+                "}";
+    }
+
 
 }

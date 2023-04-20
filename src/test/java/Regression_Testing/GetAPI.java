@@ -2,13 +2,15 @@ package Regression_Testing;
 
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.GetAPI.Payload;
-import API_Collection.Login.Live_Login;
 import MFPojo.HoldingProfile;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
+import org.testng.ITestContext;
+import org.testng.TestRunner;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -33,7 +35,12 @@ String Holdingid;       String Expected_HoldID = "183318";      String InvestorI
    /* //Live Data
     String Holdingid;    String Expected_HoldID = "1403821";    String InvestorId;     //sathish
  //    String Holdingid;       String Expected_HoldID = "935406";  String InvestorId;   // Saravanan*/
-
+   @AfterTest
+   public void setOutputDirectory(ITestContext context) {
+       TestRunner runner = (TestRunner) context;
+       String path=System.getProperty("C:/Users/FI user/IntelJ project/Sathish_APIAutomation");
+       runner.setOutputDirectory(path+"/output-testng");
+   }
     @Test(priority = 0)
     public void Feature() {
         RequestSpecification res = given().spec(req);

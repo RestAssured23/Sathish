@@ -61,7 +61,7 @@ public void Existing_GetNominee()	{           //Get API
                 .queryParam("product","EQUITY").log().body()
                         .body(eqt_payload.test());
         res.when().put("/core/investor/nominees")
-                .then().log().all().spec(respec);
+                .then().log().body().spec(respec);
     }
 
 }

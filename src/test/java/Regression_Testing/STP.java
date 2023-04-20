@@ -1,11 +1,14 @@
 package Regression_Testing;
+
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
-import MFPojo.*;
+import MFPojo.HoldingProfile;
+import MFPojo.InstallmentDates;
+import MFPojo.InvestedScheme;
+import MFPojo.MFscheme;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.OTP.VerifyOtpRequest;
-import com.microsoft.sqlserver.jdbc.StringUtils;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
@@ -25,7 +28,7 @@ import static io.restassured.RestAssured.given;
 
 public class STP {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.dev)
+            .setBaseUri(BaseURL.test)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.Regression())
@@ -174,9 +177,6 @@ public class STP {
         EndDate = df.format(EndDate);
         System.out.println(StartDate);
         System.out.println(EndDate);
-
-
-        //  System.out.println(No_installments);System.out.println(EcsDate);System.out.println(Frequency);
     }
 
     @Test(priority = 5)

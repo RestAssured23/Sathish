@@ -2,7 +2,6 @@ package Regression_Testing;
 
 import API_Collection.BaseURL.BaseURL;
 import API_Collection.GetAPI.Payload;
-import API_Collection.Login.Live_Login;
 import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.HoldingProfile;

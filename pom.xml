@@ -35,7 +35,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.6.1</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
@@ -109,6 +108,61 @@
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.nordstrom.tools</groupId>
+            <artifactId>TestNG-Foundation</artifactId>
+            <version>3.0.0-j8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nordstrom.tools</groupId>
+            <artifactId>TestNG-Foundation</artifactId>
+            <version>3.0.0-j8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nordstrom.tools</groupId>
+            <artifactId>TestNG-Foundation</artifactId>
+            <version>3.0.0-j8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nordstrom.tools</groupId>
+            <artifactId>TestNG-Foundation</artifactId>
+            <version>3.0.0-j8</version>
+        </dependency>
+        <dependency>
+            <groupId>com.nordstrom.tools</groupId>
+            <artifactId>TestNG-Foundation</artifactId>
+            <version>3.0.0-j8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.6.1</version>
             <scope>compile</scope>
         </dependency>
 

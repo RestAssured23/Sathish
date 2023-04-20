@@ -26,7 +26,7 @@ import static io.restassured.RestAssured.given;
 
 public class Switch {
     RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.dev)
+            .setBaseUri(BaseURL.test)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
             .addHeader("x-fi-access-token", Login.Regression())

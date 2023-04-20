@@ -5,7 +5,6 @@ import MFPojo.Signin;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.Test;
@@ -39,7 +38,7 @@ public class Login {
                 .body(login);
         Signin.Root response =res.when().post("/core/auth/sign-in")
                 .then().spec(respec).extract().response().as(Signin.Root.class);
-        return response.getData().getAccessToken();
+            return response.getData().getAccessToken();
 
     }
 
@@ -158,7 +157,7 @@ public static String Admin()    {
     {
 
         HashMap<String, String> login = new HashMap<String, String>();
-        login.put("emailId", "mailtossv@gmail.com");         login.put("password", "asdfasdf");
+        login.put("emailId", "mailtossv@gmail.com");         login.put("password", "asdfasdf12");
         login.put("grantType", "credentials");                  login.put("refreshToken", "string");
 
         RequestSpecification res=given().spec(req)
