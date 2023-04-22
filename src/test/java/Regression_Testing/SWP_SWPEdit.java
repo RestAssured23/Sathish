@@ -307,7 +307,7 @@ public class SWP_SWPEdit {
         System.out.println(swp_delID);
     }
 @Test(priority = 14)
-     public void SWP_Delete(){
+     public void SWP_Cancel(){
     RequestSpecification res = given().log().method().log().uri().spec(req)
             .queryParam("swpId",swp_delID).log().params().log().uri();
     res.when().delete("/core/investor/current-swps")

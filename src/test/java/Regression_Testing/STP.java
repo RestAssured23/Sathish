@@ -1,10 +1,7 @@
 package Regression_Testing;
 
 import DBConnection.DBconnection;
-import MFPojo.HoldingProfile;
-import MFPojo.InstallmentDates;
-import MFPojo.InvestedScheme;
-import MFPojo.MFscheme;
+import MFPojo.*;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.OTP.VerifyOtpRequest;
 import io.restassured.specification.RequestSpecification;
@@ -23,25 +20,19 @@ import static Regression_Testing.Base_URI.respec;
 import static io.restassured.RestAssured.given;
 
 public class STP {
-/*    RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
-            .addHeader("x-api-version", "2.0")
-            .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Regression())
-            .setContentType(ContentType.JSON).build();
-    ResponseSpecification respec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .expectContentType(ContentType.JSON).build();*/
 
     //Local DATA
-    String Holdingid, otp_refid, dbotp, DB_refid, AMC_Name, AMC_Code,RT_refno;
-    String Expected_HoldID = "183318"; int min_installment;    String InvestorId;
-    String Expected_Folio = "343423/435",Expected_Target_Scheme = "IDFC Bond Fund - Short Term Plan-Reg(G)";
-    String Expected_GoalName = "Test Portfolio";
+
+    String expected_freq="monthly",Expected_Folio = "343423/435",
+   Expected_Target_Scheme = "IDFC Bond Fund - Short Term Plan-Reg(G)",Expected_GoalName = "Test Portfolio";
+    String Holdingid, otp_refid, dbotp, DB_refid, AMC_Name, AMC_Code;
+    String Expected_HoldID = "183318",InvestorId;
     String fromschemename, fromschemecode, folio, fromoption, goalid, bankid, toschemename, toschemcode, tooption, goalname;
-    double minAmount, units, minUnits, currentamount,stpmin_amount;
-    String stp_freq,Frequency;    int No_installments,EcsDate;    Date sdate,edate;
-    String StartDate, EndDate;
+    double minAmount, units, minUnits, currentamount,stpmin_amount_D,stpmin_amount_M,stpmin_amount_W;
+    int No_installments,EcsDate,min_installment_D,min_installment_M,min_installment_W;
+    String freq_D,freq_M,freq_W,Frequency;
+    Date sdate,edate;
+    String StartDate,EndDate,Edit_StartDate,Edit_EndDate,stp_delID;
 
     @Test
     public void HoldingProfile_API() {
@@ -66,7 +57,7 @@ public class STP {
     @Test(priority = 1)
     public void InvestedSchem_API() {
         RequestSpecification InvestedScheme = given().spec(req)
-                .queryParam("holdingProfileId", Holdingid);             //183318
+                .queryParam("holdingProfileId", "183318");             //183318
         InvestedScheme.Root response = InvestedScheme.when().get("/core/investor/invested-schemes")
                 .then().log().all().spec(respec).extract().response().as(InvestedScheme.Root.class);
         int count = response.getData().size();
@@ -135,44 +126,111 @@ public class STP {
                 toschemename = response.getData().getContent().get(i).getName();
                 toschemcode = response.getData().getContent().get(i).getSchemeCode();
                 tooption = response.getData().getContent().get(i).getOption();
-                int stpinsize=response.getData().getContent().get(i).getStpFrequencies().getIn().size();
-                for(int j=0;j<stpinsize;j++) {
-                    stp_freq=response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency();
-                    min_installment=response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getMinimum();
-                    stpmin_amount= response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getAmounts().getMinimumAmount();
-
-                    System.out.println("Frequency: " + stp_freq);
-                    System.out.println("Minimum Installment: " + min_installment);
-                    System.out.println("Minimum Amount: " + stpmin_amount);
+                int stpinsize = response.getData().getContent().get(i).getStpFrequencies().getIn().size();
+                for (int j = 0; j < stpinsize; j++) {
+                    if (response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency()
+                            .equalsIgnoreCase("daily")) {
+                        freq_D = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency();
+                        min_installment_D = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getMinimum();
+                        stpmin_amount_D = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getAmounts().getMinimumAmount();
+                        System.out.println("Frequency: " + freq_D);
+                        System.out.println("Minimum Installment: " + min_installment_D);
+                        System.out.println("Minimum Amount: " + stpmin_amount_D);
+                    } else if (response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency()
+                            .equalsIgnoreCase("monthly")) {
+                        freq_M = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency();
+                        min_installment_M = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getMinimum();
+                        stpmin_amount_M = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getAmounts().getMinimumAmount();
+                        System.out.println("Frequency: " + freq_M);
+                        System.out.println("Minimum Installment: " + min_installment_M);
+                        System.out.println("Minimum Amount: " + stpmin_amount_M);
+                    }
+                    else if (response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency()
+                            .equalsIgnoreCase("weekly")) {
+                        freq_W = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getFrequency();
+                        min_installment_W = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getMinimum();
+                        stpmin_amount_W = response.getData().getContent().get(i).getStpFrequencies().getIn().get(j).getAmounts().getMinimumAmount();
+                        System.out.println("Frequency: " + freq_W);
+                        System.out.println("Minimum Installment: " + min_installment_W);
+                        System.out.println("Minimum Amount: " + stpmin_amount_W);
+                    }
+                    System.out.println("To SchemeName: " + toschemename);
+                    System.out.println("To schemecode: " + toschemcode);
+                    System.out.println("To Option: " + tooption);
                 }
-                System.out.println("To SchemeName: " + toschemename);
-                System.out.println("To schemecode: " + toschemcode);
-                System.out.println("To Option: " + tooption);
             }
         }
     }
     @Test(priority = 4)
     public void Installment_dates() {
-        Map<String,Object> payload=new HashMap<String,Object>();
-        payload.put("installments",6);
-        payload.put("frequency","monthly");
-        payload.put("feature","stp");
-        payload.put("ecsDate",5);
-        RequestSpecification res = given().spec(req).log().body()
-                .body(payload);
-        InstallmentDates.Root response=res.when().post("/core/calculators/installment-dates")
-                .then().log().body().spec(respec).extract().response().as(InstallmentDates.Root.class);
-        No_installments= response.getData().getInstallments();
-        EcsDate=response.getData().getEcsDate();
-        Frequency= response.getData().getFrequency();
-        sdate=response.getData().getStartDate();
-        edate=response.getData().getEndDate();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
-        df.setTimeZone(TimeZone.getTimeZone("IST"));
-        StartDate = df.format(StartDate);
-        EndDate = df.format(EndDate);
-        System.out.println(StartDate);
-        System.out.println(EndDate);
+        Map<String,Object> Daily=new HashMap<String,Object>();
+        Daily.put("installments",min_installment_D);
+        Daily.put("frequency",freq_D);
+        Daily.put("feature","STP");
+
+        Map<String,Object> Monthly=new HashMap<String,Object>();
+        Monthly.put("installments",min_installment_D);
+        Monthly.put("frequency",freq_M);
+        Monthly.put("feature","STP");
+        Monthly.put("ecsDate",7);
+
+        Map<String,Object> Weekly=new HashMap<String,Object>();
+        Weekly.put("installments",6);
+        Weekly.put("frequency",freq_W);
+        Weekly.put("feature","STP");
+        Monthly.put("ecsDay","thursday");
+
+if(expected_freq.equalsIgnoreCase(freq_D)){
+    RequestSpecification res = given().spec(req).log().body()
+            .body(Daily);
+    InstallmentDates.Root response=res.when().post("/core/calculators/installment-dates")
+            .then().log().body().spec(respec).extract().response().as(InstallmentDates.Root.class);
+    No_installments= response.getData().getInstallments();
+    EcsDate=response.getData().getEcsDate();
+    Frequency= response.getData().getFrequency();
+    sdate=response.getData().getStartDate();
+    edate=response.getData().getEndDate();
+    DateFormat df=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    StartDate=df.format(sdate);
+    EndDate = df.format(edate);
+    System.out.println(StartDate);
+    System.out.println(EndDate);
+}
+       else if(expected_freq.equalsIgnoreCase(freq_M)){
+            RequestSpecification res = given().spec(req).log().body()
+                    .body(Monthly);
+            InstallmentDates.Root response=res.when().post("/core/calculators/installment-dates")
+                    .then().log().body().spec(respec).extract().response().as(InstallmentDates.Root.class);
+            No_installments= response.getData().getInstallments();
+            EcsDate=response.getData().getEcsDate();
+            Frequency= response.getData().getFrequency();
+
+    sdate=response.getData().getStartDate();
+    edate=response.getData().getEndDate();
+    DateFormat df=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    StartDate=df.format(sdate);
+    EndDate = df.format(edate);
+
+            System.out.println(StartDate);
+            System.out.println(EndDate);
+        }
+else if(expected_freq.equalsIgnoreCase(freq_W)){
+    RequestSpecification res = given().spec(req).log().body()
+            .body(Monthly);
+    InstallmentDates.Root response=res.when().post("/core/calculators/installment-dates")
+            .then().log().body().spec(respec).extract().response().as(InstallmentDates.Root.class);
+    No_installments= response.getData().getInstallments();
+    EcsDate=response.getData().getEcsDate();
+    Frequency= response.getData().getFrequency();
+    sdate=response.getData().getStartDate();
+    edate=response.getData().getEndDate();
+    DateFormat df=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    StartDate=df.format(sdate);
+    EndDate = df.format(edate);
+    System.out.println(StartDate);
+    System.out.println(EndDate);
+}
+
     }
 
     @Test(priority = 5)
@@ -231,27 +289,7 @@ public class STP {
 
     @Test(priority = 8)
     public void STP_API() {
-        Map<String, Object> STP_Monthly = new LinkedHashMap<String,Object>();
-        STP_Monthly.put("holdingProfileId", Holdingid);
-        STP_Monthly.put("folio", folio);
-        STP_Monthly.put("goalId", goalid);
-        STP_Monthly.put("goalName", goalname);
-        STP_Monthly.put("fromSchemeCode", fromschemecode);
-        STP_Monthly.put("toSchemeCode", toschemcode);
-        STP_Monthly.put("toOption", tooption);
-        STP_Monthly.put("monthlyAmount",minAmount);
-        STP_Monthly.put("stpDate",5);
-        STP_Monthly.put("stpType", "regular");
-        STP_Monthly.put("accountClosure", false);
-        STP_Monthly.put("bankId", bankid);
-        STP_Monthly.put("startDate",StartDate);
-        STP_Monthly.put("endDate",EndDate);
-        STP_Monthly.put("otpReferenceId", DB_refid);
-        Map<String, Object> type = new LinkedHashMap<String,Object>();
-        type.put("noOfInstallments",min_installment);
-        type.put("frequency","monthly");
-        STP_Monthly.put("regular",type);
-/*
+
         Map<String, Object> STP_Daily = new LinkedHashMap<String,Object>();
         STP_Daily.put("holdingProfileId", Holdingid);
         STP_Daily.put("folio", folio);
@@ -260,17 +298,40 @@ public class STP {
         STP_Daily.put("fromSchemeCode", fromschemecode);
         STP_Daily.put("toSchemeCode", toschemcode);
         STP_Daily.put("toOption", tooption);
-        STP_Daily.put("monthlyAmount",minAmount);
+        STP_Daily.put("monthlyAmount",stpmin_amount_D);
         STP_Daily.put("stpType", "regular");
         STP_Daily.put("accountClosure", false);
         STP_Daily.put("bankId", bankid);
-        STP_Daily.put("startDate","2023-05-05T00:00:00.000+0530");
-        STP_Daily.put("endDate","2023-10-05T00:00:00.000+0530");
+        STP_Daily.put("startDate",StartDate);
+        STP_Daily.put("endDate",EndDate);
         STP_Daily.put("otpReferenceId", DB_refid);
         Map<String, Object> D_type = new LinkedHashMap<String,Object>();
-        D_type.put("noOfInstallments",min_installment);
+        D_type.put("noOfInstallments",min_installment_D);
         D_type.put("frequency","daily");
         STP_Daily.put("regular",D_type);
+
+
+        Map<String, Object> STP_Monthly = new LinkedHashMap<String,Object>();
+        STP_Monthly.put("holdingProfileId", Holdingid);
+        STP_Monthly.put("folio", folio);
+        STP_Monthly.put("goalId", goalid);
+        STP_Monthly.put("goalName", goalname);
+        STP_Monthly.put("fromSchemeCode", fromschemecode);
+        STP_Monthly.put("toSchemeCode", toschemcode);
+        STP_Monthly.put("toOption", tooption);
+        STP_Monthly.put("monthlyAmount",stpmin_amount_M);
+        STP_Monthly.put("stpDate",EcsDate);
+        STP_Monthly.put("stpType", "regular");
+        STP_Monthly.put("accountClosure", false);
+        STP_Monthly.put("bankId", bankid);
+        STP_Monthly.put("startDate",StartDate);
+        STP_Monthly.put("endDate",EndDate);
+        STP_Monthly.put("otpReferenceId", DB_refid);
+        Map<String, Object> type = new LinkedHashMap<String,Object>();
+        type.put("noOfInstallments",min_installment_M);
+        type.put("frequency","monthly");
+        STP_Monthly.put("regular",type);
+
 
         Map<String, Object> STP_Weekly = new LinkedHashMap<String,Object>();
         STP_Weekly.put("holdingProfileId", Holdingid);
@@ -280,7 +341,7 @@ public class STP {
         STP_Weekly.put("fromSchemeCode", fromschemecode);
         STP_Weekly.put("toSchemeCode", toschemcode);
         STP_Weekly.put("toOption", tooption);
-        STP_Weekly.put("monthlyAmount",minAmount);
+        STP_Weekly.put("monthlyAmount",stpmin_amount_W);
         STP_Weekly.put("stpDay", "monday");
         STP_Weekly.put("stpType", "regular");
         STP_Weekly.put("accountClosure", false);
@@ -289,68 +350,49 @@ public class STP {
         STP_Weekly.put("endDate",EndDate);
         STP_Weekly.put("otpReferenceId", DB_refid);
         Map<String, Object> W_type = new LinkedHashMap<String,Object>();
-        W_type.put("noOfInstallments",min_installment);
+        W_type.put("noOfInstallments",min_installment_W);
         W_type.put("frequency","weekly");
-        STP_Weekly.put("regular",W_type);*/
+        STP_Weekly.put("regular",W_type);
 
-        RequestSpecification redeem = given().spec(req)
-                .body(STP_Monthly);
-        redeem.when().post("/core/investor/current-stps")
-                .then().log().all().spec(respec);
-       /* if (fromoption.equalsIgnoreCase("Growth") && (tooption.equalsIgnoreCase("Growth"))) {
-            RequestSpecification redeem = given().spec(req)
-                    .body(Growth_Growth);
-            redeem.when().post("/core/investor/current-stps")
-                    .then().log().all().spec(respec);
-        } else if (fromoption.equalsIgnoreCase("Growth") && (tooption.equalsIgnoreCase("Dividend"))) {
-            RequestSpecification redeem = given().spec(req)
-                    .body(Growth_Div);
-            redeem.when().post("/core/investor/current-stps")
-                    .then().log().all().spec(respec);
-        } else if (fromoption.equalsIgnoreCase("Dividend") && (tooption.equalsIgnoreCase("Dividend"))) {
-            RequestSpecification redeem = given().spec(req)
-                    .body(Div_Div);
-            redeem.when().post("/core/investor/current-stps")
-                    .then().log().all().spec(respec);
-        } else if (fromoption.equalsIgnoreCase("Dividend") && (tooption.equalsIgnoreCase("Growth"))) {
-            RequestSpecification redeem = given().spec(req)
-                    .body(Div_Growth);
-            redeem.when().post("/core/investor/current-stps")
-                    .then().log().all().spec(respec);
-        }*/
+if(expected_freq.equalsIgnoreCase(freq_D)){
+    RequestSpecification redeem = given().spec(req)
+            .body(STP_Daily);
+    redeem.when().post("/core/investor/current-stps")
+            .then().log().all().spec(respec);
+}
+else if(expected_freq.equalsIgnoreCase(freq_M)){
+    RequestSpecification redeem = given().spec(req)
+            .body(STP_Monthly);
+    redeem.when().post("/core/investor/current-stps")
+            .then().log().all().spec(respec);
+}
+else if(expected_freq.equalsIgnoreCase(freq_W)){
+    RequestSpecification redeem = given().spec(req)
+            .body(STP_Weekly);
+    redeem.when().post("/core/investor/current-stps")
+            .then().log().all().spec(respec);
     }
-
-   /* @Test(priority = 8)
-    public void Recent_Transaction() {
-        RequestSpecification res = given().spec(req)
-                .queryParam("holdingProfileId", "183318")
-                .queryParam("page", "1")
-                .queryParam("size", "10");
-        RecentTransaction.Root response = res.when().get("/core/investor/recent-transactions")
-                .then().spec(respec).extract().response().as(RecentTransaction.Root.class);
-        int count = response.getData().size();
-        for (int i = 0; i < count; i++) {
-            for (int j = 0; j < response.getData().get(i).getMf().size(); j++) {
-                for (int k = 0; k < response.getData().get(i).getMf().get(j).getActions().size(); k++) {
-                    if (response.getData().get(i).getMf().get(j).getFolio().equalsIgnoreCase(Expected_Folio) ==
-                            (response.getData().get(i).getMf().get(j).getActions().get(k).equalsIgnoreCase("cancel"))) {
-                        RT_refno = response.getData().get(i).getMf().get(j).getReferenceNo();
-                        System.out.println(RT_refno);
-                    }
-                }
-            }
-        }
-    }*/
-/*
+    }
     @Test(priority = 9)
- public void Delete_API() {
-     Map<String, String> del = new HashMap<String, String>();
-     del.put("action", "cancel");
-     del.put("referenceNo", RT_refno);
+    public void Current_STP() {
+        RequestSpecification res = given().log().method().log().uri().spec(req)
+                .queryParam("holdingProfileId", Holdingid)
+                .queryParam("page", "1")
+                .queryParam("size", "10")
+                .queryParam("revert", true);
 
-     RequestSpecification can=given().spec(req).body(del);
-     can.when().post("/core/investor/recent-transactions")
-             .then().log().all().spec(respec);
- }*/
+        CurrentSTP.Root response=  res.when().get("/core/investor/current-stps")
+                .then().log().body().spec(respec).extract().response().as(CurrentSTP.Root.class);
+        int size=response.getData().getSchemes().size();
+     stp_delID=response.getData().getSchemes().get(size-1).getStpId();
+        System.out.println(stp_delID);
+    }
+   @Test(priority = 10)
+    public void STP_Cancel(){
+        RequestSpecification res = given().log().method().log().uri().spec(req)
+                .queryParam("stpId",stp_delID).log().params().log().uri();
+        res.when().delete("/core/investor/current-stps")
+                .then().log().body().spec(respec);
+    }
 
 }
