@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Regression_Testing">
+    <test verbose="2" preserve-order="true"
+          name="Get_API">
+        <classes>
+            <class name="Regression_Testing.GetAPI"></class> </classes>
+
+    </test>
+
+    <test verbose="2" preserve-order="true"
+          name="Lumpsum">
+        <classes>
+            <class name="Regression_Testing.Lumpsum"></class> </classes>
+    </test>
+
+    <test verbose="2" preserve-order="true"
+          name="Invest_More">
+        <classes>
+            <class name="Regression_Testing.InvestMore"></class> </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="Redeem_Regression">
+        <classes>
+            <class name="Regression_Testing.Redemption"></class> </classes>
+    </test>
+
+    <test verbose="2" preserve-order="true"
+          name="SWP and SWP_Edit">
+        <classes>
+            <class name="Regression_Testing.SWP_SWPEdit"></class> </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="Switch">
+        <classes>
+            <class name="Regression_Testing.Switch"></class> </classes>
+    </test>
+
+</suite>
+
+
+
+             <!--  &lt;!&ndash; <methods>
+                    <include name="Feature"/>
+                    <include name="User_Profile"/>
+                    <include name="Holding_Profile"/>
+                    <include name="Dashboard"/>
+                    <include name="Dashboard_Portfolio"/>
+                    <include name="Systematic_plan"/>
+                    <include name="Invested_Schemes"/>
+                    <include name="Recent_Transactions"/>
+                    <include name="Investor_Mandates"/>
+                    <include name="Current_SIPS"/>
+                    <include name="STP"/>
+                    <include name="Power_STPs"/>
+                    <include name="Triggers"/>
+                    <include name="SWP"/>
+                    <include name="Folio_Banklist"/>
+                    <include name="Contact_Info"/>
+                    <include name="Transactions_Authorization"/>
+                    <include name="Pending_Payments"/>
+                    <include name="Investor_Goals"/>
+                    <include name="Investor_Goal"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="Announcements"/>
+                    <include name="lookup"/>
+                    <include name="ProductSearch_MF_Form"/>
+                    <include name="Super_Savings"/>
+                    <include name="NFO_Search"/>
+                    <include name="Scheme_info"/>
+                    <include name="Dashboard_portfolio_Allocation_Asset_All"/>
+                    <include name="Dashboard_portfolio_Allocation_category"/>
+                    <include name="Dashboard_portfolio_Allocation_fi_style"/>
+                    <include name="Dashboard_portfolio_Allocation_credit"/>
+                    <include name="Select_Funds"/>
+                    <include name="New_Nominee_Declaration"/>
+                    <include name="Get_Existing_Nominee_MF"/>
+                    <include name="Get_Equity_GetNominee"/>
+                </methods>&ndash;&gt;
+            </class>
+           &lt;!&ndash; <class name="Regression_Testing.InvestMore">
+                <methods>
+                    <include name="Holding_Profile"/>
+                    <include name="InvestedSchem_API"/>
+                    <include name="Investor_Cart"/>
+                    <include name="Folio_Group_ID"/>
+                    <include name="Common_Otp"/>
+                    <include name="DB_Connection"/>
+                    <include name="OTP_Verify"/>
+                    <include name="Buy_Cart"/>
+                </methods>
+            </class>
+            <class name="Regression_Testing.Login">
+                <methods>
+                    <include name="sathish"/>
+                    <include name="Test"/>
+                </methods>
+            </class>
+            <class name="Regression_Testing.Lumpsum">
+                <methods>
+                    <include name="Holding_Profile"/>
+                    <include name="Dashboard_portfolio"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="Investor_Cart"/>
+                    <include name="Folio_Group_ID"/>
+                    <include name="Common_Otp"/>
+                    <include name="dbconnection"/>
+                    <include name="OTP_Verify"/>
+                    <include name="Buy_Cart"/>
+                </methods>
+            </class>
+            <class name="Regression_Testing.Redemption">
+                <methods>
+                    <include name="HoldingProfile_API"/>
+                    <include name="InvestedSchem_API"/>
+                    <include name="Questinoari_API"/>
+                    <include name="Common_OTP"/>
+                    <include name="DB_Connection"/>
+                    <include name="Verify_OTP"/>
+                    <include name="Redeem_API"/>
+                    <include name="Recent_Transaction"/>
+                    <include name="Delete_API"/>
+                    <include name="RT_DeleteAll"/>
+                    <include name="Redeemption_Flow"/>
+                    <include name="Delete_API"/>
+                </methods>
+            </class>&ndash;&gt;
+          &lt;!&ndash;  <class name="Regression_Testing.SIP">
+                <methods>
+                    <include name="Holding_Profile"/>
+                    <include name="Dashboard_portfolio"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="Mandate_API"/>
+                    <include name="Investor_Cart"/>
+                    <include name="Folio_Group_ID"/>
+                    <include name="Common_Otp"/>
+                    <include name="DB_Connection"/>
+                    <include name="OTP_Verify"/>
+                    <include name="Buy_Cart"/>
+                </methods>
+            </class>&ndash;&gt;
+           &lt;!&ndash; <class name="Regression_Testing.SIP_Edit">
+                <methods>
+                    <include name="Holding_Profile"/>
+                    <include name="HoldingProfile_API"/>
+                    <include name="Current_SIPS"/>
+                    <include name="SIP_Amount_Change"/>
+                    <include name="Dashboard_portfolio"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="Mandate_API"/>
+                    <include name="Investor_Cart"/>
+                    <include name="Folio_Group_ID"/>
+                    <include name="Common_Otp"/>
+                    <include name="DB_Connection"/>
+                    <include name="OTP_Verify"/>
+                    <include name="Buy_Cart"/>
+                </methods>
+            </class>&ndash;&gt;
+          &lt;!&ndash;  <class name="Regression_Testing.STP">
+                <methods>
+                    <include name="HoldingProfile_API"/>
+                    <include name="InvestedSchem_API"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="TargetScheme_Search"/>
+                    <include name="Installment_dates"/>
+                    <include name="Common_OTP"/>
+                    <include name="DB_Connection"/>
+                    <include name="Verify_OTP"/>
+                    <include name="STP_API"/>
+                    <include name="Delete_API"/>
+                </methods>
+            </class>&ndash;&gt;
+          &lt;!&ndash;  <class name="Regression_Testing.SWP_SWPEdit">
+                <methods>
+                    <include name="HoldingProfile_API"/>
+                    <include name="InvestedSchem_API"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="Installment_dates"/>
+                    <include name="Common_OTP"/>
+                    <include name="DB_Connection"/>
+                    <include name="Verify_OTP"/>
+                    <include name="SWP_API"/>
+                    <include name="Installment_dates_Edit"/>
+                    <include name="Common_OTP_Edit"/>
+                    <include name="DB_Connection_Edit"/>
+                    <include name="Verify_OTP_Edit"/>
+                    <include name="SWP_Edit"/>
+                    <include name="Current_SWP"/>
+                    <include name="SWP_Delete"/>
+                </methods>
+            </class>
+            <class name="Regression_Testing.Switch">
+                <methods>
+                    <include name="HoldingProfile_API"/>
+                    <include name="InvestedSchem_API"/>
+                    <include name="product_search_mf_form"/>
+                    <include name="TargetScheme_Search"/>
+                    <include name="Common_OTP"/>
+                    <include name="DB_Connection"/>
+                    <include name="Verify_OTP"/>
+                    <include name="Switch_API"/>
+                    <include name="Recent_Transaction"/>
+                    <include name="Delete_API"/>
+                </methods>
+            </class>&ndash;&gt;
+
+     -->
