@@ -1,7 +1,11 @@
-package MF_Pojo.Portfolio_Dashboard;
+package MFPojo.Portfolio_Dashboard;
+
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 
+@Getter@Setter
 public class Dashboard {
     public int code;
     public String desc;
@@ -11,64 +15,74 @@ public class Dashboard {
     public String name;
     public ArrayList<Data> data;
 
-    public int getCode() {
-        return code;
+    @Getter
+    @Setter
+    public static class Data {
+        public String id;
+        public String name;
+        public String type;
+        public ArrayList<Content> contents;
+        public int orderId;
+        public double currentValueOfInvestment;
+        public double investedAmount;
+        public String currentValueOfInvestmentFormatted;
+        public String investedAmountFormatted;
+        public double gainAmount;
+        public String gainAmountFormatted;
+        public double gainPercentage;
+        public double changeAmount;
+        public String changeAmountFormatted;
+        public String changePercentage;
+        public String annualReturns;
+        public ArrayList<String> actions;
+        public double redeemedAmount;
+        public double averageCost;
+        public String averageCostFormatted;
+    }
+@Getter@Setter
+    public static class Content {
+
+        public String amcCode;
+        public boolean online;
+        public boolean sip;
+        public String schemeCode;
+        public String schemeName;
+        public String navAsOn;
+        public String folio;
+        public String holdingProfileId;
+        public double units;
+        public String redemptionBank;
+        public String redemptionBankName;
+        public double amount;
+        public double nav;
+        public double investmentCost;
+        public String investmentCostFormatted;
+        public double gains;
+        public double gainPercentage;
+        public String gainPercentageFormatted;
+        public String gainsFormatted;
+        public String annualizedReturnsFormatted;
+        public double annualizedReturns;
+        public String category;
+        public String subCategory;
+        public double percentage;
+        public ArrayList<String> actions;
+        public double navChange;
+        public double navChangePercentage;
+        public int rating;
+        public boolean rated;
+        public boolean navDelay;
+        public String mobile;
+        public String email;
+        public ArrayList<String> tags;
+        public double investmentAverageCost;
+        public String investmentAverageCostFormatted;
+        public double currentAverageCost;
+        public String currentAverageCostFormatted;
     }
 
-    public void setCode(int code) {
-        this.code = code;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
-    public ArrayList<Object> getErrors() {
-        return errors;
-    }
-
-    public void setErrors(ArrayList<Object> errors) {
-        this.errors = errors;
-    }
-
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public void setSuccess(boolean success) {
-        this.success = success;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ArrayList<Data> getData() {
-        return data;
-    }
-
-    public void setData(ArrayList<Data> data) {
-        this.data = data;
-    }
-
-
-}
 
 
 
