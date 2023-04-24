@@ -13,26 +13,27 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static Regression_Testing.Base_URI.req;
 import static Regression_Testing.Base_URI.respec;
 import static io.restassured.RestAssured.given;
 
 public class STP {
-
     //Local DATA
-
     String expected_freq="monthly",Expected_Folio = "343423/435",
    Expected_Target_Scheme = "IDFC Bond Fund - Short Term Plan-Reg(G)",Expected_GoalName = "Test Portfolio";
-    String Holdingid, otp_refid, dbotp, DB_refid, AMC_Name, AMC_Code;
+    String Holdingid, otp_refid, dbotp, DB_refid, AMC_Name, AMC_Code,Edit_otp_refid,Edit_dbotp,Edit_DB_refid;
     String Expected_HoldID = "183318",InvestorId;
     String fromschemename, fromschemecode, folio, fromoption, goalid, bankid, toschemename, toschemcode, tooption, goalname;
     double minAmount, units, minUnits, currentamount,stpmin_amount_D,stpmin_amount_M,stpmin_amount_W;
-    int No_installments,EcsDate,min_installment_D,min_installment_M,min_installment_W;
-    String freq_D,freq_M,freq_W,Frequency;
+    int No_installments,Edit_No_installments,EcsDate,Edit_EcsDate,min_installment_D,min_installment_M,min_installment_W;
+    String freq_D,freq_M,freq_W,Frequency,Edit_Freq;
     Date sdate,edate;
-    String StartDate,EndDate,Edit_StartDate,Edit_EndDate,stp_delID;
+    String StartDate,EndDate,Edit_StartDate,Edit_EndDate,stp_delID,Edit_Schemecode,Edit_toSchemecode;
 
     @Test
     public void HoldingProfile_API() {
@@ -178,7 +179,7 @@ public class STP {
         Weekly.put("installments",6);
         Weekly.put("frequency",freq_W);
         Weekly.put("feature","STP");
-        Monthly.put("ecsDay","thursday");
+        Weekly.put("ecsDay","thursday");
 
 if(expected_freq.equalsIgnoreCase(freq_D)){
     RequestSpecification res = given().spec(req).log().body()
@@ -373,20 +374,193 @@ else if(expected_freq.equalsIgnoreCase(freq_W)){
             .then().log().all().spec(respec);
     }
     }
+
     @Test(priority = 9)
     public void Current_STP() {
         RequestSpecification res = given().log().method().log().uri().spec(req)
-                .queryParam("holdingProfileId", Holdingid)
+                .queryParam("holdingProfileId", "183318")
                 .queryParam("page", "1")
                 .queryParam("size", "10")
                 .queryParam("revert", true);
 
-        CurrentSTP.Root response=  res.when().get("/core/investor/current-stps")
+        CurrentSTP.Root response = res.when().get("/core/investor/current-stps")
                 .then().log().body().spec(respec).extract().response().as(CurrentSTP.Root.class);
-        int size=response.getData().getSchemes().size();
-     stp_delID=response.getData().getSchemes().get(size-1).getStpId();
+        int size = response.getData().getSchemes().size();
+        stp_delID = response.getData().getSchemes().get(size-1).getStpId();
         System.out.println(stp_delID);
+
+        for(int i=0;i<response.getData().getSchemes().get(size-1).getAction().size();i++){
+            if(response.getData().getSchemes().get(size-1).getAction().get(i).equalsIgnoreCase("edit")){
+                System.out.println(response.getData().getSchemes().get(size-1).getStpId());
+              Edit_Freq=response.getData().getSchemes().get(size-1).getFrequency();
+              Edit_Schemecode=response.getData().getSchemes().get(size-1).getSchemeCode();
+              Edit_toSchemecode=response.getData().getSchemes().get(size-1).getToSchemeCode();
+                System.out.println(Edit_Freq);
+            }
+        }
     }
+
+    @Test
+    public void Edit_Installment_Date() {
+        Map<String, Object> M_Edit = new HashMap<String, Object>();
+        M_Edit.put("ecsDate", 8);
+        M_Edit.put("installments", 7);
+        M_Edit.put("frequency", Edit_Freq);
+        M_Edit.put("feature", "STP");
+
+        Map<String,Object> W_Edit=new HashMap<String,Object>();
+        W_Edit.put("installments",6);
+        W_Edit.put("frequency",Edit_Freq);
+        W_Edit.put("feature","STP");
+        W_Edit.put("ecsDay","thursday");
+if(Edit_Freq.equalsIgnoreCase("monthly")){
+    RequestSpecification res = given().spec(req).log().body()
+            .body(M_Edit);
+    InstallmentDates.Root response=res.when().post("/core/calculators/installment-dates")
+            .then().log().body().spec(respec).extract().response().as(InstallmentDates.Root.class);
+    Edit_No_installments= response.getData().getInstallments();
+    Edit_EcsDate=response.getData().getEcsDate();
+    Frequency= response.getData().getFrequency();
+
+    sdate=response.getData().getStartDate();
+    edate=response.getData().getEndDate();
+    DateFormat df=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+   Edit_StartDate=df.format(sdate);
+   Edit_EndDate = df.format(edate);
+
+    System.out.println(Edit_StartDate);
+    System.out.println(Edit_EndDate);
+}
+        else if(Edit_Freq.equalsIgnoreCase("weekly")){
+            RequestSpecification res = given().spec(req).log().body()
+                    .body(W_Edit);
+            InstallmentDates.Root response=res.when().post("/core/calculators/installment-dates")
+                    .then().log().body().spec(respec).extract().response().as(InstallmentDates.Root.class);
+            Edit_No_installments= response.getData().getInstallments();
+            EcsDate=response.getData().getEcsDate();
+            Frequency= response.getData().getFrequency();
+            sdate=response.getData().getStartDate();
+            edate=response.getData().getEndDate();
+            DateFormat df=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
+    Edit_StartDate=df.format(sdate);
+    Edit_EndDate = df.format(edate);
+    System.out.println(Edit_StartDate);
+    System.out.println(Edit_EndDate);
+        }
+else if(Edit_Freq.equalsIgnoreCase("daily")){
+    System.out.println("Daily Edit wont support");
+}
+
+    }
+
+    @Test(priority = 5)
+    public void Edit_Common_OTP() {
+        Map<String, Object> otppayload = new HashMap<String, Object>();
+        otppayload.put("type", "mobile_and_email");
+        otppayload.put("idType", "folio");
+        otppayload.put("referenceId", folio);
+        otppayload.put("workflow", "stp_edit");
+
+        RequestSpecification commonotp = given().spec(req)
+                .body(otppayload);
+        CommonOTP.Root responce = commonotp.when().post("/core/investor/common/otp")
+                .then().log().all().spec(respec).extract().response().as(CommonOTP.Root.class);
+        Edit_otp_refid = responce.getData().getOtpReferenceId();
+    }
+
+    @Test(priority = 6)
+    public void Edit_DB_Connection() throws SQLException {
+        Statement s1 = null;
+        Connection con = null;
+        ResultSet rs = null;
+        try {
+            DBconnection ds = new DBconnection();
+            con = ds.getConnection();
+            s1 = con.createStatement();
+            rs = s1.executeQuery("select * from dbo.OTP_GEN_VERIFICATION ogv where referenceId ='" + Edit_otp_refid + "'");
+            rs.next();
+            Edit_dbotp = rs.getString("otp");
+            Edit_DB_refid = rs.getString("referenceid");
+            System.out.println("OTP :" + Edit_dbotp);
+            System.out.println("OTPReferenceID :" + Edit_DB_refid);
+        } catch (Exception e) {
+            System.out.println(e);
+        } finally {
+            if (s1 != null) s1.close();
+            if (rs != null) rs.close();
+            if (con != null) con.close();
+        }
+    }
+
+    @Test(priority = 7)
+    public void Edit_Verify_OTP() {
+        VerifyOtpRequest.Root payload = new VerifyOtpRequest.Root();
+        VerifyOtpRequest.Otp otp = new VerifyOtpRequest.Otp();
+        otp.setSms("");
+        otp.setEmail("");
+        otp.setEmail_or_sms(Edit_dbotp);
+        payload.setOtp(otp);
+        payload.setOtpReferenceId(Edit_DB_refid);
+        RequestSpecification res1 = given().spec(req)
+                .body(payload);
+        res1.when().post("/core/investor/common/otp/verify")
+                .then().log().all().spec(respec);
+    }
+
+    @Test(priority = 10)
+    public void STP_Edit(){
+        Map<String, Object> Mon_Edit = new LinkedHashMap<String,Object>();
+        Mon_Edit.put("holdingProfileId", Holdingid);
+        Mon_Edit.put("stpId", stp_delID);
+        Mon_Edit.put("schemeCode", Edit_Schemecode);
+        Mon_Edit.put("change_scheme", Edit_toSchemecode);
+        Mon_Edit.put("change_installments", Edit_No_installments);
+        Mon_Edit.put("change_amount", 500);
+        Mon_Edit.put("change_date", Edit_EcsDate);
+        Mon_Edit.put("changeStartDate", Edit_StartDate);
+        Mon_Edit.put("changeEndDate", Edit_EndDate);
+        Mon_Edit.put("otpReferenceId", Edit_otp_refid);
+
+        Map<String, Object> Weekly_Edit = new LinkedHashMap<String,Object>();
+        Weekly_Edit.put("holdingProfileId", Holdingid);
+        Weekly_Edit.put("stpId", stp_delID);
+        Weekly_Edit.put("schemeCode", Edit_Schemecode);
+        Weekly_Edit.put("change_scheme", Edit_toSchemecode);
+        Weekly_Edit.put("change_installments", Edit_No_installments);
+        Weekly_Edit.put("change_amount", 500);
+        Weekly_Edit.put("change_day", "thursday");
+        Weekly_Edit.put("changeStartDate", Edit_StartDate);
+        Weekly_Edit.put("changeEndDate", Edit_EndDate);
+        Weekly_Edit.put("otpReferenceId", Edit_otp_refid);
+
+        if(Edit_Freq.equalsIgnoreCase("daily")){
+            System.out.println("Daily Edit wont Support");
+        }
+        else if (Edit_Freq.equalsIgnoreCase("monthly")){
+            RequestSpecification res = given().log().method().log().uri().spec(req).log().params().log().uri()
+                    .body(Mon_Edit);
+            res.when().put("/core/investor/current-stps")
+                    .then().log().body().spec(respec);
+        }
+        else if (Edit_Freq.equalsIgnoreCase("weekly")){
+            RequestSpecification res = given().log().method().log().uri().spec(req).log().params().log().uri()
+                    .body(Weekly_Edit);
+            res.when().put("/core/investor/current-stps")
+                    .then().log().body().spec(respec);
+        }
+
+
+
+
+
+    }
+
+
+
+
+
+
+
    @Test(priority = 10)
     public void STP_Cancel(){
         RequestSpecification res = given().log().method().log().uri().spec(req)

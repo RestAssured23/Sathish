@@ -1,38 +1,23 @@
 package Regression_Testing;
 
-import API_Collection.BaseURL.BaseURL;
-import API_Collection.Login.Login;
 import DBConnection.DBconnection;
 import MFPojo.HoldingProfile;
 import MFPojo.InvestedScheme;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.TwoFA.AddScheme;
 import MFPojo.TwoFA.GetCart;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.Test;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.*;
-
+import static Regression_Testing.Base_URI.req;
+import static Regression_Testing.Base_URI.respec;
 import static io.restassured.RestAssured.given;
 
 public class InvestMore {
-    RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
-            .addHeader("x-api-version", "2.0")
-            .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Regression())
-            .setContentType(ContentType.JSON).build();
-    ResponseSpecification respec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .expectContentType(ContentType.JSON).build();
     String CartId,GroupId,otprefid,DB_Otp,DB_refid;    String Holdingid, InvestorId, Goal_ID;
     String Scheme_Name,Scheme_code,Folio,Bankid,Option;
     String Expected_HoldID = "183318";    String Goal_Name = "Test Portfolio"; //sathish

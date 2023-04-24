@@ -46,6 +46,7 @@ public class CurrentSTP {
         public String dayOrDate;
         public int completedInstallments;
         public int noOfInstallments;
+        public String dividendOption;
         public String toSchemeCode;
         public String toSchemeName;
         public String toCategory;

@@ -1,6 +1,5 @@
 package Regression_Testing;
-import API_Collection.BaseURL.BaseURL;
-import API_Collection.Login.Login;
+
 import DBConnection.DBconnection;
 import MFPojo.HoldingProfile;
 import MFPojo.InvestedScheme;
@@ -8,11 +7,7 @@ import MFPojo.MFscheme;
 import MFPojo.OTP.CommonOTP;
 import MFPojo.OTP.VerifyOtpRequest;
 import MFPojo.RecentTransaction;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.Test;
 
 import java.sql.Connection;
@@ -22,24 +17,15 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
+import static Regression_Testing.Base_URI.req;
+import static Regression_Testing.Base_URI.respec;
 import static io.restassured.RestAssured.given;
 
 public class Switch {
-    RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
-            .addHeader("x-api-version", "2.0")
-            .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Regression())
-            .setContentType(ContentType.JSON).build();
-    ResponseSpecification respec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .expectContentType(ContentType.JSON).build();
 
     //Local DATA
     String Holdingid, otp_refid, dbotp, DB_refid, AMC_Name, AMC_Code,RT_refno;
-    String Expected_HoldID = "183318";
-    String InvestorId;
-    String Expected_Folio = "124702100";
+    String Expected_HoldID = "183318";    String InvestorId;    String Expected_Folio = "124702100";
     String Expected_Target_Scheme = "Aditya Birla SL Floating Rate Fund(DD-IDCW)";
     String Expected_GoalName = "Test Portfolio";
     String fromschemename, fromschemecode, folio, fromoption, goalid, bankid, toschemename, toschemcode, tooption, goalname;

@@ -1,7 +1,6 @@
 package API_Collection.BaseURL;
 
 public class BaseURL {
-
     public static String dev="https://dev-api.fundsindia.com";
 
     public static String test="https://testapi.fundsindia.com";

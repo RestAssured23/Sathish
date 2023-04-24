@@ -1,33 +1,18 @@
 package Regression_Testing;
 
-import API_Collection.BaseURL.BaseURL;
 import API_Collection.GetAPI.Payload;
 import MFPojo.HoldingProfile;
-import io.restassured.builder.RequestSpecBuilder;
-import io.restassured.builder.ResponseSpecBuilder;
-import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import io.restassured.specification.ResponseSpecification;
 import org.testng.ITestContext;
 import org.testng.TestRunner;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
-
 import java.util.HashMap;
 import java.util.Map;
-
+import static Regression_Testing.Base_URI.*;
 import static io.restassured.RestAssured.given;
 
 public class GetAPI {
-    RequestSpecification req = new RequestSpecBuilder()
-            .setBaseUri(BaseURL.test)
-            .addHeader("x-api-version", "2.0")
-            .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token", Login.Test())
-            .setContentType(ContentType.JSON).build();
-    ResponseSpecification respec = new ResponseSpecBuilder()
-            .expectStatusCode(200)
-            .expectContentType(ContentType.JSON).build();
 
 //Local DATA
 String Holdingid;       String Expected_HoldID = "183318";      String InvestorId;
