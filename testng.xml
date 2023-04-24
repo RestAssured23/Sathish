@@ -4,7 +4,9 @@
     <test verbose="2" preserve-order="true"
           name="Get_API">
         <classes>
-            <class name="Regression_Testing.GetAPI"></class> </classes>
+            <class name="Regression_Testing.GetAPI">
+
+            </class> </classes>
 
     </test>
 
@@ -35,7 +37,11 @@
         <classes>
             <class name="Regression_Testing.Switch"></class> </classes>
     </test>
-
+    <test verbose="2" preserve-order="true"
+          name="Switch">
+        <classes>
+            <class name="Regression_Testing.STP_STPEdit"></class> </classes>
+    </test>
 </suite>
 
 

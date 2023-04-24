@@ -22,7 +22,7 @@ import static Regression_Testing.Base_URI.req;
 import static Regression_Testing.Base_URI.respec;
 import static io.restassured.RestAssured.given;
 
-public class STP {
+public class STP_STPEdit {
     //Local DATA
     String expected_freq="monthly",Expected_Folio = "343423/435",
    Expected_Target_Scheme = "IDFC Bond Fund - Short Term Plan-Reg(G)",Expected_GoalName = "Test Portfolio";
@@ -400,7 +400,7 @@ else if(expected_freq.equalsIgnoreCase(freq_W)){
         }
     }
 
-    @Test
+    @Test(priority = 10)
     public void Edit_Installment_Date() {
         Map<String, Object> M_Edit = new HashMap<String, Object>();
         M_Edit.put("ecsDate", 8);
@@ -453,7 +453,7 @@ else if(Edit_Freq.equalsIgnoreCase("daily")){
 
     }
 
-    @Test(priority = 5)
+    @Test(priority = 11)
     public void Edit_Common_OTP() {
         Map<String, Object> otppayload = new HashMap<String, Object>();
         otppayload.put("type", "mobile_and_email");
@@ -468,7 +468,7 @@ else if(Edit_Freq.equalsIgnoreCase("daily")){
         Edit_otp_refid = responce.getData().getOtpReferenceId();
     }
 
-    @Test(priority = 6)
+    @Test(priority = 12)
     public void Edit_DB_Connection() throws SQLException {
         Statement s1 = null;
         Connection con = null;
@@ -492,7 +492,7 @@ else if(Edit_Freq.equalsIgnoreCase("daily")){
         }
     }
 
-    @Test(priority = 7)
+    @Test(priority = 13)
     public void Edit_Verify_OTP() {
         VerifyOtpRequest.Root payload = new VerifyOtpRequest.Root();
         VerifyOtpRequest.Otp otp = new VerifyOtpRequest.Otp();
@@ -507,7 +507,7 @@ else if(Edit_Freq.equalsIgnoreCase("daily")){
                 .then().log().all().spec(respec);
     }
 
-    @Test(priority = 10)
+    @Test(priority = 14)
     public void STP_Edit(){
         Map<String, Object> Mon_Edit = new LinkedHashMap<String,Object>();
         Mon_Edit.put("holdingProfileId", Holdingid);
@@ -548,24 +548,26 @@ else if(Edit_Freq.equalsIgnoreCase("daily")){
             res.when().put("/core/investor/current-stps")
                     .then().log().body().spec(respec);
         }
-
-
-
-
-
     }
 
 
-
-
-
-
-
-   @Test(priority = 10)
+   @Test(priority = 15)
     public void STP_Cancel(){
-        RequestSpecification res = given().log().method().log().uri().spec(req)
-                .queryParam("stpId",stp_delID).log().params().log().uri();
-        res.when().delete("/core/investor/current-stps")
+       RequestSpecification res = given().log().method().log().uri().spec(req)
+               .queryParam("holdingProfileId", "183318")
+               .queryParam("page", "1")
+               .queryParam("size", "10")
+               .queryParam("revert", true);
+
+       CurrentSTP.Root response = res.when().get("/core/investor/current-stps")
+               .then().log().body().spec(respec).extract().response().as(CurrentSTP.Root.class);
+       int size = response.getData().getSchemes().size();
+      String delID = response.getData().getSchemes().get(size-1).getStpId();
+       System.out.println(delID);
+
+        RequestSpecification res1 = given().log().method().log().uri().spec(req)
+                .queryParam("stpId",delID).log().params().log().uri();
+        res1.when().delete("/core/investor/current-stps")
                 .then().log().body().spec(respec);
     }
 
