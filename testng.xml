@@ -4,9 +4,8 @@
     <test verbose="2" preserve-order="true"
           name="Get_API">
         <classes>
-            <class name="Regression_Testing.GetAPI">
-
-            </class> </classes>
+            <class name="Regression_Testing.GetAPI"></class>
+             </classes>
 
     </test>
 
