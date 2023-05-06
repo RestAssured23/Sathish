@@ -36,7 +36,7 @@ public class SIP {
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
     String CartId,GroupId,otprefid,DB_Otp,DB_refid;    String Holdingid, InvestorId, Goal_ID;
-    String Excpeted_AMC="icici", Expected_Scheme="ICICI Pru Balanced Advantage Fund(G)";
+    String Excpeted_AMC="ICICI", Expected_Scheme="ICICI Pru Balanced Advantage Fund(IDCW)";
     String Expected_HoldID = "183318";    String Goal_Name = "Test Portfolio"; //sathish
     String ConsumerCode,Bank_Id; double Avaiable_Amount;   String Scheme_Name,Scheme_Code,Option;
     double Min_Amount;int Min_Tenure;
@@ -82,7 +82,7 @@ public class SIP {
             }
         }
     }
-    @Test
+    @Test(priority = 2)
     public void product_search_mf_form() {
         RequestSpecification res = given().spec(req)
                 .body("{\n" +
@@ -108,8 +108,6 @@ public class SIP {
                 .then().log().all().spec(respec).extract().response().as(MFSearchForm.Root.class);
        for(int i=0;i<response.getData().getContent().size();i++){
            if(response.getData().getContent().get(i).getName().equalsIgnoreCase(Expected_Scheme)){
-
-
                Scheme_Name=response.getData().getContent().get(i).getName();
                Scheme_Code=response.getData().getContent().get(i).getSchemeCode();
                Min_Amount=response.getData().getContent().get(i).getSipMinimumInvestment();
@@ -123,7 +121,7 @@ public class SIP {
            }
        }
     }
-    @Test
+    @Test(priority = 3)
     public void Mandate_API(){
         RequestSpecification res=given().spec(req)
                 .queryParam("holdingProfileId","183318")
@@ -139,16 +137,16 @@ public class SIP {
           }
        }
     }
-    @Test(priority = 2)
-    public void Investor_Cart() {
-        Map<String,Object> Payload=new LinkedHashMap<String,Object>();
-        Payload.put("product","MF");
-        Payload.put("id","");
+    @Test(priority = 4)
+    public void Investor_Cart_SIP() {
+        Map<String,Object> Reg_Payload=new LinkedHashMap<String,Object>();
+        Reg_Payload.put("product","MF");
+        Reg_Payload.put("id","");
         Map<String,Object> info=new HashMap<String,Object>();
             info.put("os","Web-FI");
             info.put("fcmId","");
-        Payload.put("appInfo",info);
-        Payload.put("holdingProfileId",Holdingid);
+        Reg_Payload.put("appInfo",info);
+        Reg_Payload.put("holdingProfileId",Holdingid);
         Map<String,Object> SIP=new LinkedHashMap<String,Object>();
             SIP.put("totalAmount",1000);
             SIP.put("investmentType","sip");
@@ -174,18 +172,226 @@ public class SIP {
         Schemelist.add(data);
             SIP.put("schemes",Schemelist);
         Map<String,Object> investment=new LinkedHashMap<String,Object>();
-            investment.put("oti",SIP);
-        Payload.put("mf",investment);
+            investment.put("sip",SIP);
+        Reg_Payload.put("mf",investment);
+//Dividend
+        Map<String,Object> RegDiv_Payload=new LinkedHashMap<String,Object>();
+        RegDiv_Payload.put("product","MF");
+        RegDiv_Payload.put("id","");
+        Map<String,Object> info_D=new HashMap<String,Object>();
+        info_D.put("os","Web-FI");
+        info_D.put("fcmId","");
+        RegDiv_Payload.put("appInfo",info_D);
+        RegDiv_Payload.put("holdingProfileId",Holdingid);
+        Map<String,Object> SIP_D=new LinkedHashMap<String,Object>();
+        SIP_D.put("totalAmount",1000);
+        SIP_D.put("investmentType","sip");
+        SIP_D.put("paymentId","");
+        List<Map<String, Object>> Schemelist_D = new LinkedList<Map<String, Object>>();
+        Map<String, Object> data_D = new HashMap<String, Object>();
+        data_D.put("dividendOption","Reinvestment");
+        data_D.put("folio","-");
+        data_D.put("bankId",Bank_Id);
+        data_D.put("payment",false);
+        data_D.put("option",Option);
+        data_D.put("goalId",Goal_ID);
+        data_D.put("schemeCode",Scheme_Code);
+        data_D.put("schemeName",Scheme_Name);
+        data_D.put("amount",1000);
+        data_D.put("sipType","regular");
+        data_D.put("sipDate",1);
+        Map<String, Object> Reg_Type_D = new HashMap<String, Object>();
+        Reg_Type_D.put("amount",Min_Amount);
+        Reg_Type_D.put("frequency","monthly");
+        Reg_Type_D.put("tenure",Min_Tenure);
+        Reg_Type_D.put("consumerCode",ConsumerCode);
+        data_D.put("regular",Reg_Type_D);
+        Schemelist_D.add(data_D);
+        SIP_D.put("schemes",Schemelist_D);
+        Map<String,Object> investment_D=new LinkedHashMap<String,Object>();
+        investment_D.put("sip",SIP_D);
+        RegDiv_Payload.put("mf",investment_D);
 
-        RequestSpecification res = given().spec(req)
-                .body(Payload);
-        AddScheme.Root response=res.when().post("/core/investor/cart")
-                .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
-        CartId= response.getData().getCartId();
-        System.out.println(CartId);
+        //FlexiSIP
+        Map<String,Object> Flexi_Payload=new LinkedHashMap<String,Object>();
+        Flexi_Payload.put("product","MF");
+        Flexi_Payload.put("id","");
+        Map<String,Object> flexi_info=new HashMap<String,Object>();
+        flexi_info.put("os","Web-FI");
+        flexi_info.put("fcmId","");
+        Flexi_Payload.put("appInfo",flexi_info);
+        Flexi_Payload.put("holdingProfileId",Holdingid);
+        Map<String,Object> flexi_SIP=new LinkedHashMap<String,Object>();
+        flexi_SIP.put("totalAmount",1000);
+        flexi_SIP.put("investmentType","sip");
+        flexi_SIP.put("paymentId","");
+        List<Map<String, Object>> flexiSchemelist = new LinkedList<Map<String, Object>>();
+        Map<String, Object> flexi_data = new HashMap<String, Object>();
+        flexi_data.put("folio","-");
+        flexi_data.put("bankId",Bank_Id);
+        flexi_data.put("payment",false);
+        flexi_data.put("option",Option);
+        flexi_data.put("goalId",Goal_ID);
+        flexi_data.put("schemeCode",Scheme_Code);
+        flexi_data.put("schemeName",Scheme_Name);
+        flexi_data.put("amount",1000);
+        flexi_data.put("sipType","flexi");
+        flexi_data.put("sipDate",1);
+        Map<String, Object> flexi_Reg_Type = new HashMap<String, Object>();
+        flexi_Reg_Type.put("amount",Min_Amount);
+        flexi_Reg_Type.put("frequency","monthly");
+        flexi_Reg_Type.put("maximumAmount",3000);
+        flexi_Reg_Type.put("flexiAmount",Min_Amount);
+        flexi_Reg_Type.put("tenure",Min_Tenure);
+        flexi_Reg_Type.put("consumerCode",ConsumerCode);
+        flexi_data.put("flexi",flexi_Reg_Type);
+        flexiSchemelist.add(flexi_data);
+        flexi_SIP.put("schemes",flexiSchemelist);
+        Map<String,Object> flexi_investment=new LinkedHashMap<String,Object>();
+        flexi_investment.put("sip",flexi_SIP);
+        Flexi_Payload.put("mf",flexi_investment);
+
+        //FlexiSIP _ Divdend
+        Map<String,Object> FlexiDiv_Payload=new LinkedHashMap<String,Object>();
+        FlexiDiv_Payload.put("product","MF");
+        FlexiDiv_Payload.put("id","");
+        Map<String,Object> flexiDiv_info=new HashMap<String,Object>();
+        flexiDiv_info.put("os","Web-FI");
+        flexiDiv_info.put("fcmId","");
+        FlexiDiv_Payload.put("appInfo",flexiDiv_info);
+        FlexiDiv_Payload.put("holdingProfileId",Holdingid);
+        Map<String,Object> flexiDiv_SIP=new LinkedHashMap<String,Object>();
+        flexiDiv_SIP.put("totalAmount",1000);
+        flexiDiv_SIP.put("investmentType","sip");
+        flexiDiv_SIP.put("paymentId","");
+        List<Map<String, Object>> flexiDiv_Schemelist = new LinkedList<Map<String, Object>>();
+        Map<String, Object> flexiDiv_data = new HashMap<String, Object>();
+        flexiDiv_data.put("dividendOption","Reinvestment");
+        flexiDiv_data.put("folio","-");
+        flexiDiv_data.put("bankId",Bank_Id);
+        flexiDiv_data.put("payment",false);
+        flexiDiv_data.put("option",Option);
+        flexiDiv_data.put("goalId",Goal_ID);
+        flexiDiv_data.put("schemeCode",Scheme_Code);
+        flexiDiv_data.put("schemeName",Scheme_Name);
+        flexiDiv_data.put("amount",1000);
+        flexiDiv_data.put("sipType","flexi");
+        flexiDiv_data.put("sipDate",1);
+        Map<String, Object> flexiDiv_Reg_Type = new HashMap<String, Object>();
+        flexiDiv_Reg_Type.put("amount",Min_Amount);
+        flexiDiv_Reg_Type.put("frequency","monthly");
+        flexiDiv_Reg_Type.put("maximumAmount",3000);
+        flexiDiv_Reg_Type.put("flexiAmount",Min_Amount);
+        flexiDiv_Reg_Type.put("tenure",Min_Tenure);
+        flexiDiv_Reg_Type.put("consumerCode",ConsumerCode);
+        flexiDiv_data.put("flexi",flexiDiv_Reg_Type);
+        flexiDiv_Schemelist.add(flexiDiv_data);
+        flexiDiv_SIP.put("schemes",flexiDiv_Schemelist);
+        Map<String,Object> flexiDiv_investment=new LinkedHashMap<String,Object>();
+        flexiDiv_investment.put("sip",flexiDiv_SIP);
+        FlexiDiv_Payload.put("mf",flexiDiv_investment);
+
+        //Step_UP SIP
+        Map<String,Object> Step_Payload=new LinkedHashMap<String,Object>();
+        Step_Payload.put("product","MF");
+        Step_Payload.put("id","");
+        Map<String,Object> Step_info=new HashMap<String,Object>();
+        Step_info.put("os","Web-FI");
+        Step_info.put("fcmId","");
+        Step_Payload.put("appInfo",Step_info);
+        Step_Payload.put("holdingProfileId",Holdingid);
+        Map<String,Object> Step_SIP=new LinkedHashMap<String,Object>();
+        Step_SIP.put("totalAmount",1000);
+        Step_SIP.put("investmentType","sip");
+        Step_SIP.put("paymentId","");
+        List<Map<String, Object>> Step_Schemelist = new LinkedList<Map<String, Object>>();
+        Map<String, Object> Step_data = new HashMap<String, Object>();
+        Step_data.put("folio","-");
+        Step_data.put("bankId",Bank_Id);
+        Step_data.put("payment",false);
+        Step_data.put("option",Option);
+        Step_data.put("goalId",Goal_ID);
+        Step_data.put("schemeCode",Scheme_Code);
+        Step_data.put("schemeName",Scheme_Name);
+        Step_data.put("amount",1000);
+        Step_data.put("sipType","stepup");
+        Step_data.put("sipDate",1);
+        Map<String, Object> Step_Reg_Type = new HashMap<String, Object>();
+        Step_Reg_Type.put("amount",Min_Amount);
+        Step_Reg_Type.put("frequency","monthly");
+        Step_Reg_Type.put("stepupFrequency","half-yearly");                 //  annually /half-yearly
+        Step_Reg_Type.put("stepupAmount",Min_Amount);
+        Step_Reg_Type.put("finalAmount",0);
+        Step_Reg_Type.put("tenure",Min_Tenure);
+        Step_Reg_Type.put("consumerCode",ConsumerCode);
+        Step_data.put("stepup",Step_Reg_Type);
+        Step_Schemelist.add(Step_data);
+        Step_SIP.put("schemes",Step_Schemelist);
+        Map<String,Object> Step_investment=new LinkedHashMap<String,Object>();
+        Step_investment.put("sip",Step_SIP);
+        Step_Payload.put("mf",Step_investment);
+
+        //Step_UP SIP _ Divdend
+        Map<String,Object> StepDiv_Payload=new LinkedHashMap<String,Object>();
+        StepDiv_Payload.put("product","MF");
+        StepDiv_Payload.put("id","");
+        Map<String,Object> StepDiv_info=new HashMap<String,Object>();
+        StepDiv_info.put("os","Web-FI");
+        StepDiv_info.put("fcmId","");
+        StepDiv_Payload.put("appInfo",StepDiv_info);
+        StepDiv_Payload.put("holdingProfileId",Holdingid);
+        Map<String,Object> StepDiv_SIP=new LinkedHashMap<String,Object>();
+        StepDiv_SIP.put("totalAmount",1000);
+        StepDiv_SIP.put("investmentType","sip");
+        StepDiv_SIP.put("paymentId","");
+        List<Map<String, Object>> StepDiv_Schemelist = new LinkedList<Map<String, Object>>();
+        Map<String, Object> StepDiv_data = new HashMap<String, Object>();
+        StepDiv_data.put("dividendOption","Reinvestment");
+        StepDiv_data.put("folio","-");
+        StepDiv_data.put("bankId",Bank_Id);
+        StepDiv_data.put("payment",false);
+        StepDiv_data.put("option",Option);
+        StepDiv_data.put("goalId",Goal_ID);
+        StepDiv_data.put("schemeCode",Scheme_Code);
+        StepDiv_data.put("schemeName",Scheme_Name);
+        StepDiv_data.put("amount",1000);
+        StepDiv_data.put("sipType","stepup");
+        StepDiv_data.put("sipDate",1);
+        Map<String, Object> StepDiv_Reg_Type = new HashMap<String, Object>();
+        StepDiv_Reg_Type.put("amount",Min_Amount);
+        StepDiv_Reg_Type.put("frequency","monthly");
+        StepDiv_Reg_Type.put("stepupFrequency","half-yearly");                 //  annually /half-yearly
+        StepDiv_Reg_Type.put("stepupAmount",Min_Amount);
+        StepDiv_Reg_Type.put("finalAmount",0);
+        StepDiv_Reg_Type.put("tenure",Min_Tenure);
+        StepDiv_Reg_Type.put("consumerCode",ConsumerCode);
+        StepDiv_data.put("stepup",StepDiv_Reg_Type);
+        StepDiv_Schemelist.add(StepDiv_data);
+        StepDiv_SIP.put("schemes",StepDiv_Schemelist);
+        Map<String,Object> StepDiv_investment=new LinkedHashMap<String,Object>();
+        StepDiv_investment.put("sip",StepDiv_SIP);
+        StepDiv_Payload.put("mf",StepDiv_investment);
+
+
+        if(Option.equalsIgnoreCase("Growth")) {
+            RequestSpecification res = given().spec(req)
+                    .body(Reg_Payload);
+            AddScheme.Root response = res.when().post("/core/investor/cart")
+                    .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
+            CartId = response.getData().getCartId();
+            System.out.println(CartId);
+        }
+        else{
+            RequestSpecification res = given().spec(req)
+                    .body(StepDiv_Payload);
+            AddScheme.Root response = res.when().post("/core/investor/cart")
+                    .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
+            CartId = response.getData().getCartId();
+            System.out.println(CartId);
+        }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 5)
     public void Folio_Group_ID() {
         RequestSpecification getres = given().spec(req)
                 .queryParam("cartId", CartId);
@@ -194,7 +400,7 @@ public class SIP {
         GroupId = response.getData().getGroups().get(0).getGroupId();
         System.out.println(GroupId);
     }
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void Common_Otp() {
         Map<String, Object> otppayload = new HashMap<String, Object>();
         otppayload.put("type", "mobile_and_email");
@@ -209,7 +415,7 @@ public class SIP {
         otprefid = response.getData().getOtpReferenceId();
         System.out.println(otprefid);
     }
-    @Test(priority = 5)
+    @Test(priority = 7)
     public void DB_Connection() throws SQLException {
         // DB connection
         Statement s1 = null;
