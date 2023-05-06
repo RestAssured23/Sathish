@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Regression_Testing]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Lumpsum(failed)">
+    <classes>
+      <class name="Regression_Testing.Lumpsum">
+        <methods>
+          <include name="OTP_Verify"/>
+          <include name="Buy_Cart"/>
+        </methods>
+      </class> <!-- Regression_Testing.Lumpsum -->
+    </classes>
+  </test> <!-- Lumpsum(failed) -->
+  <test thread-count="5" name="Invest_More(failed)">
+    <classes>
+      <class name="Regression_Testing.InvestMore">
+        <methods>
+          <include name="Buy_Cart"/>
+          <include name="OTP_Verify"/>
+        </methods>
+      </class> <!-- Regression_Testing.InvestMore -->
+    </classes>
+  </test> <!-- Invest_More(failed) -->
+  <test thread-count="5" name="Redeem_Regression(failed)">
+    <classes>
+      <class name="Regression_Testing.Redemption">
+        <methods>
+          <include name="Redeem_API"/>
+          <include name="Delete_API"/>
+          <include name="Verify_OTP"/>
+        </methods>
+      </class> <!-- Regression_Testing.Redemption -->
+    </classes>
+  </test> <!-- Redeem_Regression(failed) -->
+  <test thread-count="5" name="SWP and SWP_Edit(failed)">
+    <classes>
+      <class name="Regression_Testing.SWP_SWPEdit">
+        <methods>
+          <include name="Verify_OTP"/>
+          <include name="SWP_API"/>
+          <include name="SWP_Edit"/>
+          <include name="SWP_Cancel"/>
+          <include name="Current_SWP"/>
+          <include name="Verify_OTP_Edit"/>
+        </methods>
+      </class> <!-- Regression_Testing.SWP_SWPEdit -->
+    </classes>
+  </test> <!-- SWP and SWP_Edit(failed) -->
+  <test thread-count="5" name="Switch(failed)">
+    <classes>
+      <class name="Regression_Testing.Switch">
+        <methods>
+          <include name="Switch_API"/>
+          <include name="Delete_API"/>
+          <include name="Verify_OTP"/>
+        </methods>
+      </class> <!-- Regression_Testing.Switch -->
+    </classes>
+  </test> <!-- Switch(failed) -->
+  <test thread-count="5" name="STP an STP_Edit(failed)">
+    <classes>
+      <class name="Regression_Testing.STP_STPEdit">
+        <methods>
+          <include name="STP_API"/>
+          <include name="STP_Edit"/>
+          <include name="Edit_Verify_OTP"/>
+          <include name="Verify_OTP"/>
+        </methods>
+      </class> <!-- Regression_Testing.STP_STPEdit -->
+    </classes>
+  </test> <!-- STP an STP_Edit(failed) -->
+</suite> <!-- Failed suite [Regression_Testing] -->
