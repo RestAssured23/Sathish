@@ -1,4 +1,3 @@
-/*
 package API_Collection.AdivisoryDashboard;
 
 import API_Collection.BaseURL.BaseURL;
@@ -33,7 +32,6 @@ public class AD_Login {
 
         HashMap<String, String> login = new HashMap<String, String>();
         login.put("emailId", "qateam@fundsindia.com");
-        //   login.put("emailId", "sat@gmail.com");
         login.put("password", "Oct@#789");
         login.put("grantType", "credentials");        login.put("refreshToken", "string");
 
@@ -44,6 +42,19 @@ public class AD_Login {
         return response.getData().getAccessToken();
 
     }
+    @Test
+    public static String Admin()
+    {
+        HashMap<String, String> login = new HashMap<String, String>();
+        login.put("emailId", "admin@wifs.com");
+        login.put("password", "asdfasdf");
+        login.put("grantType", "credentials");        login.put("refreshToken", "string");
 
+        RequestSpecification res=given().spec(req)
+                .body(login);
+        Signin.Root response =res.when().post("/core/auth/sign-in")
+                .then().spec(respec).extract().response().as(Signin.Root.class);
+        return response.getData().getAccessToken();
+
+    }
 }
-*/

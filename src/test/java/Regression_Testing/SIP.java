@@ -383,7 +383,7 @@ public class SIP {
         }
         else{
             RequestSpecification res = given().spec(req)
-                    .body(StepDiv_Payload);
+                    .body(RegDiv_Payload);
             AddScheme.Root response = res.when().post("/core/investor/cart")
                     .then().log().all().spec(respec).extract().response().as(AddScheme.Root.class);
             CartId = response.getData().getCartId();
@@ -440,7 +440,7 @@ public class SIP {
             if (con != null) con.close();
         }
     }
-    @Test(priority = 6)
+    @Test(priority = 8)
     public void OTP_Verify() {
         Map<String, Object> payload1 = new HashMap<String, Object>();
         Map<String, Object> payload2 = new HashMap<String, Object>();
@@ -449,13 +449,12 @@ public class SIP {
         payload2.put("email_or_sms", DB_Otp);
         payload1.put("otp", payload2);
         payload1.put("otpReferenceId", DB_refid);
-
         RequestSpecification res = given().spec(req)
                 .body(payload1);
         res.when().post("/core/investor/common/otp/verify")
                 .then().log().all().spec(respec);
     }
-   @Test(priority = 7)
+   @Test(priority = 9)
     public void Buy_Cart() {
         RequestSpecification buyres = given().spec(req)
                 .queryParam("cartId", CartId);

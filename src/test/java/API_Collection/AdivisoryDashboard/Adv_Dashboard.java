@@ -1,4 +1,3 @@
-/*
 package API_Collection.AdivisoryDashboard;
 
 import API_Collection.BaseURL.BaseURL;
@@ -19,12 +18,50 @@ public class Adv_Dashboard {
             .setBaseUri(BaseURL.scrum2)
             .addHeader("x-api-version", "2.0")
             .addHeader("channel-id", "10")
-            .addHeader("x-fi-access-token",AD_Login.qateam())
+            .addHeader("x-fi-access-token",AD_Login.Admin())
             .setContentType(ContentType.JSON).build();
     ResponseSpecification respec = new ResponseSpecBuilder()
             .expectStatusCode(200)
             .expectContentType(ContentType.JSON).build();
 
+    @Test
+    public void Form() {
+        RequestSpecification res = given().spec(req);
+        res.when().get("/tools/advisory-dashboard/filters/form")
+                .then().log().all().spec(respec);
+    }
+
+    @Test
+    public void Dues() {
+        RequestSpecification res = given().spec(req);
+        res.when().get("/tools/portfolio-review/dues")
+                .then().log().all().spec(respec);
+    }
+    @Test
+    public void Clients() {
+        RequestSpecification res = given().spec(req)
+                .body("{\n" +
+                        "  \"page\": 1,\n" +
+                        "  \"size\": 20,\n" +
+                        "  \"segments\": [],\n" +
+                        "  \"status\": [\n" +
+                        "    \"not_started\",\n" +
+                        "    \"in_progress\",\n" +
+                        "    \"completed\",\n" +
+                        "    \"overdue\",\n" +
+                        "    \"not_reviewed\"\n" +
+                        "  ],\n" +
+                        "  \"heads\": [\n" +
+                        "    \"2152531\"\n" +
+                        "  ],\n" +
+                        "  \"managers\": [],\n" +
+                        "  \"advisors\": [],\n" +
+                        "  \"sortBy\": \"user_name\",\n" +
+                        "  \"sortType\": \"asc\"\n" +
+                        "}");
+        res.when().post("/tools/portfolio-review/clients")
+                .then().log().all().spec(respec);
+    }
     @Test
     public void Communication() {
         RequestSpecification res = given().spec(req)
@@ -158,4 +195,3 @@ public class Adv_Dashboard {
     }
 }
 
-*/

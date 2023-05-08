@@ -11,6 +11,7 @@ public class CurrentSIP {
     public static class Data{
         public ArrayList<Sip> sips;
         public ArrayList<Object> portfolioSips;
+
     }
     @Getter@Setter
     public static class Flexi{
@@ -86,6 +87,7 @@ public class CurrentSIP {
         public String folioGroupId;
         public boolean modified;
         public String dividendOption;
+        public Alert alert;
         public Flexi flexi;
         public Stepup stepup;
     }
@@ -99,5 +101,12 @@ public class CurrentSIP {
         public int stepupAmount;
         public int finalAmount;
         public Date expiresOn;
+    }
+    @Getter@Setter
+    public static class Alert{
+        public int amount;
+        public String frequency;
+        public String endDate;
+        public String startDate;
     }
 }

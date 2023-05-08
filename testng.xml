@@ -41,6 +41,21 @@
         <classes>
             <class name="Regression_Testing.STP_STPEdit"></class> </classes>
     </test>
+    <test verbose="2" preserve-order="true"
+          name="SIP Set-Up">
+        <classes>
+            <class name="Regression_Testing.SIP"></class> </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="SIP_ChangeAmount">
+        <classes>
+            <class name="Regression_Testing.SIP_ChangeAmount"></class> </classes>
+    </test>
+    <test verbose="2" preserve-order="true"
+          name="SIP_ChangeScheme">
+        <classes>
+            <class name="Regression_Testing.SIP_ChangeScheme"></class> </classes>
+    </test>
 </suite>
 
 
@@ -144,7 +159,7 @@
                <include name="Buy_Cart"/>
            </methods>
        </class>&ndash;&gt;
-      &lt;!&ndash; <class name="Regression_Testing.SIP_Edit">
+      &lt;!&ndash; <class name="Regression_Testing.SIP_ChangeAmount">
            <methods>
                <include name="Holding_Profile"/>
                <include name="HoldingProfile_API"/>
